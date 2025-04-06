@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.connector.ClientAbortException;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.AccessDeniedException;
@@ -156,5 +157,30 @@ public class GlobalExceptionHandler implements AuthenticationEntryPoint, AccessD
         return ResultApiResponse.ErrorResponse.build(error);
     }
 
+    @ExceptionHandler({
+            IllegalArgumentException.class
+    })
+    public ResultApiResponse.ErrorResponse handleIllegalArgumentException(Exception ex){
+
+        Error error = Error.ILLEGAL_ARGUMENT;
+
+        logError(error, ex);
+
+        return ResultApiResponse.ErrorResponse.build(error);
+    }
+
+    @ExceptionHandler({
+            BadRequestException.class
+    })
+    public ResultApiResponse.ErrorResponse handleBadRequestException(Exception ex){
+
+        logError(Error.BAD_REQUEST, ex);
+
+        return ResultApiResponse.ErrorResponse.builder()
+                .message(ex.getMessage())
+                .status(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .code(HttpStatus.BAD_REQUEST.value())
+                .build();
+    }
 }
 

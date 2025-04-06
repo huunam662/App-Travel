@@ -14,6 +14,7 @@ public enum Error {
     UNAUTHENTICATED("You must be logged in.", HttpStatus.UNAUTHORIZED),
     UNAUTHORIZED("You are not authorized to access this resource.", HttpStatus.UNAUTHORIZED),
     FORBIDDEN("You don't have permission to access this resource.", HttpStatus.FORBIDDEN),
+    BAD_REQUEST("Bad request.", HttpStatus.BAD_REQUEST),
     SERVER_ERROR("Server error.", HttpStatus.INTERNAL_SERVER_ERROR),
     CLIENT_ERROR("Client error.", HttpStatus.BAD_REQUEST),
     ACCOUNT_DISABLED("Account locked.", HttpStatus.FORBIDDEN),
@@ -22,7 +23,8 @@ public enum Error {
     JWT_UNSUPPORTED("JWT unsupported.", HttpStatus.UNAUTHORIZED),
     JWT_PAYLOAD_EMPTY("JWT Payload is empty.", HttpStatus.UNAUTHORIZED),
     INVALID_TOKEN("Invalid token. Please refresh or login again.", HttpStatus.UNAUTHORIZED),
-    COOKIE_NOT_EXISTED("Cookie not existed.", HttpStatus.BAD_REQUEST),;
+    COOKIE_NOT_EXISTED("Cookie not existed.", HttpStatus.BAD_REQUEST),
+    ILLEGAL_ARGUMENT("Illegal argument.", HttpStatus.BAD_REQUEST),;
 
     // >> ---------------------------------------------------------------------- <<
 

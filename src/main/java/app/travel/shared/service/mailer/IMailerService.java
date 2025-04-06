@@ -8,6 +8,6 @@ public interface IMailerService {
 
     void sendToEmail(String fromEmail, String toEmail, String subjectInEmail, String contentEmail) throws MessagingException;
 
-    void sendEmailConfirmSignup(SignUpRequest request) throws Exception;
+    void sendEmailConfirmSignUp(SignUpRequest request) throws Exception;
 
 }

@@ -7,9 +7,7 @@ import app.travel.domain.auth.payload.response.SignInResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 
 public interface IAuthController {
@@ -25,5 +23,9 @@ public interface IAuthController {
     @GetMapping("/refresh-token")
     @DefaultMessage(message = "Refreshing successful.")
     SignInResponse refreshToken(HttpServletRequest request);
+
+    @GetMapping("/sign-up/confirm")
+    @DefaultMessage(message = "Confirm successful.")
+    void signUpConfirm(@RequestParam("drag") String drag) throws Exception;
 
 }

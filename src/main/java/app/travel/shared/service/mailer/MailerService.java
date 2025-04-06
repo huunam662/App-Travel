@@ -11,7 +11,6 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.util.URLEncoder;
 import org.bouncycastle.util.encoders.UrlBase64Encoder;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -20,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 
@@ -40,7 +40,7 @@ public class MailerService implements IMailerService{
     AppCoreValue appCoreValue;
 
     @Override
-    public void sendEmailConfirmSignup(SignUpRequest request) throws Exception {
+    public void sendEmailConfirmSignUp(SignUpRequest request) throws Exception {
 
         log.info("Send email confirm signup {}", request.getEmail());
 
@@ -49,7 +49,7 @@ public class MailerService implements IMailerService{
 
         String signupIn4ToJson = Json.pretty(request);
 
-        String signupIn4ToJsonEncode = URLEncoder.QUERY.encode(CryptoAESGCMUtil.encode(signupIn4ToJson), StandardCharsets.UTF_8);
+        String signupIn4ToJsonEncode = URLEncoder.encode(CryptoAESGCMUtil.encode(signupIn4ToJson), StandardCharsets.UTF_8);
 
         Context context = new Context();
 

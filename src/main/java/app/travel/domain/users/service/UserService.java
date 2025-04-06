@@ -5,8 +5,10 @@ import app.travel.common.constant.Error;
 import app.travel.model.roles.RoleEntity;
 import app.travel.model.users.UserEntity;
 import app.travel.model.users.UserMapper;
+import app.travel.model.users.UserRepository;
 import app.travel.shared.identity.UserDetailsImpl;
 import app.travel.shared.service.roles.IRoleService;
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -28,6 +30,8 @@ public class UserService implements IUserService, UserDetailsService {
     UserMapper userMapper;
 
     IRoleService roleService;
+
+    UserRepository userRepository;
 
     @Override
     public UserEntity getUserByUsername(String username) {
@@ -95,5 +99,28 @@ public class UserService implements IUserService, UserDetailsService {
                     return new ErrorHolderException(Error.RESOURCE_NOT_FOUND);
                 }
         );
+    }
+
+    @Override
+    public Boolean checkUserByUsername(String username) {
+
+        log.info("check user by username: {}", username);
+
+        return userMapper.isExistsByUsername(username);
+    }
+
+    @Override
+    public Boolean checkUserByEmail(String email) {
+
+        log.info("check user by email: {}", email);
+
+        return userMapper.isExistsByEmail(email);
+    }
+
+    @Override
+    @Transactional
+    public UserEntity saveUser(UserEntity userEntity) {
+
+        return userRepository.save(userEntity);
     }
 }

@@ -6,13 +6,13 @@ import app.travel.domain.auth.payload.request.SignUpRequest;
 import app.travel.domain.auth.payload.response.SignInResponse;
 import app.travel.domain.auth.service.IAuthService;
 import app.travel.shared.service.mailer.IMailerService;
+import app.travel.shared.service.profile_user.IProfileUserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,8 +26,6 @@ public class AuthController implements IAuthController{
 
     IAuthService authService;
 
-    IMailerService mailerService;
-
     @Override
     public SignInResponse signIn(SignInRequest request, HttpServletResponse response) {
 
@@ -37,7 +35,7 @@ public class AuthController implements IAuthController{
     @Override
     public void signUp(SignUpRequest request) throws Exception {
 
-        mailerService.sendEmailConfirmSignup(request);
+        authService.signUp(request);
     }
 
     @Override
@@ -46,4 +44,9 @@ public class AuthController implements IAuthController{
         return authService.refreshToken(request);
     }
 
+    @Override
+    public void signUpConfirm(String drag) throws Exception {
+
+        authService.signUpConfirm(drag);
+    }
 }

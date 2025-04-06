@@ -34,4 +34,12 @@ public interface UserMapper {
     @ResultMap("UserEntityResultMap")
     Optional<UserEntity> findByUsernameOrEmail(@Param("usernameOrEmail") String usernameOrEmail);
 
+    @Select("SELECT EXISTS(SELECT u.username FROM users u WHERE u.username = #{username})")
+    Boolean isExistsByUsername(@Param("username") String username);
+
+    @Select("SELECT EXISTS(SELECT u.email FROM users u WHERE u.email = #{email})")
+    Boolean isExistsByEmail(String email);
+
+    @Select("SELECT EXISTS(SELECT u.)")
+    Boolean isExistsByPhoneNumber(@Param("phoneNumber") String phoneNumber);
 }

@@ -12,4 +12,10 @@ public interface IUserService {
 
     UserEntity getUserById(UUID id);
 
+    Boolean checkUserByUsername(String username);
+
+    Boolean checkUserByEmail(String email);
+
+    UserEntity saveUser(UserEntity userEntity);
+
 }
