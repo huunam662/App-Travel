@@ -1,18 +1,15 @@
 package app.travel.model.tour_timeline;
 
 import app.travel.shared.entity.AuditEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
 import java.util.UUID;
 
-@Table(name = "tour_timeline")
-@Entity
+@TableName("tour_timeline")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -21,16 +18,16 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TourTimelineEntity extends AuditEntity {
 
-    @JoinColumn(name = "tour_id")
+    @TableField("tour_id")
     UUID tourId;
 
-    @Column(name = "tour_name")
+    @TableField("tour_name")
     String tourName;
 
-    @Column(name = "tour_day")
+    @TableField("tour_day")
     Integer tourDay;
 
-    @Column(name = "image_url")
+    @TableField("image_url")
     String imageUrl;
 
 }

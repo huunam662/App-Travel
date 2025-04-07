@@ -2,15 +2,15 @@ package app.travel.model.tokens;
 
 import app.travel.common.constant.JwtTokenType;
 import app.travel.shared.entity.AuditEntity;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 import java.util.UUID;
 
-@Table(name = "tokens")
-@Entity
+@TableName("tokens")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,14 +20,13 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TokenEntity extends AuditEntity {
 
-    @JoinColumn(name = "user_id")
+    @TableField("user_id")
     UUID userId;
 
-    @Column(name = "token")
+    @TableField("token")
     String token;
 
-    @Column(name = "token_type")
-    @Enumerated(EnumType.STRING)
+    @TableField("token_type")
     JwtTokenType tokenType;
 
 }

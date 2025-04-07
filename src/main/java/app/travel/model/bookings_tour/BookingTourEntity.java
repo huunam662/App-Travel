@@ -1,10 +1,8 @@
 package app.travel.model.bookings_tour;
 
 import app.travel.shared.entity.AuditEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
@@ -12,8 +10,7 @@ import lombok.experimental.SuperBuilder;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@Table(name = "bookings_tour")
-@Entity
+@TableName("bookings_tour")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -22,25 +19,25 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BookingTourEntity extends AuditEntity {
 
-    @JoinColumn(name = "schedules_tour_id")
+    @TableField("schedules_tour_id")
     UUID schedulesTourId;
 
-    @JoinColumn(name = "user_id")
+    @TableField("user_id")
     UUID userId;
 
-    @Column(name = "tickets_number")
+    @TableField("tickets_number")
     Integer ticketsNumber;
 
-    @Column(name = "money_tour")
+    @TableField("money_tour")
     BigDecimal moneyTour;
 
-    @Column(name = "money_tour_type")
+    @TableField("money_tour_type")
     String moneyTourType;
 
-    @Column(name = "booking_status")
+    @TableField("booking_status")
     Boolean bookingStatus;
 
-    @Column(name = "tour_image_url")
+    @TableField("tour_image_url")
     String tourImageUrl;
 
 }

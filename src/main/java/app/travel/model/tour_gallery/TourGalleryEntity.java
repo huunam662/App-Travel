@@ -1,18 +1,14 @@
 package app.travel.model.tour_gallery;
 
 import app.travel.shared.entity.AuditEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
-
 import java.util.UUID;
 
-@Table(name = "tour_gallery")
-@Entity
+@TableName("tour_gallery")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -21,10 +17,10 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TourGalleryEntity extends AuditEntity {
 
-    @JoinColumn(name = "tour_id")
+    @TableField("tour_id")
     UUID tourId;
 
-    @Column(name = "image_url")
+    @TableField("image_url")
     String imageUrl;
 
 }

@@ -2,14 +2,13 @@ package app.travel.shared.service.profile_user;
 
 import app.travel.model.profile_user.ProfileUserEntity;
 import app.travel.model.profile_user.ProfileUserMapper;
-import app.travel.model.profile_user.ProfileUserRepository;
-import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j(topic = "PROFILE-USER-SERVICE")
 @Service
@@ -18,8 +17,6 @@ import org.springframework.stereotype.Service;
 public class ProfileUserService implements IProfileUserService {
 
     ProfileUserMapper profileUserMapper;
-
-    ProfileUserRepository profileUserRepository;
 
     @Override
     public Boolean checkProfileUserByPhoneNumber(String numberPhone) {
@@ -31,8 +28,10 @@ public class ProfileUserService implements IProfileUserService {
 
     @Override
     @Transactional
-    public ProfileUserEntity saveProfileUser(ProfileUserEntity profileUserEntity) {
+    public ProfileUserEntity insertProfileUser(ProfileUserEntity profileUserEntity) {
 
-        return profileUserRepository.save(profileUserEntity);
+        profileUserMapper.insert(profileUserMapper);
+
+        return profileUserEntity;
     }
 }

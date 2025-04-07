@@ -1,15 +1,13 @@
 package app.travel.model.tag_tours;
 
 import app.travel.shared.entity.AuditEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-@Table(name = "tag_tours")
-@Entity
+@TableName("tag_tours")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -18,10 +16,10 @@ import lombok.experimental.SuperBuilder;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TagTourEntity extends AuditEntity {
 
-    @Column(name = "tag_name")
+    @TableField("tag_name")
     String tagName;
 
-    @Column(name = "tag_type")
+    @TableField("tag_type")
     String tagType;
 
 }

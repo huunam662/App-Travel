@@ -31,7 +31,6 @@ import io.swagger.v3.core.util.Json;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -40,8 +39,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -54,8 +53,6 @@ import java.util.UUID;
 public class AuthService implements IAuthService{
 
     AuthenticationManager authenticationManager;
-
-    PasswordEncoder passwordEncoder;
 
     AppCoreValue appCoreValue;
 
@@ -93,9 +90,9 @@ public class AuthService implements IAuthService{
 
         UserEntity userEntity = userDetails.getUser();
 
-        TokenEntity accessTokenEntity = tokenService.saveTokenInclude(accessToken, JwtTokenType.ACCESS, userEntity);
+        TokenEntity accessTokenEntity = tokenService.insertTokenInclude(accessToken, JwtTokenType.ACCESS, userEntity);
 
-        TokenEntity refreshTokenEntity = tokenService.saveTokenInclude(refreshToken, JwtTokenType.REFRESH, userEntity);
+        TokenEntity refreshTokenEntity = tokenService.insertTokenInclude(refreshToken, JwtTokenType.REFRESH, userEntity);
 
         CookieTransfer cookieTransfer = CookieTransfer.builder()
                 .key(JwtTokenType.REFRESH.getNameSpecial())
@@ -158,7 +155,7 @@ public class AuthService implements IAuthService{
 
         String accessToken = jwtService.generateToken(userDetails, JwtTokenType.ACCESS);
 
-        tokenEntity = tokenService.saveTokenInclude(accessToken, JwtTokenType.ACCESS, userEntity);
+        tokenEntity = tokenService.insertTokenInclude(accessToken, JwtTokenType.ACCESS, userEntity);
 
         JwtTokenResponse jwtTokenResponse = JwtTokenResponse.builder()
                 .access(tokenEntity.getToken())
@@ -192,7 +189,7 @@ public class AuthService implements IAuthService{
         ProfileUserEntity profileUserEntity = ProfileUserConverter.INSTANCE.toProfileUserEntityFromSignUpRequest(signUpRequest);
         profileUserEntity.setUserId(userEntity.getId());
 
-        profileUserService.saveProfileUser(profileUserEntity);
+        profileUserService.insertProfileUser(profileUserEntity);
 
     }
 }

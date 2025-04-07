@@ -1,22 +1,17 @@
 package app.travel.model.tokens;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.*;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Mapper
-public interface TokenMapper {
+public interface TokenMapper extends BaseMapper<TokenEntity> {
 
     @Select("SELECT * FROM tokens t " +
             "WHERE t.id = #{id}"
     )
-    @Results(id = "TokenEntityResultMap", value = {
-            @Result(column = "user_id", property = "userId"),
-            @Result(column = "token_type", property = "tokenType"),
-            @Result(column = "created_at", property = "createdAt"),
-            @Result(column = "updated_at", property = "updatedAt")
-    })
     Optional<TokenEntity> findById(@Param("id") UUID id);
 
     @Select("SELECT * FROM tokens t " +

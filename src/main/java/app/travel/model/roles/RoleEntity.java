@@ -2,13 +2,13 @@ package app.travel.model.roles;
 
 import app.travel.common.constant.Role;
 import app.travel.shared.entity.AuditEntity;
-import jakarta.persistence.*;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-@Table(name = "roles")
-@Entity
+@TableName("roles")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -17,8 +17,7 @@ import lombok.experimental.SuperBuilder;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RoleEntity extends AuditEntity {
 
-    @Column(name = "role_name")
-    @Enumerated(EnumType.STRING)
+    @TableField("role_name")
     Role roleName;
 
 }

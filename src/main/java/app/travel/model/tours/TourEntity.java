@@ -1,14 +1,14 @@
 package app.travel.model.tours;
 
 import app.travel.shared.entity.AuditEntity;
-import jakarta.persistence.*;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 import java.util.UUID;
 
-@Table(name = "tours")
-@Entity
+@TableName("tours")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -17,43 +17,37 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TourEntity extends AuditEntity {
 
-    @JoinColumn(name = "founder_tour_id")
+    @TableField("founder_tour_id")
     UUID founderTourId;
 
-    @JoinColumn(name = "tag_tour_id")
+    @TableField("tag_tour_id")
     UUID tagTourId;
 
-    @JoinColumn(name = "place_depart_id")
+    @TableField("place_depart_id")
     UUID placeDepartId;
 
-    @JoinColumn(name = "place_travel_id")
+    @TableField("place_travel_id")
     UUID placeTravelId;
 
-    @Column(name = "tour_name")
+    @TableField("tour_name")
     String tourName;
 
-    @Column(name = "tour_code")
+    @TableField("tour_code")
     String tourCode;
 
-    @Column(name = "extension_items")
+    @TableField("extension_items")
     String extensionItems;
 
-    @Column(name = "rating_avg")
+    @TableField("rating_avg")
     Float ratingAvg;
 
-    @Column(name = "tour_experience_html")
+    @TableField("tour_experience_html")
     String tourExperienceHtml;
 
-    @Column(name = "tour_video_url")
+    @TableField("tour_video_url")
     String tourVideoUrl;
 
-    @Column(name = "booking_tickets")
+    @TableField("booking_tickets")
     Integer bookingTickets;
-
-    @Override
-    public void prePersist() {
-        super.prePersist();
-        bookingTickets = 0;
-    }
 
 }

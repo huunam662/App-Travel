@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface ITokenService {
 
-    TokenEntity saveTokenInclude(String token, JwtTokenType tokenType, UserEntity user);
+    TokenEntity insertTokenInclude(String token, JwtTokenType tokenType, UserEntity user);
 
     void deleteTokenById(UUID tokenId);
 

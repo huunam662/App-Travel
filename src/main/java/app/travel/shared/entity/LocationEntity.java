@@ -1,11 +1,11 @@
 package app.travel.shared.entity;
 
-import jakarta.persistence.*;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-@MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -14,23 +14,23 @@ import lombok.experimental.SuperBuilder;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LocationEntity {
 
-    @Id
-    @Column(name = "id")
+    @TableId
+    @TableField("id")
     String id;
 
-    @Column(name = "name")
+    @TableField("name")
     String name;
 
-    @Column(name = "name_en")
+    @TableField("name_en")
     String nameEn;
 
-    @Column(name = "full_name")
+    @TableField("full_name")
     String fullName;
 
-    @Column(name = "full_name_en")
+    @TableField("full_name_en")
     String fullNameEn;
 
-    @Column(name = "code_name")
+    @TableField("code_name")
     String codeName;
 
 }

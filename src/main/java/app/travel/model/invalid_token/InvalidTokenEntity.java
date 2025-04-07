@@ -1,18 +1,15 @@
 package app.travel.model.invalid_token;
 
 import app.travel.shared.entity.AuditEntity;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 import java.util.UUID;
 
-@Table(name = "invalid_token")
-@Entity
+@TableName("invalid_token")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,13 +19,13 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class InvalidTokenEntity extends AuditEntity {
 
-    @JoinColumn(name = "user_id")
+    @TableField("user_id")
     UUID userId;
 
-    @Column(name = "token")
+    @TableField("token")
     String token;
 
-    @Column(name = "invalid_type")
+    @TableField("invalid_type")
     String invalidType;
 
 }

@@ -1,15 +1,13 @@
 package app.travel.model.places;
 
 import app.travel.shared.entity.AuditEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-@Table(name = "places")
-@Entity
+@TableName("places")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -18,10 +16,10 @@ import lombok.experimental.SuperBuilder;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PlaceEntity extends AuditEntity {
 
-    @Column(name = "place_name")
+    @TableField("place_name")
     String placeName;
 
-    @Column(name = "is_foreign")
+    @TableField("is_foreign")
     Boolean isForeign;
 
 }

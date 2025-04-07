@@ -5,10 +5,8 @@ import app.travel.common.constant.Error;
 import app.travel.model.roles.RoleEntity;
 import app.travel.model.users.UserEntity;
 import app.travel.model.users.UserMapper;
-import app.travel.model.users.UserRepository;
 import app.travel.shared.identity.UserDetailsImpl;
 import app.travel.shared.service.roles.IRoleService;
-import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -30,8 +29,6 @@ public class UserService implements IUserService, UserDetailsService {
     UserMapper userMapper;
 
     IRoleService roleService;
-
-    UserRepository userRepository;
 
     @Override
     public UserEntity getUserByUsername(String username) {
@@ -121,6 +118,8 @@ public class UserService implements IUserService, UserDetailsService {
     @Transactional
     public UserEntity saveUser(UserEntity userEntity) {
 
-        return userRepository.save(userEntity);
+        userMapper.insert(userEntity);
+
+        return userEntity;
     }
 }

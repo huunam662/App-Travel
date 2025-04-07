@@ -1,14 +1,12 @@
 package app.travel.model.location.provinces;
 
 import app.travel.shared.entity.LocationEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-@Table(name = "provinces_location")
-@Entity
+@TableName("provinces_location")
 @AllArgsConstructor
 @Getter
 @Setter

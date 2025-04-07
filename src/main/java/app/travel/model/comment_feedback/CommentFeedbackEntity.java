@@ -1,18 +1,15 @@
 package app.travel.model.comment_feedback;
 
 import app.travel.shared.entity.AuditEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
 import java.util.UUID;
 
-@Table(name = "comment_feedback")
-@Entity
+@TableName("comment_feedback")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -21,13 +18,13 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CommentFeedbackEntity extends AuditEntity {
 
-    @JoinColumn(name = "feedback_id")
+    @TableField("feedback_id")
     UUID feedbackId;
 
-    @JoinColumn(name = "founder_tour_id")
+    @TableField("founder_tour_id")
     UUID founderTourId;
 
-    @Column(name = "content")
+    @TableField("content")
     String content;
 
 }

@@ -1,18 +1,15 @@
 package app.travel.model.founder_tours;
 
 import app.travel.shared.entity.AuditEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
 import java.util.UUID;
 
-@Table(name = "founder_tours")
-@Entity
+@TableName("founder_tours")
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
@@ -21,25 +18,25 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FounderTourEntity extends AuditEntity {
 
-    @JoinColumn(name = "user_id")
+    @TableField("user_id")
     UUID userId;
 
-    @JoinColumn(name = "ward_location_id")
+    @TableField("ward_location_id")
     String wardLocationId;
 
-    @Column(name = "company_name")
+    @TableField("company_name")
     String companyName;
 
-    @Column(name = "email")
+    @TableField("email")
     String email;
 
-    @Column(name = "phone_number")
+    @TableField("phone_number")
     String phoneNumber;
 
-    @Column(name = "enterprise_code")
+    @TableField("enterprise_code")
     String enterpriseCode;
 
-    @Column(name = "address_location")
+    @TableField("address_location")
     String addressLocation;
 
 }

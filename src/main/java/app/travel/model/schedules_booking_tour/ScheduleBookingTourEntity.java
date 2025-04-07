@@ -1,10 +1,8 @@
 package app.travel.model.schedules_booking_tour;
 
 import app.travel.shared.entity.AuditEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
@@ -12,8 +10,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-@Table(name = "schedules_booking_tour")
-@Entity
+@TableName("schedules_booking_tour")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -22,28 +19,28 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ScheduleBookingTourEntity extends AuditEntity {
 
-    @JoinColumn(name = "tour_id")
+    @TableField("tour_id")
     UUID tourId;
 
-    @JoinColumn(name = "hotel_id")
+    @TableField("hotel_id")
     UUID hotelId;
 
-    @Column(name = "start_date")
+    @TableField("start_date")
     OffsetDateTime startDate;
 
-    @Column(name = "end_date")
+    @TableField("end_date")
     OffsetDateTime endDate;
 
-    @Column(name = "remaining_tickets")
+    @TableField("remaining_tickets")
     Integer remainingTickets;
 
-    @Column(name = "tickets_status")
+    @TableField("tickets_status")
     Boolean ticketsStatus;
 
-    @Column(name = "money")
+    @TableField("money")
     BigDecimal money;
 
-    @Column(name = "money_type")
+    @TableField("money_type")
     String moneyType;
 
 }

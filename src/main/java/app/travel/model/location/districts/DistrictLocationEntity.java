@@ -1,15 +1,13 @@
 package app.travel.model.location.districts;
 
 import app.travel.shared.entity.LocationEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-@Table(name = "districts_location")
-@Entity
+@TableName("districts_location")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -18,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class DistrictLocationEntity extends LocationEntity {
 
-    @JoinColumn(name = "province_location_id")
+    @TableField("province_location_id")
     String provinceLocationId;
 
 }

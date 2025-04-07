@@ -1,18 +1,15 @@
 package app.travel.model.feedback_gallery;
 
 import app.travel.shared.entity.AuditEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
 import java.util.UUID;
 
-@Table(name = "feedback_gallery")
-@Entity
+@TableName("feedback_gallery")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -21,10 +18,10 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FeedbackGalleryEntity extends AuditEntity {
 
-    @JoinColumn(name = "feedback_id")
+    @TableField("feedback_id")
     UUID feedbackId;
 
-    @Column(name = "image_url")
+    @TableField("image_url")
     String imageUrl;
 
 }

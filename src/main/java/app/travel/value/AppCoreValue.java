@@ -3,7 +3,6 @@ package app.travel.value;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.Bag;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

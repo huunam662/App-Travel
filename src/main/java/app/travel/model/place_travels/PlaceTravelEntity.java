@@ -1,17 +1,15 @@
 package app.travel.model.place_travels;
 
 import app.travel.shared.entity.AuditEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
 import java.util.UUID;
 
-@Table(name = "place_travels")
-@Entity
+@TableName("place_travels")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -20,10 +18,10 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PlaceTravelEntity extends AuditEntity {
 
-    @JoinColumn(name = "tour_id")
+    @TableField("tour_id")
     UUID tourId;
 
-    @JoinColumn(name = "place_id")
+    @TableField("place_id")
     UUID placeId;
 
 }

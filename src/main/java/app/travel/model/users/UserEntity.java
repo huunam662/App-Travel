@@ -1,15 +1,14 @@
 package app.travel.model.users;
 
 import app.travel.shared.entity.AuditEntity;
-import jakarta.persistence.*;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
-
 import java.util.UUID;
 
-@Entity
-@Table(name = "users")
+@TableName("users")
 @Getter
 @Setter
 @SuperBuilder
@@ -18,19 +17,19 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserEntity extends AuditEntity {
 
-    @JoinColumn(name = "role_id")
+    @TableField("role_id")
     UUID roleId;
 
-    @Column(name = "email")
+    @TableField("email")
     String email;
 
-    @Column(name = "username")
+    @TableField("username")
     String username;
 
-    @Column(name = "password")
+    @TableField("password")
     String password;
 
-    @Column(name = "is_enabled")
+    @TableField("is_enabled")
     Boolean isEnabled;
 
 }

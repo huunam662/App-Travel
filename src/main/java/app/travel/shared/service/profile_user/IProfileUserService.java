@@ -6,6 +6,6 @@ public interface IProfileUserService {
 
     Boolean checkProfileUserByPhoneNumber(String numberPhone);
 
-    ProfileUserEntity saveProfileUser(ProfileUserEntity profileUserEntity);
+    ProfileUserEntity insertProfileUser(ProfileUserEntity profileUserEntity);
 
 }
