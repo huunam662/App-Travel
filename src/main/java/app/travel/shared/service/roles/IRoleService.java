@@ -1,7 +1,7 @@
 package app.travel.shared.service.roles;
 
 import app.travel.common.constant.Role;
-import app.travel.model.roles.RoleEntity;
+import app.travel.model.roles.entity.RoleEntity;
 
 import java.util.UUID;
 

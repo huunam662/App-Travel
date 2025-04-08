@@ -2,9 +2,10 @@ package app.travel.domain.users.service;
 
 import app.travel.advice.exception.templates.ErrorHolderException;
 import app.travel.common.constant.Error;
-import app.travel.model.roles.RoleEntity;
-import app.travel.model.users.UserEntity;
-import app.travel.model.users.UserMapper;
+import app.travel.model.roles.entity.RoleEntity;
+import app.travel.model.users.entity.UserEntity;
+import app.travel.model.users.mapper.UserMapper;
+import app.travel.model.users.repository.IUserRepository;
 import app.travel.shared.identity.UserDetailsImpl;
 import app.travel.shared.service.roles.IRoleService;
 import lombok.AccessLevel;
@@ -18,6 +19,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,7 +28,7 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserService implements IUserService, UserDetailsService {
 
-    UserMapper userMapper;
+    IUserRepository userRepository;
 
     IRoleService roleService;
 
@@ -35,7 +37,7 @@ public class UserService implements IUserService, UserDetailsService {
 
         log.info("get user by username {}", username);
 
-        return userMapper.findByUsername(username).orElseThrow(
+        return userRepository.findByUsername(username).orElseThrow(
                 () -> {
 
                     log.error("get user by username {} failed", username);
@@ -50,7 +52,7 @@ public class UserService implements IUserService, UserDetailsService {
 
         log.info("get user by username or email {}", usernameOrEmail);
 
-        return userMapper.findByUsernameOrEmail(usernameOrEmail).orElseThrow(
+        return userRepository.findByUsernameOrEmail(usernameOrEmail).orElseThrow(
                 () -> {
 
                     log.error("get user by username or email {} failed", usernameOrEmail);
@@ -65,7 +67,7 @@ public class UserService implements IUserService, UserDetailsService {
 
         log.info("load user by username {}", username);
 
-        UserEntity userEntity = userMapper.findByUsernameOrEmail(username)
+        UserEntity userEntity = userRepository.findByUsernameOrEmail(username)
                         .orElseThrow(
                                 () -> {
 
@@ -88,7 +90,7 @@ public class UserService implements IUserService, UserDetailsService {
 
         log.info("get user by id {}", id);
 
-        return userMapper.findById(id).orElseThrow(
+        return userRepository.findById(id).orElseThrow(
                 () -> {
 
                     log.error("get user by id {} failed", id);
@@ -103,7 +105,7 @@ public class UserService implements IUserService, UserDetailsService {
 
         log.info("check user by username: {}", username);
 
-        return userMapper.isExistsByUsername(username);
+        return userRepository.existsByUsername(username);
     }
 
     @Override
@@ -111,15 +113,13 @@ public class UserService implements IUserService, UserDetailsService {
 
         log.info("check user by email: {}", email);
 
-        return userMapper.isExistsByEmail(email);
+        return userRepository.existsByEmail(email);
     }
 
     @Override
     @Transactional
     public UserEntity saveUser(UserEntity userEntity) {
 
-        userMapper.insert(userEntity);
-
-        return userEntity;
+        return userRepository.insert(userEntity);
     }
 }

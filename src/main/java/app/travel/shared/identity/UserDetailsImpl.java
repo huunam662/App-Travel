@@ -1,7 +1,7 @@
 package app.travel.shared.identity;
 
-import app.travel.model.roles.RoleEntity;
-import app.travel.model.users.UserEntity;
+import app.travel.model.roles.entity.RoleEntity;
+import app.travel.model.users.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

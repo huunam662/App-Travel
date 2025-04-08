@@ -60,12 +60,17 @@ server:
 logging:
   level:
     org.springframework.security: DEBUG
+    com.baomidou.mybatisplus.core: DEBUG
+    com.baomidou.mybatisplus.extension: DEBUG
     org.mybatis: DEBUG
     app.travel: DEBUG
 
-mybatis:
+mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
     lazy-loading-enabled: true
     aggressive-lazy-loading: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+  type-aliases-package: app.travel.model

@@ -1,6 +1,7 @@
 package app.travel.model.tours;
 
 import app.travel.shared.entity.AuditEntity;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
@@ -47,7 +48,7 @@ public class TourEntity extends AuditEntity {
     @TableField("tour_video_url")
     String tourVideoUrl;
 
-    @TableField("booking_tickets")
+    @TableField(value = "booking_tickets", fill = FieldFill.INSERT)
     Integer bookingTickets;
 
 }

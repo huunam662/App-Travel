@@ -1,7 +1,8 @@
 package app.travel.shared.service.profile_user;
 
-import app.travel.model.profile_user.ProfileUserEntity;
-import app.travel.model.profile_user.ProfileUserMapper;
+import app.travel.model.profile_user.entity.ProfileUserEntity;
+import app.travel.model.profile_user.mapper.ProfileUserMapper;
+import app.travel.model.profile_user.repository.IProfileUserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -16,22 +17,20 @@ import org.springframework.transaction.annotation.Transactional;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ProfileUserService implements IProfileUserService {
 
-    ProfileUserMapper profileUserMapper;
+    IProfileUserRepository profileUserRepository;
 
     @Override
-    public Boolean checkProfileUserByPhoneNumber(String numberPhone) {
+    public Boolean checkProfileUserByPhoneNumber(String phoneNumber) {
 
-        log.info("check profile user by number phone: {}", numberPhone);
+        log.info("check profile user by number phone: {}", phoneNumber);
 
-        return profileUserMapper.isExistsByPhoneNumber(numberPhone);
+        return profileUserRepository.existsByPhoneNumber(phoneNumber);
     }
 
     @Override
     @Transactional
-    public ProfileUserEntity insertProfileUser(ProfileUserEntity profileUserEntity) {
+    public ProfileUserEntity saveProfileUser(ProfileUserEntity profileUserEntity) {
 
-        profileUserMapper.insert(profileUserMapper);
-
-        return profileUserEntity;
+        return profileUserRepository.insert(profileUserEntity);
     }
 }

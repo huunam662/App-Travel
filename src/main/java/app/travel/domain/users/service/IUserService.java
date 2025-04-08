@@ -1,6 +1,6 @@
 package app.travel.domain.users.service;
 
-import app.travel.model.users.UserEntity;
+import app.travel.model.users.entity.UserEntity;
 
 import java.util.UUID;
 

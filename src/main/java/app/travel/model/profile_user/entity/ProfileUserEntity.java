@@ -1,4 +1,4 @@
-package app.travel.model.profile_user;
+package app.travel.model.profile_user.entity;
 
 import app.travel.shared.entity.AuditEntity;
 import com.baomidou.mybatisplus.annotation.TableField;

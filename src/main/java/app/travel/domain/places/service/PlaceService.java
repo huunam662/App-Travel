@@ -15,13 +15,14 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 
 @Slf4j(topic = "PLACE-SERVICE")
 @Service
 @RequiredArgsConstructor(onConstructor_ = {@Lazy})
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PlaceService implements IPlaceService{
 
     PlaceMapper placeMapper;
@@ -31,7 +32,7 @@ public class PlaceService implements IPlaceService{
 
         log.info("get place by id: {}", id);
 
-        return placeMapper.findById(id).orElseThrow(
+        return Optional.ofNullable(placeMapper.selectById(id)).orElseThrow(
                 () -> {
                     log.error("get place by id: {} failed", id);
 

@@ -14,8 +14,7 @@ import lombok.experimental.SuperBuilder;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LocationEntity {
 
-    @TableId
-    @TableField("id")
+    @TableId("id")
     String id;
 
     @TableField("name")

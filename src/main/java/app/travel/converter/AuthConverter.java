@@ -1,7 +1,7 @@
 package app.travel.converter;
 
 import app.travel.domain.auth.payload.request.SignUpRequest;
-import app.travel.model.users.UserEntity;
+import app.travel.model.users.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

@@ -1,4 +1,4 @@
-package app.travel.model.users;
+package app.travel.model.users.entity;
 
 import app.travel.shared.entity.AuditEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -8,7 +8,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 import java.util.UUID;
 
-@TableName("users")
+@TableName(value = "users", autoResultMap = true)
 @Getter
 @Setter
 @SuperBuilder

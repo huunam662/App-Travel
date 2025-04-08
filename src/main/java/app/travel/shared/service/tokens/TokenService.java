@@ -5,7 +5,7 @@ import app.travel.common.constant.Error;
 import app.travel.common.constant.JwtTokenType;
 import app.travel.model.tokens.TokenEntity;
 import app.travel.model.tokens.TokenMapper;
-import app.travel.model.users.UserEntity;
+import app.travel.model.users.entity.UserEntity;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,7 +26,7 @@ public class TokenService implements ITokenService{
 
     @Override
     @Transactional
-    public TokenEntity insertTokenInclude(String token, JwtTokenType tokenType, UserEntity user) {
+    public TokenEntity saveToken(String token, JwtTokenType tokenType, UserEntity user) {
 
         log.info("Saving token include: token {}, token type {}, user id {}", token, tokenType, user.getId());
 
@@ -46,7 +46,7 @@ public class TokenService implements ITokenService{
 
         log.info("get token by id {}", id);
 
-        return tokenMapper.findById(id).orElseThrow(
+        return Optional.ofNullable(tokenMapper.selectById(id)).orElseThrow(
                 () -> {
 
                     log.error("get token by id {} failed", id);
@@ -76,7 +76,7 @@ public class TokenService implements ITokenService{
     @Override
     public TokenEntity getTokenByToken(String token, Boolean throwable) {
 
-        TokenEntity tokenEntity = tokenMapper.findByToken(token).orElse(null);
+        TokenEntity tokenEntity = tokenMapper.selectByToken(token).orElse(null);
 
         if(tokenEntity == null && throwable)
             throw new ErrorHolderException(Error.RESOURCE_NOT_FOUND);

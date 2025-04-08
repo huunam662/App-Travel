@@ -1,57 +1,32 @@
 package app.travel.shared.entity;
 
-import app.travel.model.tours.TourEntity;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
-import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.stereotype.Component;
-
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-@Component
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AuditEntity implements MetaObjectHandler {
+public class AuditEntity {
 
-    @TableId
-    @TableField("id")
+    @TableId(value = "id", type = IdType.INPUT)
+    @TableField(fill = FieldFill.INSERT)
     UUID id;
 
-    @TableField("created_at")
+    @TableField(value = "created_at", fill = FieldFill.INSERT)
     OffsetDateTime createdAt;
 
-    @TableField("updated_at")
+    @TableField(value = "updated_at", fill = FieldFill.INSERT_UPDATE)
     OffsetDateTime updatedAt;
 
-    @Override
-    public void insertFill(MetaObject metaObject) {
-        this.strictInsertFill(metaObject, "id", UUID::randomUUID, UUID.class);
-        this.strictInsertFill(metaObject, "createdAt", OffsetDateTime::now, OffsetDateTime.class);
-        this.strictInsertFill(metaObject, "updatedAt", OffsetDateTime::now, OffsetDateTime.class);
 
-        Object originalObject = metaObject.getOriginalObject();
-
-        if(originalObject instanceof TourEntity){
-
-            String fieldBookingTicketsName = "bookingTickets";
-
-            if(getFieldValByName(fieldBookingTicketsName, metaObject) == null){
-                this.strictInsertFill(metaObject, fieldBookingTicketsName, () -> 0, Integer.class);
-            }
-        }
-    }
-
-    @Override
-    public void updateFill(MetaObject metaObject) {
-        this.strictInsertFill(metaObject, "updatedAt", OffsetDateTime::now, OffsetDateTime.class);
-    }
 }

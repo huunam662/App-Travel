@@ -3,14 +3,16 @@ package app.travel.shared.service.roles;
 import app.travel.advice.exception.templates.ErrorHolderException;
 import app.travel.common.constant.Error;
 import app.travel.common.constant.Role;
-import app.travel.model.roles.RoleEntity;
-import app.travel.model.roles.RoleMapper;
+import app.travel.model.roles.entity.RoleEntity;
+import app.travel.model.roles.mapper.RoleMapper;
+import app.travel.model.roles.repository.IRoleRepository;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -19,14 +21,14 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class RoleService implements IRoleService{
 
-    RoleMapper roleMapper;
+    IRoleRepository roleRepository;
 
     @Override
     public RoleEntity getRoleById(UUID id) {
 
         log.info("get role by id {}", id);
 
-        return roleMapper.findById(id).orElseThrow(
+        return roleRepository.findById(id).orElseThrow(
                 () -> {
 
                     log.error("get role by id {} failed", id);
@@ -41,7 +43,7 @@ public class RoleService implements IRoleService{
 
         log.info("get role by name {}", roleName.getPrettyRoleName());
 
-        return roleMapper.findByRoleName(roleName).orElseThrow(
+        return roleRepository.findByRoleName(roleName).orElseThrow(
                 () -> {
 
                     log.error("get role by name {} failed", roleName.getPrettyRoleName());
@@ -56,7 +58,7 @@ public class RoleService implements IRoleService{
 
         log.info("get role id by role name {}", roleName.getPrettyRoleName());
 
-        return roleMapper.findIdByRoleName(roleName).orElseThrow(
+        return roleRepository.findIdByRoleName(roleName).orElseThrow(
                 () -> {
 
                     log.error("get role id by role name {} failed", roleName.getPrettyRoleName());

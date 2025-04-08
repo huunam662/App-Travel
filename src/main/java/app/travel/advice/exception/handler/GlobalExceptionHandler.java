@@ -30,8 +30,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+@Slf4j(topic = "GLOBAL-EXCEPTION-HANDLER")
 @RestControllerAdvice
-@Slf4j
 public class GlobalExceptionHandler implements AuthenticationEntryPoint, AccessDeniedHandler {
 
     private void logError(Error error, Exception ex){

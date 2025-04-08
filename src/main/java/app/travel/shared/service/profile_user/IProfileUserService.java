@@ -1,11 +1,11 @@
 package app.travel.shared.service.profile_user;
 
-import app.travel.model.profile_user.ProfileUserEntity;
+import app.travel.model.profile_user.entity.ProfileUserEntity;
 
 public interface IProfileUserService {
 
-    Boolean checkProfileUserByPhoneNumber(String numberPhone);
+    Boolean checkProfileUserByPhoneNumber(String phoneNumber);
 
-    ProfileUserEntity insertProfileUser(ProfileUserEntity profileUserEntity);
+    ProfileUserEntity saveProfileUser(ProfileUserEntity profileUserEntity);
 
 }

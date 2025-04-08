@@ -11,10 +11,10 @@ import app.travel.domain.auth.payload.request.SignUpRequest;
 import app.travel.domain.auth.payload.response.SignInResponse;
 import app.travel.domain.users.service.IUserService;
 import app.travel.helper.AuthHelper;
-import app.travel.model.profile_user.ProfileUserEntity;
-import app.travel.model.roles.RoleEntity;
+import app.travel.model.profile_user.entity.ProfileUserEntity;
+import app.travel.model.roles.entity.RoleEntity;
 import app.travel.model.tokens.TokenEntity;
-import app.travel.model.users.UserEntity;
+import app.travel.model.users.entity.UserEntity;
 import app.travel.shared.identity.UserDetailsImpl;
 import app.travel.shared.payload.response.JwtTokenResponse;
 import app.travel.shared.payload.transfer.CookieTransfer;
@@ -41,7 +41,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
@@ -90,9 +89,9 @@ public class AuthService implements IAuthService{
 
         UserEntity userEntity = userDetails.getUser();
 
-        TokenEntity accessTokenEntity = tokenService.insertTokenInclude(accessToken, JwtTokenType.ACCESS, userEntity);
+        TokenEntity accessTokenEntity = tokenService.saveToken(accessToken, JwtTokenType.ACCESS, userEntity);
 
-        TokenEntity refreshTokenEntity = tokenService.insertTokenInclude(refreshToken, JwtTokenType.REFRESH, userEntity);
+        TokenEntity refreshTokenEntity = tokenService.saveToken(refreshToken, JwtTokenType.REFRESH, userEntity);
 
         CookieTransfer cookieTransfer = CookieTransfer.builder()
                 .key(JwtTokenType.REFRESH.getNameSpecial())
@@ -155,7 +154,7 @@ public class AuthService implements IAuthService{
 
         String accessToken = jwtService.generateToken(userDetails, JwtTokenType.ACCESS);
 
-        tokenEntity = tokenService.insertTokenInclude(accessToken, JwtTokenType.ACCESS, userEntity);
+        tokenEntity = tokenService.saveToken(accessToken, JwtTokenType.ACCESS, userEntity);
 
         JwtTokenResponse jwtTokenResponse = JwtTokenResponse.builder()
                 .access(tokenEntity.getToken())
@@ -189,7 +188,7 @@ public class AuthService implements IAuthService{
         ProfileUserEntity profileUserEntity = ProfileUserConverter.INSTANCE.toProfileUserEntityFromSignUpRequest(signUpRequest);
         profileUserEntity.setUserId(userEntity.getId());
 
-        profileUserService.insertProfileUser(profileUserEntity);
+        profileUserService.saveProfileUser(profileUserEntity);
 
     }
 }
