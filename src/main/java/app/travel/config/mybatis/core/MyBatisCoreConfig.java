@@ -25,16 +25,11 @@ public class MyBatisCoreConfig {
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource, MyBatisValue myBatisValue) throws Exception {
 
-        MybatisConfiguration mybatisConfiguration = new MybatisConfiguration();
-        mybatisConfiguration.setJdbcTypeForNull(JdbcType.NULL);
-        mybatisConfiguration.setMapUnderscoreToCamelCase(myBatisValue.getMapUnderscoreToCamelCase());
-        mybatisConfiguration.setCacheEnabled(myBatisValue.getCacheEnabled());
-
         MybatisSqlSessionFactoryBean sqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
-        sqlSessionFactoryBean.setConfiguration(mybatisConfiguration);
+        sqlSessionFactoryBean.setGlobalConfig(globalConfig(myBatisValue));
+        sqlSessionFactoryBean.setConfiguration(mybatisConfiguration(myBatisValue));
         sqlSessionFactoryBean.setTypeHandlers(uuidBaseTypeHandler());
-        sqlSessionFactoryBean.setGlobalConfig(globalConfig());
         sqlSessionFactoryBean.setPlugins(new MyBatisInterceptorConfig());
 
         return sqlSessionFactoryBean.getObject();
@@ -69,13 +64,23 @@ public class MyBatisCoreConfig {
         };
     }
 
-    public GlobalConfig globalConfig() {
+    public MybatisConfiguration mybatisConfiguration(MyBatisValue myBatisValue){
+
+        MybatisConfiguration mybatisConfiguration = new MybatisConfiguration();
+        mybatisConfiguration.setJdbcTypeForNull(JdbcType.NULL);
+        mybatisConfiguration.setMapUnderscoreToCamelCase(myBatisValue.getMapUnderscoreToCamelCase());
+        mybatisConfiguration.setCacheEnabled(myBatisValue.getCacheEnabled());
+
+        return mybatisConfiguration;
+    }
+
+    public GlobalConfig globalConfig(MyBatisValue myBatisValue) {
 
         GlobalConfig globalConfig = new GlobalConfig();
         globalConfig.setMetaObjectHandler(new MetaObjectHandlerConfig());
 
         GlobalConfig.DbConfig dbConfig = new GlobalConfig.DbConfig();
-        dbConfig.setTableUnderline(Boolean.TRUE);
+        dbConfig.setTableUnderline(myBatisValue.getTableUnderline());
 
         globalConfig.setDbConfig(dbConfig);
 

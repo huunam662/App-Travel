@@ -3,8 +3,8 @@ package app.travel.shared.service.tokens;
 import app.travel.advice.exception.templates.ErrorHolderException;
 import app.travel.common.constant.Error;
 import app.travel.common.constant.JwtTokenType;
-import app.travel.model.tokens.TokenEntity;
-import app.travel.model.tokens.TokenMapper;
+import app.travel.model.tokens.entity.TokenEntity;
+import app.travel.model.tokens.repository.ITokenRepository;
 import app.travel.model.users.entity.UserEntity;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class TokenService implements ITokenService{
 
-    TokenMapper tokenMapper;
+    ITokenRepository tokenRepository;
 
     @Override
     @Transactional
@@ -35,9 +35,7 @@ public class TokenService implements ITokenService{
                 .userId(user.getId())
                 .build();
 
-        tokenMapper.insert(tokenEntity);
-
-        return tokenEntity;
+        return tokenRepository.insert(tokenEntity);
     }
 
     @Override
@@ -45,7 +43,7 @@ public class TokenService implements ITokenService{
 
         log.info("get token by id {}", id);
 
-        TokenEntity tokenEntity = tokenMapper.selectById(id);
+        TokenEntity tokenEntity = tokenRepository.findById(id).orElse(null);
 
         if(tokenEntity == null && throwable)
             throw new ErrorHolderException(Error.RESOURCE_NOT_FOUND);
@@ -67,13 +65,13 @@ public class TokenService implements ITokenService{
     @Transactional
     public void deleteToken(TokenEntity token) {
 
-        tokenMapper.deleteById(token);
+        tokenRepository.delete(token);
     }
 
     @Override
     public TokenEntity getTokenByToken(String token, Boolean throwable) {
 
-        TokenEntity tokenEntity = tokenMapper.selectByToken(token).orElse(null);
+        TokenEntity tokenEntity = tokenRepository.findByToken(token).orElse(null);
 
         if(tokenEntity == null && throwable)
             throw new ErrorHolderException(Error.RESOURCE_NOT_FOUND);

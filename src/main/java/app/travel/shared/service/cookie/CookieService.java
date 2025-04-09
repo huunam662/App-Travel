@@ -4,7 +4,7 @@ package app.travel.shared.service.cookie;
 import app.travel.advice.exception.templates.ErrorHolderException;
 import app.travel.common.constant.CookieSameSite;
 import app.travel.common.constant.Error;
-import app.travel.shared.payload.transfer.CookieTransfer;
+import app.travel.shared.payload.internal.CookieInternal;
 import app.travel.value.AppCoreValue;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,7 +25,7 @@ public class CookieService implements ICookieService{
     AppCoreValue appCoreValue;
 
     @Override
-    public Boolean sendCookieInclude(CookieTransfer cookieTransfer, HttpServletResponse response) {
+    public Boolean sendCookieInclude(CookieInternal cookieTransfer, HttpServletResponse response) {
 
         if (cookieTransfer == null) return Boolean.TRUE;
 

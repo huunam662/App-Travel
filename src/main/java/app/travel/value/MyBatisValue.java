@@ -20,4 +20,7 @@ public class MyBatisValue {
     @Value("${mybatis-plus.configuration.cache-enabled}")
     Boolean cacheEnabled;
 
+    @Value("${mybatis-plus.global-config.db-config.table-underline}")
+    Boolean tableUnderline;
+
 }

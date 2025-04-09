@@ -1,6 +1,6 @@
-package app.travel.model.tokens;
+package app.travel.model.tokens.mapper;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import app.travel.model.tokens.entity.TokenEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.*;
 import java.util.Optional;

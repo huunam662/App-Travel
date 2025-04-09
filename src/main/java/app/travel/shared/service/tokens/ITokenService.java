@@ -1,7 +1,7 @@
 package app.travel.shared.service.tokens;
 
 import app.travel.common.constant.JwtTokenType;
-import app.travel.model.tokens.TokenEntity;
+import app.travel.model.tokens.entity.TokenEntity;
 import app.travel.model.users.entity.UserEntity;
 
 import java.util.UUID;

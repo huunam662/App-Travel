@@ -74,3 +74,6 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mybatis/mapper/**/*.xml
   type-aliases-package: app.travel.model
+  global-config:
+    db-config:
+      table-underline: true

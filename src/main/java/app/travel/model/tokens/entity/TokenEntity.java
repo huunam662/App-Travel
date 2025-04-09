@@ -1,4 +1,4 @@
-package app.travel.model.tokens;
+package app.travel.model.tokens.entity;
 
 import app.travel.common.constant.JwtTokenType;
 import app.travel.shared.entity.BaseEntity;

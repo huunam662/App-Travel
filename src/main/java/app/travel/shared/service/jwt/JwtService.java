@@ -4,7 +4,7 @@ import app.travel.advice.exception.templates.ErrorHolderException;
 import app.travel.common.constant.Error;
 import app.travel.common.constant.JwtTokenType;
 import app.travel.common.constant.Role;
-import app.travel.model.tokens.TokenEntity;
+import app.travel.model.tokens.entity.TokenEntity;
 import app.travel.shared.service.tokens.ITokenService;
 import app.travel.value.JwtValue;
 import io.jsonwebtoken.*;

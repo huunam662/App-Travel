@@ -2,24 +2,24 @@ package app.travel.model.users.repository;
 
 import app.travel.model.users.entity.UserEntity;
 import app.travel.model.users.mapper.UserMapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-@RequiredArgsConstructor(onConstructor_ = {@Lazy})
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserRepository implements IUserRepository{
 
     UserMapper userMapper;
 
-
     @Override
+    @Transactional
     public UserEntity insert(UserEntity user) {
 
         userMapper.insert(user);
@@ -28,6 +28,7 @@ public class UserRepository implements IUserRepository{
     }
 
     @Override
+    @Transactional
     public UserEntity update(UserEntity user) {
 
         userMapper.updateById(user);
@@ -36,12 +37,14 @@ public class UserRepository implements IUserRepository{
     }
 
     @Override
+    @Transactional
     public void delete(UserEntity user) {
 
         userMapper.deleteById(user);
     }
 
     @Override
+    @Transactional
     public void deleteById(UUID id) {
 
         userMapper.deleteById(id);

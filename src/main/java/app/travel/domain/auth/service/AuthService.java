@@ -13,11 +13,11 @@ import app.travel.domain.users.service.IUserService;
 import app.travel.helper.AuthHelper;
 import app.travel.model.profile_user.entity.ProfileUserEntity;
 import app.travel.model.roles.entity.RoleEntity;
-import app.travel.model.tokens.TokenEntity;
+import app.travel.model.tokens.entity.TokenEntity;
 import app.travel.model.users.entity.UserEntity;
 import app.travel.shared.identity.UserDetailsImpl;
 import app.travel.shared.payload.response.JwtTokenResponse;
-import app.travel.shared.payload.transfer.CookieTransfer;
+import app.travel.shared.payload.internal.CookieInternal;
 import app.travel.shared.service.cookie.ICookieService;
 import app.travel.shared.service.jwt.IJwtService;
 import app.travel.shared.service.mailer.IMailerService;
@@ -103,14 +103,14 @@ public class AuthService implements IAuthService{
 
         TokenEntity refreshTokenEntity = tokenService.saveToken(refreshToken, JwtTokenType.REFRESH, userEntity);
 
-        CookieTransfer cookieTransfer = CookieTransfer.builder()
+        CookieInternal cookieInternal = CookieInternal.builder()
                 .key(JwtTokenType.REFRESH.getNameSpecial())
                 .value(refreshTokenEntity.getId().toString())
                 .path(String.format("%s/", appCoreValue.getRefreshTokenPath()))
                 .maxAge(jwtValue.getRefreshDurationTime().intValue())
                 .build();
 
-        cookieService.sendCookieInclude(cookieTransfer, servletResponse);
+        cookieService.sendCookieInclude(cookieInternal, servletResponse);
 
         JwtTokenResponse tokensResponse = JwtTokenResponse.builder()
                 .access(accessTokenEntity.getToken())

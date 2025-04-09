@@ -1,8 +1,7 @@
-package app.travel.shared.payload.transfer;
+package app.travel.shared.payload.internal;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 @Getter
 @Setter
@@ -10,7 +9,7 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CookieTransfer {
+public class CookieInternal {
 
     String key;
 
