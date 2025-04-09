@@ -1,6 +1,6 @@
 package app.travel.model.tours;
 
-import app.travel.shared.entity.AuditEntity;
+import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Setter
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TourEntity extends AuditEntity {
+public class TourEntity extends BaseEntity{
 
     @TableField("founder_tour_id")
     UUID founderTourId;
@@ -48,7 +48,7 @@ public class TourEntity extends AuditEntity {
     @TableField("tour_video_url")
     String tourVideoUrl;
 
-    @TableField(value = "booking_tickets", fill = FieldFill.INSERT)
+    @TableField(value = "booking_tickets", fill = FieldFill.INSERT_UPDATE)
     Integer bookingTickets;
 
 }

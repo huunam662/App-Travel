@@ -32,7 +32,4 @@ public class AppCoreValue {
     @Value("${spring.mail.username}")
     String sendEmailFrom;
 
-    @Value("${mybatis-plus.mapper-locations}")
-    String myBatisPlusMapperLocations;
-
 }

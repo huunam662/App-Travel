@@ -14,7 +14,7 @@ public interface IAuthController {
 
     @PostMapping("/sign-in")
     @DefaultMessage(message = "Authentication successful.")
-    SignInResponse signIn(@Valid @RequestBody SignInRequest request, HttpServletResponse response);
+    SignInResponse signIn(@Valid @RequestBody SignInRequest request, HttpServletRequest servletRequest, HttpServletResponse servletResponse);
 
     @PostMapping("/sign-up")
     @DefaultMessage(message = "Send email for register confirm successful.")

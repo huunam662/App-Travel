@@ -2,21 +2,23 @@ package app.travel.config.mybatis.hander;
 
 import app.travel.model.tours.TourEntity;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.context.annotation.Configuration;
-
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.UUID;
 
-@Configuration
+@Slf4j(topic = "META-OBJECT-HANDLER")
 public class MetaObjectHandlerConfig implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
 
-        this.strictInsertFill(metaObject, "id", UUID::randomUUID, UUID.class);
-        this.strictInsertFill(metaObject, "createdAt", OffsetDateTime::now, OffsetDateTime.class);
-        this.strictInsertFill(metaObject, "updatedAt", OffsetDateTime::now, OffsetDateTime.class);
+        log.info("Meta Object Handler insert fill");
+
+        setFieldValByName("id", UUID.randomUUID(), metaObject);
+        setFieldValByName("createdAt", OffsetDateTime.now(ZoneId.systemDefault()), metaObject);
+        setFieldValByName("updatedAt", OffsetDateTime.now(ZoneId.systemDefault()), metaObject);
 
         Object originalObject = metaObject.getOriginalObject();
 
@@ -24,8 +26,10 @@ public class MetaObjectHandlerConfig implements MetaObjectHandler {
 
             String fieldBookingTicketsName = "bookingTickets";
 
-            if(getFieldValByName(fieldBookingTicketsName, metaObject) == null){
-                this.strictInsertFill(metaObject, fieldBookingTicketsName, () -> 0, Integer.class);
+            Object fieldBookingTickets = getFieldValByName(fieldBookingTicketsName, metaObject);
+
+            if(fieldBookingTickets == null){
+                setFieldValByName(fieldBookingTicketsName, 0, metaObject);
             }
         }
     }
@@ -33,6 +37,8 @@ public class MetaObjectHandlerConfig implements MetaObjectHandler {
     @Override
     public void updateFill(MetaObject metaObject) {
 
-        this.strictInsertFill(metaObject, "updatedAt", OffsetDateTime::now, OffsetDateTime.class);
+        log.info("Meta Object Handler update fill");
+
+        setFieldValByName("updatedAt", OffsetDateTime.now(ZoneId.systemDefault()), metaObject);
     }
 }

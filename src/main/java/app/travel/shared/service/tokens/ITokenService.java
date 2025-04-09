@@ -14,7 +14,7 @@ public interface ITokenService {
 
     void deleteToken(TokenEntity token);
 
-    TokenEntity getTokenById(UUID id);
+    TokenEntity getTokenById(UUID id, Boolean throwable);
 
     TokenEntity getTokenByToken(String token, Boolean throwable);
 

@@ -1,6 +1,6 @@
 package app.travel.model.comment_feedback;
 
-import app.travel.shared.entity.AuditEntity;
+import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Setter
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CommentFeedbackEntity extends AuditEntity {
+public class CommentFeedbackEntity extends BaseEntity {
 
     @TableField("feedback_id")
     UUID feedbackId;

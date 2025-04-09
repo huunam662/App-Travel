@@ -52,19 +52,19 @@ public class CookieService implements ICookieService{
     }
 
     @Override
-    public Cookie getCookieFrom(HttpServletRequest request, String key) {
+    public Cookie getCookieFrom(HttpServletRequest request, String key, Boolean throwable) {
 
         Cookie[] cookies = request.getCookies();
 
-        if(cookies == null)
+        if(cookies == null && throwable)
             throw new ErrorHolderException(Error.COOKIE_NOT_EXISTED);
 
-        Cookie cookie = Arrays.stream(cookies)
+        Cookie cookie = Arrays.stream(cookies != null ? cookies : new Cookie[]{})
                 .filter(
                         c -> c.getName().equals(key)
                 ).findFirst().orElse(null);
 
-        if(cookie == null)
+        if(cookie == null && throwable)
             throw new ErrorHolderException(Error.COOKIE_NOT_EXISTED);
 
         return cookie;

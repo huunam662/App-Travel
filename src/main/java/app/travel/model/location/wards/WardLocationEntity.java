@@ -1,6 +1,6 @@
 package app.travel.model.location.wards;
 
-import app.travel.shared.entity.LocationEntity;
+import app.travel.shared.entity.LocationBaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class WardLocationEntity extends LocationEntity {
+public class WardLocationEntity extends LocationBaseEntity {
 
     @TableField("district_location_id")
     String districtLocationId;

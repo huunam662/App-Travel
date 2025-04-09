@@ -1,6 +1,6 @@
 package app.travel.model.places;
 
-import app.travel.shared.entity.AuditEntity;
+import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PlaceEntity extends AuditEntity {
+public class PlaceEntity extends BaseEntity {
 
     @TableField("place_name")
     String placeName;

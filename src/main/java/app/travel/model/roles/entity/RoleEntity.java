@@ -1,7 +1,7 @@
 package app.travel.model.roles.entity;
 
 import app.travel.common.constant.Role;
-import app.travel.shared.entity.AuditEntity;
+import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RoleEntity extends AuditEntity {
+public class RoleEntity extends BaseEntity {
 
     @TableField("role_name")
     @EnumValue

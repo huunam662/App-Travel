@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -42,18 +41,16 @@ public class TokenService implements ITokenService{
     }
 
     @Override
-    public TokenEntity getTokenById(UUID id) {
+    public TokenEntity getTokenById(UUID id, Boolean throwable) {
 
         log.info("get token by id {}", id);
 
-        return Optional.ofNullable(tokenMapper.selectById(id)).orElseThrow(
-                () -> {
+        TokenEntity tokenEntity = tokenMapper.selectById(id);
 
-                    log.error("get token by id {} failed", id);
+        if(tokenEntity == null && throwable)
+            throw new ErrorHolderException(Error.RESOURCE_NOT_FOUND);
 
-                    return new ErrorHolderException(Error.RESOURCE_NOT_FOUND);
-                }
-        );
+        return tokenEntity;
     }
 
 
@@ -61,7 +58,7 @@ public class TokenService implements ITokenService{
     @Transactional
     public void deleteTokenById(UUID tokenId) {
 
-        TokenEntity tokenEntity = getTokenById(tokenId);
+        TokenEntity tokenEntity = getTokenById(tokenId, Boolean.TRUE);
 
         deleteToken(tokenEntity);
     }

@@ -9,6 +9,6 @@ public interface ICookieService {
 
     Boolean sendCookieInclude(CookieTransfer cookieTransfer, HttpServletResponse response);
 
-    Cookie getCookieFrom(HttpServletRequest request, String key);
+    Cookie getCookieFrom(HttpServletRequest request, String key, Boolean throwable);
 
 }

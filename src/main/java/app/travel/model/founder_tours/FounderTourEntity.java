@@ -1,6 +1,6 @@
 package app.travel.model.founder_tours;
 
-import app.travel.shared.entity.AuditEntity;
+import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class FounderTourEntity extends AuditEntity {
+public class FounderTourEntity extends BaseEntity {
 
     @TableField("user_id")
     UUID userId;

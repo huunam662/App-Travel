@@ -1,6 +1,6 @@
 package app.travel.model.location.provinces;
 
-import app.travel.shared.entity.LocationEntity;
+import app.travel.shared.entity.LocationBaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -12,5 +12,5 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProvinceLocationEntity extends LocationEntity {
+public class ProvinceLocationEntity extends LocationBaseEntity {
 }

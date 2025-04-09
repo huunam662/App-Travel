@@ -1,6 +1,6 @@
 package app.travel.model.hotels;
 
-import app.travel.shared.entity.AuditEntity;
+import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 @Setter
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class HotelEntity extends AuditEntity {
+public class HotelEntity extends BaseEntity {
 
     @TableField("hotel_name")
     String hotel_name;

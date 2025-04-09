@@ -1,6 +1,6 @@
 package app.travel.model.tour_packs;
 
-import app.travel.shared.entity.AuditEntity;
+import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TourPackEntity extends AuditEntity {
+public class TourPackEntity extends BaseEntity {
 
     @TableField("pack_name")
     String packName;

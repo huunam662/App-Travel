@@ -1,6 +1,6 @@
 package app.travel.model.invalid_token;
 
-import app.travel.shared.entity.AuditEntity;
+import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,7 +17,7 @@ import java.util.UUID;
 @SuperBuilder
 @Schema(hidden = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class InvalidTokenEntity extends AuditEntity {
+public class InvalidTokenEntity extends BaseEntity {
 
     @TableField("user_id")
     UUID userId;

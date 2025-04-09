@@ -8,21 +8,16 @@ import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.*;
-import org.apache.ibatis.session.ResultHandler;
-import org.apache.ibatis.session.RowBounds;
-import org.springframework.context.annotation.Configuration;
+
 
 @Slf4j(topic = "MYBATIS-INTERCEPTOR")
-@Configuration
 @Intercepts({
         @Signature(
                 type = Executor.class,
                 method = "update",
                 args = {
                         MappedStatement.class,
-                        Object.class,
-                        RowBounds.class,
-                        ResultHandler.class
+                        Object.class
                 }
         )
 })
@@ -31,7 +26,13 @@ public class MyBatisInterceptorConfig implements Interceptor {
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
 
+        log.info("MyBatis Interceptor start intercept - Go to DB");
+
+        // Go to db
         Object result = invocation.proceed();
+        // Go to db success
+
+        log.info("MyBatis Interceptor start intercept - Back from DB");
 
         MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];
 
@@ -41,11 +42,13 @@ public class MyBatisInterceptorConfig implements Interceptor {
                 sqlCommandType.equals(SqlCommandType.UPDATE) ||
                 sqlCommandType.equals(SqlCommandType.DELETE);
 
+        BoundSql boundSql = mappedStatement.getBoundSql(invocation.getArgs()[1]);
+
+        log.info("MyBatis Interceptor end intercept - Sql -> {}", boundSql.getSql());
+
         if(!isInsertOrUpdateOrDelete) return result;
 
         if(result instanceof Integer effectedRow && effectedRow < 1){
-
-            BoundSql boundSql = mappedStatement.getBoundSql(invocation.getArgs()[1]);
 
             log.error("{} effected row is less than one with: {}", sqlCommandType, boundSql.getSql());
 
@@ -55,8 +58,10 @@ public class MyBatisInterceptorConfig implements Interceptor {
         return result;
     }
 
+
     @Override
     public Object plugin(Object target) {
         return Plugin.wrap(target, this);
     }
+
 }

@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class LocationEntity {
+public class LocationBaseEntity {
 
     @TableId("id")
     String id;

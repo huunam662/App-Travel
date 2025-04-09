@@ -1,6 +1,6 @@
 package app.travel.model.packs_of_tour;
 
-import app.travel.shared.entity.AuditEntity;
+import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.*;
@@ -15,7 +15,7 @@ import java.util.UUID;
 @Setter
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PackOfTourEntity extends AuditEntity {
+public class PackOfTourEntity extends BaseEntity {
 
     @TableField("tour_id")
     UUID tourId;

@@ -16,10 +16,9 @@ import java.util.UUID;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AuditEntity {
+public class BaseEntity {
 
     @TableId(value = "id", type = IdType.INPUT)
-    @TableField(fill = FieldFill.INSERT)
     UUID id;
 
     @TableField(value = "created_at", fill = FieldFill.INSERT)

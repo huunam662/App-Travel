@@ -1,6 +1,8 @@
 package app.travel.config.core;
 
+import app.travel.config.mybatis.hander.MetaObjectHandlerConfig;
 import app.travel.value.AppCoreValue;
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.BaseTypeHandler;
@@ -13,12 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
-import javax.sql.DataSource;
-import java.sql.CallableStatement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.UUID;
 
 @Configuration
 public class AppCoreConfig {
@@ -34,40 +30,6 @@ public class AppCoreConfig {
             throws Exception {
 
         return authenticationConfiguration.getAuthenticationManager();
-    }
-
-    @Bean
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource, AppCoreValue appCoreValue) throws Exception {
-
-        MybatisSqlSessionFactoryBean factoryBean = new MybatisSqlSessionFactoryBean();
-        factoryBean.setDataSource(dataSource);
-        factoryBean.setTypeHandlers(new BaseTypeHandler<UUID>() {
-
-            @Override
-            public void setNonNullParameter(PreparedStatement ps, int i, UUID parameter, JdbcType jdbcType) throws SQLException {
-                ps.setObject(i, parameter);
-            }
-
-            @Override
-            public UUID getNullableResult(ResultSet rs, String columnName) throws SQLException {
-                String uuid = rs.getString(columnName);
-                return uuid != null ? UUID.fromString(uuid) : null;
-            }
-
-            @Override
-            public UUID getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-                String uuid = rs.getString(columnIndex);
-                return uuid != null ? UUID.fromString(uuid) : null;
-            }
-
-            @Override
-            public UUID getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
-                String uuid = cs.getString(columnIndex);
-                return uuid != null ? UUID.fromString(uuid) : null;
-            }
-        });
-
-        return factoryBean.getObject();
     }
 
     @Bean

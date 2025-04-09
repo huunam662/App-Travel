@@ -1,7 +1,7 @@
 package app.travel.model.tokens;
 
 import app.travel.common.constant.JwtTokenType;
-import app.travel.shared.entity.AuditEntity;
+import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @SuperBuilder
 @Schema(hidden = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TokenEntity extends AuditEntity {
+public class TokenEntity extends BaseEntity {
 
     @TableField("user_id")
     UUID userId;

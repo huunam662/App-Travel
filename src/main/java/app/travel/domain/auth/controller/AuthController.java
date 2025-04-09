@@ -27,9 +27,9 @@ public class AuthController implements IAuthController{
     IAuthService authService;
 
     @Override
-    public SignInResponse signIn(SignInRequest request, HttpServletResponse response) {
+    public SignInResponse signIn(SignInRequest request, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
 
-        return authService.signIn(request, response);
+        return authService.signIn(request, servletRequest, servletResponse);
     }
 
     @Override

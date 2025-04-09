@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public interface IAuthService {
 
-    SignInResponse signIn(SignInRequest request, HttpServletResponse response);
+    SignInResponse signIn(SignInRequest request, HttpServletRequest servletRequest, HttpServletResponse servletResponse);
 
     SignInResponse refreshToken(HttpServletRequest request);
 

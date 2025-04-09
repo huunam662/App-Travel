@@ -75,7 +75,17 @@ public class AuthService implements IAuthService{
 
     @Override
     @Transactional
-    public SignInResponse signIn(SignInRequest request, HttpServletResponse response) {
+    public SignInResponse signIn(SignInRequest request, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+
+        Cookie cookie = cookieService.getCookieFrom(servletRequest, JwtTokenType.REFRESH.getNameSpecial(), Boolean.FALSE);
+
+        if(cookie != null){
+
+            TokenEntity tokenEntity = tokenService.getTokenById(UUID.fromString(cookie.getValue()), Boolean.FALSE);
+
+            if(tokenEntity != null)
+                tokenService.deleteToken(tokenEntity);
+        }
 
         Authentication authentication = authenticationManager.authenticate(
                 UsernamePasswordAuthenticationToken.unauthenticated(request.getUsername(), request.getPassword())
@@ -100,7 +110,7 @@ public class AuthService implements IAuthService{
                 .maxAge(jwtValue.getRefreshDurationTime().intValue())
                 .build();
 
-        cookieService.sendCookieInclude(cookieTransfer, response);
+        cookieService.sendCookieInclude(cookieTransfer, servletResponse);
 
         JwtTokenResponse tokensResponse = JwtTokenResponse.builder()
                 .access(accessTokenEntity.getToken())
@@ -126,11 +136,11 @@ public class AuthService implements IAuthService{
     @Transactional
     public SignInResponse refreshToken(HttpServletRequest request) {
 
-        Cookie cookie = cookieService.getCookieFrom(request, JwtTokenType.REFRESH.getNameSpecial());
+        Cookie cookie = cookieService.getCookieFrom(request, JwtTokenType.REFRESH.getNameSpecial(), Boolean.TRUE);
 
         UUID refreshTokenId = UUID.fromString(cookie.getValue());
 
-        TokenEntity tokenEntity = tokenService.getTokenById(refreshTokenId);
+        TokenEntity tokenEntity = tokenService.getTokenById(refreshTokenId, Boolean.TRUE);
 
         String refreshToken = tokenEntity.getToken();
 
