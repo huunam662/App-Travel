@@ -1,5 +1,6 @@
 package app.travel.common.constant.sort_by;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
@@ -26,6 +27,7 @@ public enum PlaceSortBy {
         else this.column = column;
     }
 
+    @JsonCreator
     public static PlaceSortBy fromValue(String value){
 
         return Arrays.stream(PlaceSortBy.values())
@@ -46,4 +48,9 @@ public enum PlaceSortBy {
                 .orElse(UPDATE_AT);
     }
 
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

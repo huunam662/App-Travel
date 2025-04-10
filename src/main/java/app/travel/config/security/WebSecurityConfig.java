@@ -52,7 +52,7 @@ public class WebSecurityConfig {
                 .addFilterBefore(middlewareFilterConfig, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(
                         authorize ->
-                                authorize.requestMatchers("/auth/**").permitAll()
+                                authorize.requestMatchers("/**").permitAll()
                                         .requestMatchers(
                                                 "/v3/api-docs/**",
                                                 "/swagger-ui/**",

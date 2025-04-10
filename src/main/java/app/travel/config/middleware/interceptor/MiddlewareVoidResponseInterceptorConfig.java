@@ -58,7 +58,7 @@ public class MiddlewareVoidResponseInterceptorConfig implements HandlerIntercept
         response.getWriter().write(
                 Json.pretty(
                         ResultApiResponse.builder()
-                                .success(Boolean.TRUE)
+                                .success(true)
                                 .message(defaultMessage != null ? defaultMessage.message() : "")
                                 .status(statusResponse.getReasonPhrase())
                                 .code(statusResponse.value())

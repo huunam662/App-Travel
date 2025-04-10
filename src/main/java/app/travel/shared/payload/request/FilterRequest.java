@@ -2,6 +2,7 @@ package app.travel.shared.payload.request;
 
 import app.travel.common.constant.SortDirection;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.*;
@@ -34,7 +35,11 @@ public class FilterRequest {
     @Builder.Default
     String search = "";
 
-    @Parameter(description = "Sort type for sort elements [ASC, DESC].")
-    SortDirection sortType;
+    @Parameter(description = "Sort type for sort elements [ASC, DESC].",
+            schema = @Schema(
+                    allowableValues = {"ASC", "DESC"}
+            )
+    )
+    String sortType;
 
 }

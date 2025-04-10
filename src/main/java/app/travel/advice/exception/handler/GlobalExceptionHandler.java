@@ -46,7 +46,7 @@ public class GlobalExceptionHandler implements AuthenticationEntryPoint, AccessD
         response.getWriter().write(
                 Json.pretty(
                         ResultApiResponse.ErrorResponse.builder()
-                                .success(Boolean.FALSE)
+                                .success(false)
                                 .message(error.getMessage())
                                 .status(error.getStatus().getReasonPhrase())
                                 .code(error.getStatus().value())
@@ -91,7 +91,7 @@ public class GlobalExceptionHandler implements AuthenticationEntryPoint, AccessD
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResultApiResponse.ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException err){
 
-        log.error("Field Not Valid or Method Argument Not Valid Exception.");
+        logError(Error.BAD_REQUEST, err);
 
         BindingResult bindingResult = err.getBindingResult();
 

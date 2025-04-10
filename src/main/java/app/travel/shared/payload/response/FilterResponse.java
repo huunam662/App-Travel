@@ -13,11 +13,13 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FilterResponse<T> {
 
-    Integer pageNumber;
+    Long pageNumber;
 
-    Integer pageSize;
+    Long totalPages;
 
-    Integer totalElements;
+    Long pageSize;
+
+    Long totalElements;
 
     Boolean hasPreviousPage;
 
@@ -28,6 +30,6 @@ public class FilterResponse<T> {
     public void hasNextOrPreviousPage() {
 
         hasPreviousPage = pageNumber > 1;
-        hasNextPage = pageNumber < pageSize;
+        hasNextPage = pageNumber < totalPages;
     }
 }

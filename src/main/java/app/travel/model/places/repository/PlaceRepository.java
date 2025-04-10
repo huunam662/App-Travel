@@ -4,6 +4,8 @@ package app.travel.model.places.repository;
 import app.travel.model.places.entity.PlaceEntity;
 import app.travel.model.places.mapper.PlaceMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -74,5 +76,11 @@ public class PlaceRepository implements IPlaceRepository{
     public void delete(PlaceEntity place) {
 
         placeMapper.deleteById(place);
+    }
+
+    @Override
+    public IPage<PlaceEntity> selectPage(Page<PlaceEntity> page, QueryWrapper<PlaceEntity> queryWrapper) {
+
+        return placeMapper.selectPage(page, queryWrapper);
     }
 }

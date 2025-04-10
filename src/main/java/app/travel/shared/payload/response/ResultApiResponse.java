@@ -48,7 +48,7 @@ public class ResultApiResponse {
         public static ResultApiResponse.ErrorResponse build(Error err){
 
             return ErrorResponse.builder()
-                    .success(Boolean.FALSE)
+                    .success(false)
                     .message(err.getMessage())
                     .status(err.getStatus().getReasonPhrase())
                     .code(err.getStatus().value())

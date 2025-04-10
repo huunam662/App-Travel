@@ -1,6 +1,7 @@
 package app.travel.advice.response;
 
 import app.travel.common.annotation.DefaultMessage;
+import app.travel.shared.payload.response.FilterResponse;
 import app.travel.shared.payload.response.ResultApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -79,8 +80,11 @@ public class GlobalObjectResponseWrapper implements ResponseBodyAdvice<Object> {
 
         log.error("Result api response with message: {}", defaultMessage);
 
+        if(body instanceof FilterResponse<?> filterResponse)
+            filterResponse.hasNextOrPreviousPage();
+
         return ResultApiResponse.builder()
-                .success(Boolean.TRUE)
+                .success(true)
                 .message(defaultMessage != null ? defaultMessage.message() : "")
                 .status(statusResponse.getReasonPhrase())
                 .code(statusResponse.value())
