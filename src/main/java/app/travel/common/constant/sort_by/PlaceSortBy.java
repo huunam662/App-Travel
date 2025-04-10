@@ -9,19 +9,21 @@ import java.util.Arrays;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public enum PlaceSortBy {
 
-    UPDATE_AT("latest"),
-    PLACE_NAME("place-name");
+    UPDATE_AT("latest", "updated_at"),
+    PLACE_NAME("name", "place_name");
 
     String value;
+    String column;
 
-    PlaceSortBy(String value) {
+    PlaceSortBy(String value, String column) {
 
-        if(value == null || value.isEmpty()) {
+        if(value == null || value.isEmpty())
             this.value = "latest";
-            return;
-        }
+        else this.value = value;
 
-        this.value = value;
+        if(column == null || column.isEmpty())
+            this.column = "updated_at";
+        else this.column = column;
     }
 
     public static PlaceSortBy fromValue(String value){
@@ -29,6 +31,16 @@ public enum PlaceSortBy {
         return Arrays.stream(PlaceSortBy.values())
                 .filter(
                         v -> v.getValue().equalsIgnoreCase(value)
+                )
+                .findFirst()
+                .orElse(UPDATE_AT);
+    }
+
+    public static PlaceSortBy fromColumn(String column){
+
+        return Arrays.stream(PlaceSortBy.values())
+                .filter(
+                        v -> v.getColumn().equalsIgnoreCase(column)
                 )
                 .findFirst()
                 .orElse(UPDATE_AT);

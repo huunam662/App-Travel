@@ -1,4 +1,4 @@
-package app.travel.model.places;
+package app.travel.model.places.entity;
 
 import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;

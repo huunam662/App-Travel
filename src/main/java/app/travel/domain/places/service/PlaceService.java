@@ -4,9 +4,12 @@ import app.travel.advice.exception.templates.ErrorHolderException;
 import app.travel.common.constant.Error;
 import app.travel.domain.places.payload.request.PlaceFilterRequest;
 import app.travel.domain.places.payload.response.PlaceResponse;
-import app.travel.model.places.PlaceEntity;
-import app.travel.model.places.PlaceMapper;
+import app.travel.model.places.entity.PlaceEntity;
+import app.travel.model.places.mapper.PlaceMapper;
+import app.travel.model.places.repository.PlaceRepository;
 import app.travel.shared.payload.response.FilterResponse;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -25,14 +28,14 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PlaceService implements IPlaceService{
 
-    PlaceMapper placeMapper;
+    PlaceRepository placeRepository;
 
     @Override
     public PlaceEntity getPlaceById(UUID id) {
 
         log.info("get place by id: {}", id);
 
-        return Optional.ofNullable(placeMapper.selectById(id)).orElseThrow(
+        return placeRepository.findById(id).orElseThrow(
                 () -> {
                     log.error("get place by id: {} failed", id);
 
@@ -43,7 +46,8 @@ public class PlaceService implements IPlaceService{
 
     @Override
     public List<PlaceEntity> getAllPlaces() {
-        return List.of();
+
+        return placeRepository.findAll();
     }
 
     @Override
@@ -54,7 +58,10 @@ public class PlaceService implements IPlaceService{
                 .pageSize(request.getPageSize())
                 .build();
 
-        int offset = request.getPageSize() * (request.getPage() - 1);
+        Page<PlaceEntity> page = new Page<>(request.getPage(), request.getPageSize());
+
+
+
 
         return null;
     }
