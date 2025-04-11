@@ -89,4 +89,10 @@ public class PlaceRepository implements IPlaceRepository{
 
         return placeMapper.existsByName(name);
     }
+
+    @Override
+    public Boolean existsByPlaceNameAndNotId(String name, UUID id) {
+
+        return placeMapper.existsByNameAndNotId(id, name);
+    }
 }

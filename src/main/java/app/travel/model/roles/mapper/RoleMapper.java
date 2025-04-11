@@ -10,10 +10,10 @@ import java.util.UUID;
 @Mapper
 public interface RoleMapper extends BaseMapper<RoleEntity> {
 
-    @Select("SELECT * FROM roles r WHERE r.role_name = #{roleName}")
+    @Select("SELECT * FROM roles r WHERE LOWER(r.role_name) = LOWER(#{roleName})")
     Optional<RoleEntity> selectByRoleName(@Param("roleName") Role role);
 
-    @Select("SELECT r.id FROM roles r WHERE r.role_name = #{roleName}")
+    @Select("SELECT r.id FROM roles r WHERE LOWER(r.role_name) = LOWER(#{roleName})")
     Optional<UUID> selectIdByRoleName(@Param("roleName") Role role);
 
 }

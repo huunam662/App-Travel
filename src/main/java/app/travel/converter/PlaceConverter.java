@@ -1,5 +1,6 @@
 package app.travel.converter;
 
+import app.travel.domain.places.payload.request.ChangeIsForeignRequest;
 import app.travel.domain.places.payload.request.EditPlaceRequest;
 import app.travel.domain.places.payload.request.NewPlaceRequest;
 import app.travel.domain.places.payload.response.PlaceResponse;

@@ -26,10 +26,13 @@ public class MetaObjectHandlerConfig implements MetaObjectHandler {
 
             String fieldBookingTicketsName = "bookingTickets";
 
-            Object fieldBookingTickets = getFieldValByName(fieldBookingTicketsName, metaObject);
+            if(metaObject.hasGetter(fieldBookingTicketsName)){
 
-            if(fieldBookingTickets == null){
-                setFieldValByName(fieldBookingTicketsName, 0, metaObject);
+                Object fieldBookingTicketsVal = getFieldValByName(fieldBookingTicketsName, metaObject);
+
+                if(fieldBookingTicketsVal == null || (int) fieldBookingTicketsVal < 0){
+                    setFieldValByName(fieldBookingTicketsName, 0, metaObject);
+                }
             }
         }
     }

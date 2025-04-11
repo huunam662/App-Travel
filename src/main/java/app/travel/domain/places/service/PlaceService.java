@@ -86,14 +86,14 @@ public class PlaceService implements IPlaceService{
                 .pageNumber(pageResult.getCurrent())
                 .totalPages(pageResult.getPages())
                 .pageSize(pageResult.getSize())
-                .totalElements(pageResult.getTotal())
+                .totalElements((long) results.size())
                 .results(results)
                 .build();
     }
 
     @Override
     @Transactional
-    public KeyResourceResponse createPlace(NewPlaceRequest request) {
+    public KeyResourceResponse<?> createPlace(NewPlaceRequest request) {
 
         checkExistsByPlaceName(request.getPlaceName(), true);
 
@@ -102,35 +102,56 @@ public class PlaceService implements IPlaceService{
         place = placeRepository.insert(place);
 
         return KeyResourceResponse.builder()
-                .keyResource(place.getId())
+                .key(place.getId())
                 .build();
     }
 
     @Override
     @Transactional
-    public KeyResourceResponse updatePlace(EditPlaceRequest request) {
+    public KeyResourceResponse<?> updatePlace(EditPlaceRequest request) {
 
+        PlaceEntity place = getPlaceById(request.getId());
 
+        checkExistsByPlaceNameAndNotId(place.getId(), request.getPlaceName(), true);
 
-        return null;
+        place = PlaceConverter.INSTANCE.toPlaceEntity(request);
+
+        place = placeRepository.update(place);
+
+        return KeyResourceResponse.builder()
+                .key(place.getId())
+                .build();
     }
 
     @Override
     @Transactional
-    public KeyResourceResponse changePlaceIsForeign(ChangeIsForeignRequest request) {
-        return null;
+    public KeyResourceResponse<?> changePlaceIsForeign(ChangeIsForeignRequest request) {
+
+        PlaceEntity place = getPlaceById(request.getId());
+
+        place.setIsForeign(request.getIsForeign());
+
+        place = placeRepository.update(place);
+
+        return KeyResourceResponse.builder()
+                .key(place.getId())
+                .build();
     }
 
     @Override
     @Transactional
     public void deletePlaceById(UUID id) {
 
+        PlaceEntity place = getPlaceById(id);
+
+        placeRepository.delete(place);
     }
 
     @Override
     @Transactional
     public void deletePlace(PlaceEntity placeEntity) {
 
+        placeRepository.delete(placeEntity);
     }
 
     @Override
@@ -138,7 +159,18 @@ public class PlaceService implements IPlaceService{
 
         Boolean isExists = placeRepository.existsByPlaceName(placeName);
 
-        if(!isExists && throwable)
+        if(isExists && throwable)
+            throw new ErrorHolderException(Error.RESOURCE_EXISTED);
+
+        return isExists;
+    }
+
+    @Override
+    public Boolean checkExistsByPlaceNameAndNotId(UUID id, String placeName, Boolean throwable) {
+
+        Boolean isExists = placeRepository.existsByPlaceNameAndNotId(placeName, id);
+
+        if(isExists && throwable)
             throw new ErrorHolderException(Error.RESOURCE_EXISTED);
 
         return isExists;

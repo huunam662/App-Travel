@@ -30,7 +30,7 @@ public class MyBatisInterceptorConfig implements Interceptor {
 
         // Go to db
         Object result = invocation.proceed();
-        // Go to db success
+        // back from db
 
         log.info("MyBatis Interceptor start intercept - Back from DB");
 

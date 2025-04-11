@@ -3,8 +3,11 @@ package app.travel.config.mybatis.core;
 import app.travel.config.mybatis.hander.MetaObjectHandlerConfig;
 import app.travel.config.mybatis.inteceptor.MyBatisInterceptorConfig;
 import app.travel.value.MyBatisValue;
+import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.BaseTypeHandler;
@@ -21,7 +24,6 @@ import java.util.UUID;
 @Configuration
 public class MyBatisCoreConfig {
 
-
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource, MyBatisValue myBatisValue) throws Exception {
 
@@ -30,9 +32,18 @@ public class MyBatisCoreConfig {
         sqlSessionFactoryBean.setGlobalConfig(globalConfig(myBatisValue));
         sqlSessionFactoryBean.setConfiguration(mybatisConfiguration(myBatisValue));
         sqlSessionFactoryBean.setTypeHandlers(uuidBaseTypeHandler());
-        sqlSessionFactoryBean.setPlugins(new MyBatisInterceptorConfig());
+        sqlSessionFactoryBean.setPlugins(new MyBatisInterceptorConfig(), mybatisPlusInterceptor());
 
         return sqlSessionFactoryBean.getObject();
+    }
+
+    public MybatisPlusInterceptor mybatisPlusInterceptor(){
+
+        MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
+
+        mybatisPlusInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
+
+        return mybatisPlusInterceptor;
     }
 
     public BaseTypeHandler<UUID> uuidBaseTypeHandler() {

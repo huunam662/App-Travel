@@ -18,8 +18,6 @@ import java.util.UUID;
 public class EditPlaceRequest extends NewPlaceRequest{
 
     @NotNull(message = "This field is required!")
-    @NotBlank(message = "This field is required!")
-    @NotEmpty(message = "This field is required!")
     UUID id;
 
 }

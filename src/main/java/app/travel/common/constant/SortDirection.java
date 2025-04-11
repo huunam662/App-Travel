@@ -4,22 +4,21 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
-import org.springframework.core.convert.converter.Converter;
 import java.util.Arrays;
 
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public enum SortDirection {
 
-    ASC("ASC"),
-    DESC("DESC");
+    ASC("asc"),
+    DESC("desc");
 
     String value;
 
     SortDirection(String value) {
 
         if(value == null || value.isEmpty()) {
-            this.value = "DESC";
+            this.value = "desc";
             return;
         }
 

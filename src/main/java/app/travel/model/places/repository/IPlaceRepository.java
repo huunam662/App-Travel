@@ -29,6 +29,8 @@ public interface IPlaceRepository {
 
     Boolean existsByPlaceName(String name);
 
+    Boolean existsByPlaceNameAndNotId(String name, UUID id);
+
     IPage<PlaceEntity> selectPage(Page<PlaceEntity> page, QueryWrapper<PlaceEntity> queryWrapper);
 
 }

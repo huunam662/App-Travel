@@ -18,15 +18,17 @@ public interface IPlaceService {
 
     Boolean checkExistsByPlaceName(String placeName, Boolean throwable);
 
+    Boolean checkExistsByPlaceNameAndNotId(UUID id, String placeName, Boolean throwable);
+
     List<PlaceEntity> getAllPlaces();
 
     FilterResponse<PlaceResponse> filterPlaces(PlaceFilterRequest request);
 
-    KeyResourceResponse createPlace(NewPlaceRequest request);
+    KeyResourceResponse<?> createPlace(NewPlaceRequest request);
 
-    KeyResourceResponse updatePlace(EditPlaceRequest request);
+    KeyResourceResponse<?> updatePlace(EditPlaceRequest request);
 
-    KeyResourceResponse changePlaceIsForeign(ChangeIsForeignRequest request);
+    KeyResourceResponse<?> changePlaceIsForeign(ChangeIsForeignRequest request);
 
     void deletePlaceById(UUID id);
 

@@ -25,7 +25,8 @@ public enum Error {
     INVALID_TOKEN("Invalid token. Please refresh or login again.", HttpStatus.UNAUTHORIZED),
     COOKIE_NOT_EXISTED("Cookie not existed.", HttpStatus.BAD_REQUEST),
     ILLEGAL_ARGUMENT("Illegal argument.", HttpStatus.BAD_REQUEST),
-    RESOURCE_EXISTED("Resource already exists.", HttpStatus.BAD_REQUEST),;
+    RESOURCE_EXISTED("Resource already exists.", HttpStatus.BAD_REQUEST),
+    PARSE_DATATYPE_FAIL("Parse data failed.", HttpStatus.BAD_REQUEST),;
 
     // >> ---------------------------------------------------------------------- <<
 

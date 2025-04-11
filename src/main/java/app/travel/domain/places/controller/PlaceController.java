@@ -35,19 +35,19 @@ public class PlaceController implements IPlaceController {
     }
 
     @Override
-    public KeyResourceResponse createPlace(NewPlaceRequest request) {
+    public KeyResourceResponse<?> createPlace(NewPlaceRequest request) {
 
         return placeService.createPlace(request);
     }
 
     @Override
-    public KeyResourceResponse updatePlace(EditPlaceRequest request) {
+    public KeyResourceResponse<?> updatePlace(EditPlaceRequest request) {
 
         return placeService.updatePlace(request);
     }
 
     @Override
-    public KeyResourceResponse changePlaceIsForeign(ChangeIsForeignRequest request) {
+    public KeyResourceResponse<?> changePlaceIsForeign(ChangeIsForeignRequest request) {
 
         return placeService.changePlaceIsForeign(request);
     }

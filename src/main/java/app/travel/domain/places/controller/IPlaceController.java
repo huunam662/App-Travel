@@ -19,21 +19,21 @@ public interface IPlaceController {
     @DefaultMessage(message = "Load resource successful.")
     PlaceResponse getPlace(@PathVariable("id") UUID id);
 
-    @GetMapping
+    @GetMapping("/filter")
     @DefaultMessage(message = "Filter successful.")
     FilterResponse<PlaceResponse> filterPlaces(@Valid PlaceFilterRequest request);
 
     @PostMapping
     @DefaultMessage(message = "Save resource successful.")
-    KeyResourceResponse createPlace(@Valid @RequestBody NewPlaceRequest request);
+    KeyResourceResponse<?> createPlace(@Valid @RequestBody NewPlaceRequest request);
 
     @PutMapping
     @DefaultMessage(message = "Save resource successful.")
-    KeyResourceResponse updatePlace(@Valid @RequestBody EditPlaceRequest request);
+    KeyResourceResponse<?> updatePlace(@Valid @RequestBody EditPlaceRequest request);
 
     @PatchMapping("/foreign")
     @DefaultMessage(message = "Save resource successful.")
-    KeyResourceResponse changePlaceIsForeign(@Valid @RequestBody ChangeIsForeignRequest request);
+    KeyResourceResponse<?> changePlaceIsForeign(@Valid @RequestBody ChangeIsForeignRequest request);
 
     @DeleteMapping("/{id}")
     @DefaultMessage(message = "Drop resource successful.")

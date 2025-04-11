@@ -13,6 +13,7 @@ import org.apache.catalina.connector.ClientAbortException;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -174,13 +175,27 @@ public class GlobalExceptionHandler implements AuthenticationEntryPoint, AccessD
     })
     public ResultApiResponse.ErrorResponse handleBadRequestException(Exception ex){
 
-        logError(Error.BAD_REQUEST, ex);
+        Error error = Error.BAD_REQUEST;
+
+        logError(error, ex);
 
         return ResultApiResponse.ErrorResponse.builder()
                 .message(ex.getMessage())
                 .status(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .code(HttpStatus.BAD_REQUEST.value())
                 .build();
+    }
+
+    @ExceptionHandler({
+            HttpMessageNotReadableException.class
+    })
+    public ResultApiResponse.ErrorResponse handleHttpMessageNotReadable(Exception ex){
+
+        Error error = Error.PARSE_DATATYPE_FAIL;
+
+        logError(error, ex);
+
+        return ResultApiResponse.ErrorResponse.build(error);
     }
 }
 

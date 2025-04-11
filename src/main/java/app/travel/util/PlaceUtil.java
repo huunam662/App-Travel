@@ -1,7 +1,6 @@
 package app.travel.util;
 
 import app.travel.common.constant.SortDirection;
-import app.travel.common.constant.sort_by.PlaceSortBy;
 import app.travel.domain.places.payload.request.PlaceFilterRequest;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
@@ -19,6 +18,9 @@ public class PlaceUtil {
         String search = placeFilterRequest.getSearch();
 
         if(search != null && !search.isEmpty()){
+
+            search = search.trim();
+
             if(search.contains(" ")){
                 List<String> searchList = new ArrayList<>(List.of(search.split(" ")));
                 queryWrapper.and(wrapper -> {
@@ -32,9 +34,9 @@ public class PlaceUtil {
                         int valLength = val.length();
 
                         if(val.startsWith(","))
-                            val = val.substring(1);
+                            val = val.substring(1).trim();
                         else if(val.endsWith(","))
-                            val = val.substring(0, valLength - 1);
+                            val = val.substring(0, valLength - 1).trim();
 
                         if(val.contains(",")){
                             String[] valArray = val.split(",");
