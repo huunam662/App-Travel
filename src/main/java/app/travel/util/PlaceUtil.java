@@ -1,6 +1,7 @@
 package app.travel.util;
 
 import app.travel.common.constant.SortDirection;
+import app.travel.common.constant.sort_by.PlaceSortBy;
 import app.travel.domain.places.payload.request.PlaceFilterRequest;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
@@ -22,6 +23,8 @@ public class PlaceUtil {
                 List<String> searchList = new ArrayList<>(List.of(search.split(" ")));
                 queryWrapper.and(wrapper -> {
                     for(String val : searchList){
+
+                        val = val.trim();
 
                         if(val.equals(","))
                             continue;
@@ -48,7 +51,7 @@ public class PlaceUtil {
             }
         }
 
-        boolean isAsc = SortDirection.fromValue(placeFilterRequest.getSortType()).equals(SortDirection.ASC);
+        boolean isAsc = placeFilterRequest.getSortType().equals(SortDirection.ASC);
 
         String column = placeFilterRequest.getSortBy().getColumn();
 

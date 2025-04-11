@@ -1,10 +1,10 @@
 package app.travel.common.constant;
 
-import app.travel.common.constant.sort_by.PlaceSortBy;
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
-
+import org.springframework.core.convert.converter.Converter;
 import java.util.Arrays;
 
 @Getter
@@ -26,7 +26,12 @@ public enum SortDirection {
         this.value = value;
     }
 
+    public static final SortDirection DEFAULT = DESC;
+
     public static SortDirection fromValue(String value){
+
+        if(value == null || value.isEmpty())
+            return DESC;
 
         return Arrays.stream(SortDirection.values())
                 .filter(
@@ -34,6 +39,11 @@ public enum SortDirection {
                 )
                 .findFirst()
                 .orElse(DESC);
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 
 }

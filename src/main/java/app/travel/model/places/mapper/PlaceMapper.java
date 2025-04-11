@@ -18,4 +18,6 @@ public interface PlaceMapper extends BaseMapper<PlaceEntity> {
     @Select("SELECT * FROM places p WHERE p.is_foreign = #{isForeign}")
     List<PlaceEntity> selectListByIsForeign(@Param("isForeign") Boolean isForeign);
 
+    @Select("SELECT EXISTS(SELECT p.place_name FROM places p WHERE p.place_name = #{name})")
+    Boolean existsByName(@Param("name") String name);
 }

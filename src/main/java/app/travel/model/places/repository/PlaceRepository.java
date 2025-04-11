@@ -83,4 +83,10 @@ public class PlaceRepository implements IPlaceRepository{
 
         return placeMapper.selectPage(page, queryWrapper);
     }
+
+    @Override
+    public Boolean existsByPlaceName(String name) {
+
+        return placeMapper.existsByName(name);
+    }
 }

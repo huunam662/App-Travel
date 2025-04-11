@@ -2,14 +2,12 @@ package app.travel.shared.payload.request;
 
 import app.travel.common.constant.SortDirection;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 @Getter
 @Setter
@@ -35,11 +33,7 @@ public class FilterRequest {
     @Builder.Default
     String search = "";
 
-    @Parameter(description = "Sort type for sort elements [ASC, DESC].",
-            schema = @Schema(
-                    allowableValues = {"ASC", "DESC"}
-            )
-    )
-    String sortType;
+    @Parameter(description = "Sort type for sort elements [ASC, DESC].")
+    SortDirection sortType = SortDirection.DEFAULT;
 
 }

@@ -18,6 +18,6 @@ import org.springdoc.core.annotations.ParameterObject;
 public class PlaceFilterRequest extends FilterRequest {
 
     @Parameter(description = "Sort by field of object.")
-    PlaceSortBy sortBy;
+    PlaceSortBy sortBy = PlaceSortBy.DEFAULT;
 
 }

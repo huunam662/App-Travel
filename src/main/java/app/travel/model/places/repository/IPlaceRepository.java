@@ -27,6 +27,8 @@ public interface IPlaceRepository {
 
     void delete(PlaceEntity place);
 
+    Boolean existsByPlaceName(String name);
+
     IPage<PlaceEntity> selectPage(Page<PlaceEntity> page, QueryWrapper<PlaceEntity> queryWrapper);
 
 }

@@ -24,7 +24,8 @@ public enum Error {
     JWT_PAYLOAD_EMPTY("JWT Payload is empty.", HttpStatus.UNAUTHORIZED),
     INVALID_TOKEN("Invalid token. Please refresh or login again.", HttpStatus.UNAUTHORIZED),
     COOKIE_NOT_EXISTED("Cookie not existed.", HttpStatus.BAD_REQUEST),
-    ILLEGAL_ARGUMENT("Illegal argument.", HttpStatus.BAD_REQUEST),;
+    ILLEGAL_ARGUMENT("Illegal argument.", HttpStatus.BAD_REQUEST),
+    RESOURCE_EXISTED("Resource already exists.", HttpStatus.BAD_REQUEST),;
 
     // >> ---------------------------------------------------------------------- <<
 

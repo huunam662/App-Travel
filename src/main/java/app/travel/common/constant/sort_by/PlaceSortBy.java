@@ -27,8 +27,12 @@ public enum PlaceSortBy {
         else this.column = column;
     }
 
-    @JsonCreator
+    public static final PlaceSortBy DEFAULT = UPDATE_AT;
+
     public static PlaceSortBy fromValue(String value){
+
+        if(value == null || value.isEmpty())
+            return UPDATE_AT;
 
         return Arrays.stream(PlaceSortBy.values())
                 .filter(
@@ -39,6 +43,9 @@ public enum PlaceSortBy {
     }
 
     public static PlaceSortBy fromColumn(String column){
+
+        if(column == null || column.isEmpty())
+            return UPDATE_AT;
 
         return Arrays.stream(PlaceSortBy.values())
                 .filter(
@@ -53,4 +60,5 @@ public enum PlaceSortBy {
     public String toString() {
         return value;
     }
+
 }

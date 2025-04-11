@@ -3,6 +3,9 @@ package app.travel.domain.places.service;
 import app.travel.advice.exception.templates.ErrorHolderException;
 import app.travel.common.constant.Error;
 import app.travel.converter.PlaceConverter;
+import app.travel.domain.places.payload.request.ChangeIsForeignRequest;
+import app.travel.domain.places.payload.request.EditPlaceRequest;
+import app.travel.domain.places.payload.request.NewPlaceRequest;
 import app.travel.domain.places.payload.request.PlaceFilterRequest;
 import app.travel.domain.places.payload.response.PlaceResponse;
 import app.travel.model.places.entity.PlaceEntity;
@@ -10,6 +13,7 @@ import app.travel.model.places.mapper.PlaceMapper;
 import app.travel.model.places.repository.IPlaceRepository;
 import app.travel.model.places.repository.PlaceRepository;
 import app.travel.shared.payload.response.FilterResponse;
+import app.travel.shared.payload.response.KeyResourceResponse;
 import app.travel.util.PlaceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -18,8 +22,10 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.BadRequestException;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -83,5 +89,58 @@ public class PlaceService implements IPlaceService{
                 .totalElements(pageResult.getTotal())
                 .results(results)
                 .build();
+    }
+
+    @Override
+    @Transactional
+    public KeyResourceResponse createPlace(NewPlaceRequest request) {
+
+        checkExistsByPlaceName(request.getPlaceName(), true);
+
+        PlaceEntity place = PlaceConverter.INSTANCE.toPlaceEntity(request);
+
+        place = placeRepository.insert(place);
+
+        return KeyResourceResponse.builder()
+                .keyResource(place.getId())
+                .build();
+    }
+
+    @Override
+    @Transactional
+    public KeyResourceResponse updatePlace(EditPlaceRequest request) {
+
+
+
+        return null;
+    }
+
+    @Override
+    @Transactional
+    public KeyResourceResponse changePlaceIsForeign(ChangeIsForeignRequest request) {
+        return null;
+    }
+
+    @Override
+    @Transactional
+    public void deletePlaceById(UUID id) {
+
+    }
+
+    @Override
+    @Transactional
+    public void deletePlace(PlaceEntity placeEntity) {
+
+    }
+
+    @Override
+    public Boolean checkExistsByPlaceName(String placeName, Boolean throwable) {
+
+        Boolean isExists = placeRepository.existsByPlaceName(placeName);
+
+        if(!isExists && throwable)
+            throw new ErrorHolderException(Error.RESOURCE_EXISTED);
+
+        return isExists;
     }
 }
