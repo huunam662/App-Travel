@@ -20,7 +20,7 @@ public interface IPlaceService {
 
     Boolean checkExistsByPlaceNameAndNotId(UUID id, String placeName, Boolean throwable);
 
-    List<PlaceEntity> getAllPlaces();
+    List<PlaceEntity> getListPlaces();
 
     FilterResponse<PlaceResponse> filterPlaces(PlaceFilterRequest request);
 

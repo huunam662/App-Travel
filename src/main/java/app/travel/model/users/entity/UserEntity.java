@@ -1,5 +1,6 @@
 package app.travel.model.users.entity;
 
+import app.travel.model.roles.entity.RoleEntity;
 import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -31,5 +32,8 @@ public class UserEntity extends BaseEntity {
 
     @TableField("is_enabled")
     Boolean isEnabled;
+
+    @TableField(exist = false)
+    RoleEntity role;
 
 }

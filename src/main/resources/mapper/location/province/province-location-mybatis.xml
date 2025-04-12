@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapper namespace="app.travel.model.location.provinces.mapper.ProvinceLocationMapper">
+
+    <resultMap id="provinceWithJoinDistrictAndWardMap" type="app.travel.model.location.provinces.entity.ProvinceLocationEntity">
+        <collection property="districts" ofType="app.travel.model.location.districts.entity.DistrictLocationEntity">
+            <collection property="wards" ofType="app.travel.model.location.wards.entity.WardLocationEntity" />
+        </collection>
+    </resultMap>
+
+
+    <select id="selectByIdWithJoinDistrictAndWard" resultMap="provinceWithJoinDistrictAndWardMap">
+
+        SELECT * FROM provinces_location p
+
+        <if test="joinDistrictLocation">
+            LEFT JOIN districts_location d
+            ON p.id = d.province_location_id
+
+            <if test="joinWardLocation">
+                LEFT JOIN wards_location w
+                ON d.id = w.district_location_id
+            </if>
+        </if>
+
+        WHERE p.id = #{id}
+
+    </select>
+
+    <select id="selectByCodeNameWithJoinDistrictAndWard" resultMap="provinceWithJoinDistrictAndWardMap">
+
+        SELECT * FROM provinces_location p
+
+        <if test="joinDistrictLocation">
+            LEFT JOIN districts_location d
+            ON p.id = d.province_location_id
+
+            <if test="joinWardLocation">
+                LEFT JOIN wards_location w
+                ON d.id = w.district_location_id
+            </if>
+        </if>
+
+        WHERE p.code_name = #{code}
+
+    </select>
+
+    <select id="selectListWithJoinDistrictAndWard" resultMap="provinceWithJoinDistrictAndWardMap">
+
+        SELECT * FROM provinces_location p
+
+        <if test="joinDistrictLocation">
+            LEFT JOIN districts_location d
+            ON p.id = d.province_location_id
+
+            <if test="joinWardLocation">
+                LEFT JOIN wards_location w
+                ON d.id = w.district_location_id
+            </if>
+        </if>
+
+        <if test="orderBy != null">
+            ORDER BY #{orderBy}
+            <if test="sortDirection != null">
+                #{sortDirection}
+            </if>
+        </if>
+
+        <if test="limit != null and limit > 0">
+            LIMIT #{limit}
+        </if>
+
+    </select>
+
+    <select id="selectListByNameLikeWithJoinDistrictAndWard" resultMap="provinceWithJoinDistrictAndWardMap">
+
+        SELECT * FROM provinces_location p
+
+        <if test="joinDistrictLocation">
+            LEFT JOIN districts_location d
+            ON p.id = d.province_location_id
+
+            <if test="joinWardLocation">
+                LEFT JOIN wards_location w
+                ON d.id = w.district_location_id
+            </if>
+        </if>
+
+        WHERE LOWER(p.name) LIKE %LOWER(#{provinceName})%
+
+        <if test="orderBy != null">
+            ORDER BY #{orderBy}
+            <if test="sortDirection != null">
+                #{sortDirection}
+            </if>
+        </if>
+
+        <if test="limit != null and limit > 0">
+            LIMIT #{limit}
+        </if>
+
+    </select>
+
+</mapper>

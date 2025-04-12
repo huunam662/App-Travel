@@ -3,7 +3,6 @@ package app.travel.util;
 import app.travel.common.constant.SortDirection;
 import app.travel.domain.places.payload.request.PlaceFilterRequest;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,7 @@ public class PlaceUtil {
 
     public static <T> QueryWrapper<T> queryFilter(QueryWrapper<T> queryWrapper, PlaceFilterRequest placeFilterRequest){
 
-        if(queryWrapper == null) queryWrapper = new QueryWrapper<T>();
+        if(queryWrapper == null) queryWrapper = new QueryWrapper<>();
 
         queryWrapper.isNotNull("id");
 

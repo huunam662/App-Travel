@@ -1,16 +1,5 @@
 package app.travel.config.core;
 
-import app.travel.common.constant.sort_by.PlaceSortBy;
-import app.travel.config.mybatis.hander.MetaObjectHandlerConfig;
-import app.travel.value.AppCoreValue;
-import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.fasterxml.jackson.databind.util.Converter;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.type.BaseTypeHandler;
-import org.apache.ibatis.type.JdbcType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,5 +1,7 @@
 package app.travel.model.founder_tours;
 
+import app.travel.model.location.wards.entity.WardLocationEntity;
+import app.travel.model.users.entity.UserEntity;
 import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -38,5 +40,11 @@ public class FounderTourEntity extends BaseEntity {
 
     @TableField("address_location")
     String addressLocation;
+
+    @TableField(exist = false)
+    UserEntity user;
+
+    @TableField(exist = false)
+    WardLocationEntity wardLocation;
 
 }

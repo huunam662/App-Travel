@@ -3,7 +3,6 @@ package app.travel.config.mybatis.core;
 import app.travel.config.mybatis.hander.MetaObjectHandlerConfig;
 import app.travel.config.mybatis.inteceptor.MyBatisInterceptorConfig;
 import app.travel.value.MyBatisValue;
-import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -14,6 +13,8 @@ import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+
 import javax.sql.DataSource;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -30,6 +31,10 @@ public class MyBatisCoreConfig {
         MybatisSqlSessionFactoryBean sqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setGlobalConfig(globalConfig(myBatisValue));
+        sqlSessionFactoryBean.setMapperLocations(
+                new PathMatchingResourcePatternResolver()
+                        .getResource(myBatisValue.getMapperLocations())
+        );
         sqlSessionFactoryBean.setConfiguration(mybatisConfiguration(myBatisValue));
         sqlSessionFactoryBean.setTypeHandlers(uuidBaseTypeHandler());
         sqlSessionFactoryBean.setPlugins(new MyBatisInterceptorConfig(), mybatisPlusInterceptor());

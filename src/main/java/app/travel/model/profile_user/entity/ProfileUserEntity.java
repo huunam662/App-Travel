@@ -1,5 +1,6 @@
 package app.travel.model.profile_user.entity;
 
+import app.travel.model.users.entity.UserEntity;
 import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -36,4 +37,6 @@ public class ProfileUserEntity extends BaseEntity {
     @TableField("profile_image")
     String profileImage;
 
+    @TableField(exist = false)
+    UserEntity user;
 }

@@ -1,5 +1,8 @@
 package app.travel.model.tours;
 
+import app.travel.model.founder_tours.FounderTourEntity;
+import app.travel.model.places.entity.PlaceEntity;
+import app.travel.model.tag_tours.TagTourEntity;
 import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -7,6 +10,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
+import java.util.List;
 import java.util.UUID;
 
 @TableName("tours")
@@ -50,5 +54,20 @@ public class TourEntity extends BaseEntity{
 
     @TableField(value = "booking_tickets", fill = FieldFill.INSERT_UPDATE)
     Integer bookingTickets;
+
+    @TableField(exist = false)
+    FounderTourEntity founder;
+
+    @TableField(exist = false)
+    TagTourEntity tag;
+
+    @TableField(exist = false)
+    PlaceEntity placeDepart;
+
+    @TableField(exist = false)
+    PlaceEntity placeTravel;
+
+    @TableField(exist = false)
+    List<PlaceEntity> trips;
 
 }

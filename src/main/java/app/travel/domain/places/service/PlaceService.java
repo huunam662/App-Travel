@@ -55,7 +55,7 @@ public class PlaceService implements IPlaceService{
     }
 
     @Override
-    public List<PlaceEntity> getAllPlaces() {
+    public List<PlaceEntity> getListPlaces() {
 
         return placeRepository.findAll();
     }
@@ -114,7 +114,7 @@ public class PlaceService implements IPlaceService{
 
         checkExistsByPlaceNameAndNotId(place.getId(), request.getPlaceName(), true);
 
-        place = PlaceConverter.INSTANCE.toPlaceEntity(request);
+        PlaceConverter.INSTANCE.flowToPlaceEntity(place, request);
 
         place = placeRepository.update(place);
 

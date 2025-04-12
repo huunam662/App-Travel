@@ -1,5 +1,6 @@
-package app.travel.model.location.districts;
+package app.travel.model.location.provinces.entity;
 
+import app.travel.model.location.districts.entity.DistrictLocationEntity;
 import app.travel.shared.entity.LocationBaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -7,16 +8,17 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-@TableName("districts_location")
-@NoArgsConstructor
+import java.util.List;
+
+@TableName("provinces_location")
 @AllArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class DistrictLocationEntity extends LocationBaseEntity {
+public class ProvinceLocationEntity extends LocationBaseEntity {
 
-    @TableField("province_location_id")
-    String provinceLocationId;
+    @TableField(exist = false)
+    List<DistrictLocationEntity> districts;
 
 }
