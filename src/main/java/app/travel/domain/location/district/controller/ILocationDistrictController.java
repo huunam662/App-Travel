@@ -18,6 +18,14 @@ public interface ILocationDistrictController {
             LocationDistrictParams2Request params
     );
 
+    @GetMapping("/parent")
+    @DefaultMessage(message = "Load location districts successful.")
+    List<LocationDistrictProvinceWardsResponse> getLocationDistrictByParent(
+        @RequestParam(value = "provinceId", required = false) String provinceId,
+        @RequestParam(value = "provinceCode", required = false) String provinceCode,
+        LocationDistrictParams2Request params
+    );
+
     @GetMapping("/name")
     @DefaultMessage(message = "Load location district successful.")
     LocationDistrictProvinceWardsResponse getLocationDistrictByName(

@@ -23,11 +23,11 @@ public class LocationDistrictRepository implements ILocationDistrictRepository{
     }
 
     @Override
-    public Optional<LocationDistrictEntity> findById(String id, Boolean includeDistricts, Boolean includeWards) {
+    public Optional<LocationDistrictEntity> findById(String id, Boolean includeProvince, Boolean includeWards) {
 
         return locationDistrictMapper.selectByIdWithJoinProvinceWards(
                 id,
-                includeDistricts,
+                includeProvince,
                 includeWards
         );
     }
@@ -39,21 +39,21 @@ public class LocationDistrictRepository implements ILocationDistrictRepository{
     }
 
     @Override
-    public Optional<LocationDistrictEntity> findByCodeName(String codeName, Boolean includeDistricts, Boolean includeWards) {
+    public Optional<LocationDistrictEntity> findByCodeName(String codeName, Boolean includeProvince, Boolean includeWards) {
 
         return locationDistrictMapper.selectByCodeNameWithJoinProvinceWards(
                 codeName,
-                includeDistricts,
+                includeProvince,
                 includeWards
         );
     }
 
     @Override
-    public Optional<LocationDistrictEntity> findByName(String name, Boolean includeDistricts, Boolean includeWards) {
+    public Optional<LocationDistrictEntity> findByName(String name, Boolean includeProvince, Boolean includeWards) {
 
         return locationDistrictMapper.selectByNameWithJoinProvinceWards(
                 name,
-                includeDistricts,
+                includeProvince,
                 includeWards
         );
     }
@@ -65,10 +65,10 @@ public class LocationDistrictRepository implements ILocationDistrictRepository{
     }
 
     @Override
-    public List<LocationDistrictEntity> findAll(Boolean includeDistricts, Boolean includeWards) {
+    public List<LocationDistrictEntity> findAll(Boolean includeProvince, Boolean includeWards) {
 
         return findAll(
-                includeDistricts,
+                includeProvince,
                 includeWards,
                 null,
                 null,
@@ -77,10 +77,10 @@ public class LocationDistrictRepository implements ILocationDistrictRepository{
     }
 
     @Override
-    public List<LocationDistrictEntity> findAll(Boolean includeDistricts, Boolean includeWards, String orderBy, String sortType, Integer limit) {
+    public List<LocationDistrictEntity> findAll(Boolean includeProvince, Boolean includeWards, String orderBy, String sortType, Integer limit) {
 
         return locationDistrictMapper.selectListWithJoinProvinceWards(
-                includeDistricts,
+                includeProvince,
                 includeWards,
                 orderBy,
                 sortType,
@@ -89,15 +89,41 @@ public class LocationDistrictRepository implements ILocationDistrictRepository{
     }
 
     @Override
-    public List<LocationDistrictEntity> findAllByNameLike(String name, Boolean includeDistricts, Boolean includeWards, String orderBy, String sortType, Integer limit) {
+    public List<LocationDistrictEntity> findAllByNameLike(String name, Boolean includeProvince, Boolean includeWards, String orderBy, String sortType, Integer limit) {
 
         return locationDistrictMapper.selectListByNameLikeWithJoinProvinceWards(
                 name,
-                includeDistricts,
+                includeProvince,
                 includeWards,
                 orderBy,
                 sortType,
                 limit
+        );
+    }
+
+    @Override
+    public List<LocationDistrictEntity> findAllByProvinceId(String id, Boolean includeProvince, Boolean includeWards, String orderBy, String sortType, Integer limit) {
+
+        return locationDistrictMapper.selectListByProvinceIdWithJoinProvinceWards(
+                id,
+                includeProvince,
+                includeWards,
+                orderBy,
+                sortType,
+                limit
+        );
+    }
+
+    @Override
+    public List<LocationDistrictEntity> findAllByProvinceCode(String code, Boolean includeProvince, Boolean includeWards, String orderBy, String sortType, Integer limit) {
+
+        return locationDistrictMapper.selectListByProvinceCodeWithJoinProvinceWards(
+            code,
+            includeProvince,
+            includeWards,
+            orderBy,
+            sortType,
+            limit
         );
     }
 }

@@ -4,7 +4,6 @@ import app.travel.advice.exception.templates.ErrorHolderException;
 import app.travel.common.constant.Error;
 import app.travel.domain.location.district.payload.request.LocationDistrictParams1Request;
 import app.travel.domain.location.district.payload.request.LocationDistrictParams2Request;
-import app.travel.domain.location.province.payload.request.LocationProvinceParams2Request;
 import app.travel.model.location.districts.entity.LocationDistrictEntity;
 import app.travel.model.location.districts.repository.LocationDistrictRepository;
 import lombok.AccessLevel;
@@ -54,7 +53,7 @@ public class LocationDistrictService implements ILocationDistrictService{
     }
 
     @Override
-    public List<LocationDistrictEntity> getListDistrictLocation(LocationDistrictParams2Request params) {
+    public List<LocationDistrictEntity> getListDistrictLocation(LocationDistrictParams1Request params) {
 
         return locationDistrictRepository.findAll(params.getIncludeProvince(), params.getIncludeWards());
     }
@@ -73,7 +72,7 @@ public class LocationDistrictService implements ILocationDistrictService{
     }
 
     @Override
-    public List<LocationDistrictEntity> getListDistrictLocations(LocationDistrictParams2Request params) {
+    public List<LocationDistrictEntity> getListDistrictLocation(LocationDistrictParams2Request params) {
 
         return locationDistrictRepository.findAll(
                 params.getIncludeProvince(),
@@ -83,4 +82,31 @@ public class LocationDistrictService implements ILocationDistrictService{
                 params.getLimit()
         );
     }
+
+    @Override
+    public List<LocationDistrictEntity> getListDistrictByProvinceId(String provinceId, LocationDistrictParams2Request params) {
+
+        return locationDistrictRepository.findAllByProvinceId(
+                provinceId,
+                params.getIncludeProvince(),
+                params.getIncludeWards(),
+                params.getSortBy().getName(),
+                params.getSortType().getValue(),
+                params.getLimit()
+        );
+    }
+
+    @Override
+    public List<LocationDistrictEntity> getListDistrictByProvinceCode(String provinceCode, LocationDistrictParams2Request params) {
+
+        return locationDistrictRepository.findAllByProvinceCode(
+                provinceCode,
+                params.getIncludeProvince(),
+                params.getIncludeWards(),
+                params.getSortBy().getName(),
+                params.getSortType().getValue(),
+                params.getLimit()
+        );
+    }
+
 }

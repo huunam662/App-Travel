@@ -33,6 +33,16 @@ public class LocationDistrictController implements ILocationDistrictController {
     }
 
     @Override
+    public List<LocationDistrictProvinceWardsResponse> getLocationDistrictByParent(String provinceId, String provinceCode, LocationDistrictParams2Request params) {
+
+        List<LocationDistrictEntity> locationDistricts = provinceId != null
+                ? locationDistrictService.getListDistrictByProvinceId(provinceId, params)
+                : locationDistrictService.getListDistrictByProvinceCode(provinceCode, params);
+
+        return LocationDistrictConverter.INSTANCE.toListLocationDistrictProvinceWardsResponse(locationDistricts);
+    }
+
+    @Override
     public LocationDistrictProvinceWardsResponse getLocationDistrictByName(String query, LocationDistrictParams1Request params) {
 
         LocationDistrictEntity locationDistrict = locationDistrictService.getByName(query, params);

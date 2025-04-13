@@ -45,4 +45,22 @@ public interface LocationDistrictMapper {
             @Param("limit") Integer limit
     );
 
+    List<LocationDistrictEntity> selectListByProvinceIdWithJoinProvinceWards(
+            @Param("provinceId") String provinceId,
+            @Param("includeProvince") Boolean includeProvince,
+            @Param("includeWards") Boolean includeWards,
+            @Param("orderBy") String orderBy,
+            @Param("sortType") String sortType,
+            @Param("limit") Integer limit
+    );
+
+    List<LocationDistrictEntity> selectListByProvinceCodeWithJoinProvinceWards(
+            @Param("provinceCode") String provinceCode,
+            @Param("includeProvince") Boolean includeProvince,
+            @Param("includeWards") Boolean includeWards,
+            @Param("orderBy") String orderBy,
+            @Param("sortType") String sortType,
+            @Param("limit") Integer limit
+    );
+
 }

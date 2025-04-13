@@ -8,20 +8,24 @@ public interface ILocationDistrictRepository {
 
     Optional<LocationDistrictEntity> findById(String id);
 
-    Optional<LocationDistrictEntity> findById(String id, Boolean includeDistricts, Boolean includeWards);
+    Optional<LocationDistrictEntity> findById(String id, Boolean includeProvince, Boolean includeWards);
 
     Optional<LocationDistrictEntity> findByCodeName(String codeName);
 
-    Optional<LocationDistrictEntity> findByCodeName(String codeName, Boolean includeDistricts, Boolean includeWards);
+    Optional<LocationDistrictEntity> findByCodeName(String codeName, Boolean includeProvince, Boolean includeWards);
 
-    Optional<LocationDistrictEntity> findByName(String name, Boolean includeDistricts, Boolean includeWards);
+    Optional<LocationDistrictEntity> findByName(String name, Boolean includeProvince, Boolean includeWards);
 
     List<LocationDistrictEntity> findAll();
 
-    List<LocationDistrictEntity> findAll(Boolean includeDistricts, Boolean includeWards);
+    List<LocationDistrictEntity> findAll(Boolean includeProvince, Boolean includeWards);
 
-    List<LocationDistrictEntity> findAll(Boolean includeDistricts, Boolean includeWards, String orderBy, String sortType, Integer limit);
+    List<LocationDistrictEntity> findAll(Boolean includeProvince, Boolean includeWards, String orderBy, String sortType, Integer limit);
 
-    List<LocationDistrictEntity> findAllByNameLike(String name, Boolean includeDistricts, Boolean includeWards, String orderBy, String sortType, Integer limit);
+    List<LocationDistrictEntity> findAllByNameLike(String name, Boolean includeProvince, Boolean includeWards, String orderBy, String sortType, Integer limit);
+
+    List<LocationDistrictEntity> findAllByProvinceId(String id, Boolean includeProvince, Boolean includeWards, String orderBy, String sortType, Integer limit);
+
+    List<LocationDistrictEntity> findAllByProvinceCode(String code, Boolean includeProvince, Boolean includeWards, String orderBy, String sortType, Integer limit);
 
 }
