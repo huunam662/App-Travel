@@ -1,6 +1,6 @@
 package app.travel.domain.location.province.payload.response;
 
-import app.travel.domain.location.district.payload.response.DistrictLocationResponse;
+import app.travel.domain.location.district.payload.response.LocationDistrictResponse;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
@@ -13,8 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProvinceDistrictsLocationResponse extends ProvinceLocationResponse {
+public class LocationProvinceDistrictsResponse extends LocationProvinceResponse {
 
-    List<DistrictLocationResponse> districts;
+    List<LocationDistrictResponse> districts;
 
 }

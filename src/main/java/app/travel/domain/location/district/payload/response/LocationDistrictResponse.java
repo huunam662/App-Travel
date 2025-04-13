@@ -1,11 +1,8 @@
 package app.travel.domain.location.district.payload.response;
 
-import app.travel.domain.location.ward.payload.response.WardLocationResponse;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -13,8 +10,18 @@ import java.util.List;
 @AllArgsConstructor
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class DistrictWardsLocationResponse extends DistrictProvinceLocationResponse{
+public class LocationDistrictResponse {
 
-    List<WardLocationResponse> wards;
+    String id;
+
+    String name;
+
+    String nameEn;
+
+    String fullName;
+
+    String fullNameEn;
+
+    String codeName;
 
 }

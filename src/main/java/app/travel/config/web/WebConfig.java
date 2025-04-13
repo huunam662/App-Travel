@@ -1,6 +1,7 @@
 package app.travel.config.web;
 
 import app.travel.common.constant.SortDirection;
+import app.travel.common.constant.sort_by.LocationSortBy;
 import app.travel.common.constant.sort_by.PlaceSortBy;
 import app.travel.config.middleware.interceptor.MiddlewareInterceptorConfig;
 import app.travel.config.middleware.interceptor.MiddlewareVoidResponseInterceptorConfig;
@@ -65,6 +66,15 @@ public class WebConfig implements WebMvcConfigurer {
             @NonNull
             public SortDirection convert(@NonNull String source) {
                 return SortDirection.fromValue(source);
+            }
+        });
+
+        registry.addConverter(new Converter<String, LocationSortBy>() {
+
+            @Override
+            @NonNull
+            public LocationSortBy convert(@NonNull String source) {
+                return LocationSortBy.fromName(source);
             }
         });
     }

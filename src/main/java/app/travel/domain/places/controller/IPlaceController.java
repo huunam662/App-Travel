@@ -21,7 +21,7 @@ public interface IPlaceController {
 
     @GetMapping("/filter")
     @DefaultMessage(message = "Filter successful.")
-    FilterResponse<PlaceResponse> filterPlaces(@Valid PlaceFilterRequest request);
+    FilterResponse<PlaceResponse> filterPlaces(@Valid PlaceFilterRequest params);
 
     @PostMapping
     @DefaultMessage(message = "Save resource successful.")

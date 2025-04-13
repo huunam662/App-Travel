@@ -33,7 +33,7 @@ public class MyBatisCoreConfig {
         sqlSessionFactoryBean.setGlobalConfig(globalConfig(myBatisValue));
         sqlSessionFactoryBean.setMapperLocations(
                 new PathMatchingResourcePatternResolver()
-                        .getResource(myBatisValue.getMapperLocations())
+                        .getResources(myBatisValue.getMapperLocations())
         );
         sqlSessionFactoryBean.setConfiguration(mybatisConfiguration(myBatisValue));
         sqlSessionFactoryBean.setTypeHandlers(uuidBaseTypeHandler());

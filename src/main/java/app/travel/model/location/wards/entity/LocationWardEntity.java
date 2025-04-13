@@ -1,7 +1,7 @@
 package app.travel.model.location.wards.entity;
 
 import app.travel.model.founder_tours.FounderTourEntity;
-import app.travel.model.location.districts.entity.DistrictLocationEntity;
+import app.travel.model.location.districts.entity.LocationDistrictEntity;
 import app.travel.shared.entity.LocationBaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -11,20 +11,20 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-@TableName("wards_location")
+@TableName("location_wards")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class WardLocationEntity extends LocationBaseEntity {
+public class LocationWardEntity extends LocationBaseEntity {
 
-    @TableField("district_location_id")
-    String districtLocationId;
+    @TableField("location_district_id")
+    String locationDistrictId;
 
     @TableField(exist = false)
-    DistrictLocationEntity district;
+    LocationDistrictEntity district;
 
     @TableField(exist = false)
     List<FounderTourEntity> foundersAddress;

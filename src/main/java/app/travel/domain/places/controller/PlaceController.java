@@ -29,9 +29,9 @@ public class PlaceController implements IPlaceController {
     IPlaceService placeService;
 
     @Override
-    public FilterResponse<PlaceResponse> filterPlaces(PlaceFilterRequest request) {
+    public FilterResponse<PlaceResponse> filterPlaces(PlaceFilterRequest params) {
 
-        return placeService.filterPlaces(request);
+        return placeService.filterPlaces(params);
     }
 
     @Override

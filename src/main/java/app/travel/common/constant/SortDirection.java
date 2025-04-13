@@ -2,7 +2,6 @@ package app.travel.common.constant;
 
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
 import java.util.Arrays;
 

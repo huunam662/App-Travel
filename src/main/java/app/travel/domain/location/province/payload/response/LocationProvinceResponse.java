@@ -1,4 +1,4 @@
-package app.travel.domain.location.ward.payload.response;
+package app.travel.domain.location.province.payload.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class WardLocationResponse {
+public class LocationProvinceResponse {
 
     String id;
 
