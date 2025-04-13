@@ -22,8 +22,8 @@ public interface ILocationProvinceRepository {
 
     List<LocationProvinceEntity> findAll(Boolean includeDistricts, Boolean includeWards);
 
-    List<LocationProvinceEntity> findAll(Boolean includeDistricts, Boolean includeWards, String orderBy, Integer limit);
+    List<LocationProvinceEntity> findAll(Boolean includeDistricts, Boolean includeWards, String orderBy, String sortType, Integer limit);
 
-    List<LocationProvinceEntity> findAllByNameLike(String name, Boolean includeDistricts, Boolean includeWards, String orderBy, Integer limit);
+    List<LocationProvinceEntity> findAllByNameLike(String name, Boolean includeDistricts, Boolean includeWards, String orderBy, String sortType, Integer limit);
 
 }

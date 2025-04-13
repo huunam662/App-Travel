@@ -24,4 +24,6 @@ public class LocationWardResponse {
 
     String codeName;
 
+    String locationDistrictId;
+
 }

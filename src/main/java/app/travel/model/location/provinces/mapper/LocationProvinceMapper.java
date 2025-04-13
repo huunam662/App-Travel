@@ -31,13 +31,9 @@ public interface LocationProvinceMapper extends BaseMapper<LocationProvinceEntit
 
     List<LocationProvinceEntity> selectListWithJoinDistrictAndWard(
             @Param("joinLocationDistrict") Boolean joinLocationDistrict,
-            @Param("joinLocationWard") Boolean joinLocationWard
-    );
-
-    List<LocationProvinceEntity> selectListWithJoinDistrictAndWard(
-            @Param("joinLocationDistrict") Boolean joinLocationDistrict,
             @Param("joinLocationWard") Boolean joinLocationWard,
             @Param("orderBy") String orderBy,
+            @Param("sortType") String sortType,
             @Param("limit") Integer limit
     );
 
@@ -46,6 +42,7 @@ public interface LocationProvinceMapper extends BaseMapper<LocationProvinceEntit
             @Param("joinLocationDistrict") Boolean joinLocationDistrict,
             @Param("joinLocationWard") Boolean joinLocationWard,
             @Param("orderBy") String orderBy,
+            @Param("sortType") String sortType,
             @Param("limit") Integer limit
     );
 

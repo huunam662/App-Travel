@@ -22,7 +22,7 @@ public interface ILocationProvinceController {
     @GetMapping("/name")
     @DefaultMessage(message = "Load location province successful.")
     LocationProvinceDistrictsWardsResponse getLocationProvinceByName(
-            @RequestParam("query") String query,
+            @RequestParam(value = "query", required = false) String query,
             LocationProvinceParams1Request params
     );
 

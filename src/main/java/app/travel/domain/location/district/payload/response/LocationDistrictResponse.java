@@ -24,4 +24,5 @@ public class LocationDistrictResponse {
 
     String codeName;
 
+    String locationProvinceId;
 }

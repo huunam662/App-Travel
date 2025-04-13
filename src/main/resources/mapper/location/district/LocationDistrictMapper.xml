@@ -5,4 +5,144 @@
 
 <mapper namespace="app.travel.model.location.districts.mapper.LocationDistrictMapper">
 
+    <resultMap id="districtWithJoinProvinceWardMap" type="app.travel.model.location.districts.entity.LocationDistrictEntity">
+        <id property="id" column="dt_id" />
+        <result property="name" column="dt_name" />
+        <result property="nameEn" column="dt_name_en" />
+        <result property="fullName" column="dt_full_name" />
+        <result property="fullNameEn" column="dt_full_name_en" />
+        <result property="codeName" column="dt_code_name" />
+        <result property="locationProvinceId" column="dt_location_province_id" />
+        
+        <association property="province" javaType="app.travel.model.location.provinces.entity.LocationProvinceEntity">
+            <id property="id" column="pv_id" />
+            <result property="name" column="pv_name" />
+            <result property="nameEn" column="pv_name_en" />
+            <result property="fullName" column="pv_full_name" />
+            <result property="fullNameEn" column="pv_full_name_en" />
+            <result property="codeName" column="pv_code_name" />
+        </association>
+
+        <collection property="wards" ofType="app.travel.model.location.wards.entity.LocationWardEntity">
+            <id property="id" column="w_id" />
+            <result property="name" column="w_name" />
+            <result property="nameEn" column="w_name_en" />
+            <result property="fullName" column="w_full_name" />
+            <result property="fullNameEn" column="w_full_name_en" />
+            <result property="codeName" column="w_code_name" />
+            <result property="locationDistrictId" column="w_location_district_id" />
+        </collection>
+    </resultMap>
+
+    <sql id="provinceColumns">
+        pv.id as pv_id,
+        pv.name as pv_name,
+        pv.name_en as pv_name_en,
+        pv.full_name as pv_full_name,
+        pv.full_name_en as pv_full_name_en,
+        pv.code_name as pv_code_name
+    </sql>
+
+    <sql id="districtColumns">
+        dt.id as dt_id,
+        dt.name as dt_name,
+        dt.name_en as dt_name_en,
+        dt.full_name as dt_full_name,
+        dt.full_name_en as dt_full_name_en,
+        dt.code_name as dt_code_name,
+        dt.location_province_id as dt_location_province_id
+    </sql>
+
+    <sql id="wardColumns">
+        w.id as w_id,
+        w.name as w_name,
+        w.name_en as w_name_en,
+        w.full_name as w_full_name,
+        w.full_name_en as w_full_name_en,
+        w.code_name as w_code_name,
+        w.location_district_id as w_location_district_id
+    </sql>
+
+    <sql id="queryColumnsFromTableTemplate">
+
+        SELECT <include refid="districtColumns" />
+
+        <if test="includeProvince">
+            , <include refid="provinceColumns" />
+        </if>
+
+        <if test="includeWards">
+            , <include refid="wardColumns" />
+        </if>
+
+        FROM location_districts dt
+
+        <if test="includeProvince">
+            LEFT JOIN location_provinces pv
+            ON dt.location_province_id = pv.id
+        </if>
+
+        <if test="includeWards">
+            LEFT JOIN location_wards w
+            ON dt.id = w.location_district_id
+        </if>
+
+    </sql>
+
+    <select id="selectByIdWithJoinProvinceWards" resultMap="districtWithJoinProvinceWardMap">
+
+        <include refid="queryColumnsFromTableTemplate" />
+
+        WHERE dt.id = #{id}
+
+    </select>
+
+    <select id="selectByCodeNameWithJoinProvinceWards" resultMap="districtWithJoinProvinceWardMap">
+
+        <include refid="queryColumnsFromTableTemplate" />
+
+        WHERE dt.code_name = #{code}
+
+    </select>
+
+    <select id="selectByNameWithJoinProvinceWards" resultMap="districtWithJoinProvinceWardMap">
+
+        <include refid="queryColumnsFromTableTemplate" />
+
+        WHERE dt.name = #{name}
+
+    </select>
+
+    <select id="selectListWithJoinProvinceWards" resultMap="districtWithJoinProvinceWardMap">
+
+        <include refid="queryColumnsFromTableTemplate" />
+
+        <if test="orderBy != null">
+            ORDER BY dt.${orderBy} ${sortType}
+        </if>
+
+        <if test="limit != null and limit > 0">
+            LIMIT #{limit}
+        </if>
+
+    </select>
+
+    <select id="selectListByNameLikeWithJoinProvinceWards" resultMap="districtWithJoinProvinceWardMap">
+
+        <include refid="queryColumnsFromTableTemplate" />
+
+        <if test="districtName != null">
+            WHERE LOWER(dt.name) LIKE CONCAT('%', LOWER(#{districtName}), '%')
+        </if>
+
+        <if test="orderBy != null">
+            ORDER BY dt.${orderBy} ${sortType}
+        </if>
+
+        <if test="limit != null and limit > 0">
+            LIMIT #{limit}
+        </if>
+
+    </select>
+
 </mapper>

@@ -58,14 +58,22 @@ public class LocationProvinceService implements ILocationProvinceService {
     @Override
     public List<LocationProvinceEntity> getListProvinceLocation(LocationProvinceParams1Request params) {
 
-        return provinceLocationRepository.findAll(params.getIncludeDistricts(), params.getIncludeWards());
+        return provinceLocationRepository.findAll(
+                params.getIncludeDistricts(),
+                params.getIncludeWards()
+        );
     }
 
     @Override
     public List<LocationProvinceEntity> getListByContainsName(String name, LocationProvinceParams2Request params) {
 
         return provinceLocationRepository.findAllByNameLike(
-                name, params.getIncludeDistricts(), params.getIncludeWards(), params.getSortBy().getName(), params.getLimit()
+                name,
+                params.getIncludeDistricts(),
+                params.getIncludeWards(),
+                params.getSortBy().getName(),
+                params.getSortType().getValue(),
+                params.getLimit()
         );
     }
 
@@ -73,7 +81,11 @@ public class LocationProvinceService implements ILocationProvinceService {
     public List<LocationProvinceEntity> getListProvinceLocations(LocationProvinceParams2Request params) {
 
         return provinceLocationRepository.findAll(
-                params.getIncludeDistricts(), params.getIncludeWards(), params.getSortBy().getName(), params.getLimit()
+                params.getIncludeDistricts(),
+                params.getIncludeWards(),
+                params.getSortBy().getName(),
+                params.getSortType().getValue(),
+                params.getLimit()
         );
     }
 

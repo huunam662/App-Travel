@@ -1,4 +1,4 @@
-package app.travel.domain.location.province.payload.request;
+package app.travel.domain.location.district.payload.request;
 
 import app.travel.common.constant.SortDirection;
 import app.travel.common.constant.sort_by.LocationSortBy;
@@ -15,7 +15,7 @@ import org.springdoc.core.annotations.ParameterObject;
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ParameterObject
-public class LocationProvinceParams2Request extends LocationProvinceParams1Request{
+public class LocationDistrictParams2Request extends LocationDistrictParams1Request{
 
     @Parameter(description = "Sort by field.")
     LocationSortBy sortBy = LocationSortBy.DEFAULT;

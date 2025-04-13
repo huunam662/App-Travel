@@ -49,19 +49,19 @@ public class LocationProvinceRepository implements ILocationProvinceRepository {
     @Override
     public List<LocationProvinceEntity> findAll(Boolean includeDistricts, Boolean includeWards) {
 
-        return findAll(includeDistricts, includeWards, null, null);
+        return findAll(includeDistricts, includeWards, null, null, null);
     }
 
     @Override
-    public List<LocationProvinceEntity> findAll(Boolean includeDistricts, Boolean includeWards, String orderBy, Integer limit) {
+    public List<LocationProvinceEntity> findAll(Boolean includeDistricts, Boolean includeWards, String orderBy, String sortType, Integer limit) {
 
-        return provinceLocationMapper.selectListWithJoinDistrictAndWard(includeDistricts, includeWards, orderBy, limit);
+        return provinceLocationMapper.selectListWithJoinDistrictAndWard(includeDistricts, includeWards, orderBy, sortType, limit);
     }
 
     @Override
-    public List<LocationProvinceEntity> findAllByNameLike(String name, Boolean includeDistricts, Boolean includeWards, String orderBy, Integer limit) {
+    public List<LocationProvinceEntity> findAllByNameLike(String name, Boolean includeDistricts, Boolean includeWards, String orderBy, String sortType, Integer limit) {
 
-        return provinceLocationMapper.selectListByNameLikeWithJoinDistrictAndWard(name, includeDistricts, includeWards, orderBy, limit);
+        return provinceLocationMapper.selectListByNameLikeWithJoinDistrictAndWard(name, includeDistricts, includeWards, orderBy, sortType, limit);
     }
 
     @Override
