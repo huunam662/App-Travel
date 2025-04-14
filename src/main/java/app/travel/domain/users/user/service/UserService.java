@@ -1,10 +1,9 @@
-package app.travel.domain.users.service;
+package app.travel.domain.users.user.service;
 
 import app.travel.advice.exception.templates.ErrorHolderException;
 import app.travel.common.constant.Error;
 import app.travel.model.roles.entity.RoleEntity;
 import app.travel.model.users.entity.UserEntity;
-import app.travel.model.users.mapper.UserMapper;
 import app.travel.model.users.repository.IUserRepository;
 import app.travel.shared.identity.UserDetailsImpl;
 import app.travel.shared.service.roles.IRoleService;
@@ -19,7 +18,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service

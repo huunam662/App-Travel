@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="app.travel.model.profile_user.mapper.ProfileUserMapper">
+
+    <resultMap id="profileUserWithJoinUserMap" type="app.travel.model.profile_user.entity.ProfileUserEntity">
+        <id property="id" column="pf_id" />
+        <result property="firstName" column="pf_first_name" />
+        <result property="lastName" column="pf_last_name" />
+        <result property="identifyCode" column="pf_identify_code" />
+        <result property="phoneNumber" column="pf_phone_number" />
+        <result property="profileImage" column="pf_profile_image" />
+        <result property="userId" column="pf_user_id" />
+        <result property="createdAt" column="pf_created_at" />
+        <result property="updatedAt" column="pf_updated_at" />
+
+        <association property="user" javaType="app.travel.model.users.entity.UserEntity">
+            <id property="id" column="u_id" />
+            <result property="email" column="u_email" />
+            <result property="username" column="u_username" />
+            <result property="password" column="u_password" />
+            <result property="isEnabled" column="u_is_enabled" />
+            <result property="roleId" column="u_role_id" />
+            <result property="createdAt" column="u_created_at" />
+            <result property="updatedAt" column="u_updated_at" />
+
+        </association>
+
+    </resultMap>
+    
+    <sql id="profileUserColumns">
+        pf.id as pf_id,
+        pf.first_name as pf_first_name,
+        pf.last_name as pf_last_name,
+        pf.identify_code as pf_identity_code,
+        pf.phone_number as pf_phone_number,
+        pf.profile_image as pf_profile_image,
+        pf.user_id as pf_user_id,
+        pf.created_at as pf_created_at,
+        pf.updated_at as pf_updated_at
+    </sql>
+
+    <sql id="userColumns">
+        u.id as u_id,
+        u.email as u_email,
+        u.username as u_username,
+        u.password as u_password,
+        u.is_enabled as u_is_enabled,
+        u.role_id as u_role_id,
+        u.created_at as u_created_at,
+        u.updated_at as u_updated_at
+    </sql>
+
+    <sql id="queryProfileUserJoinUserTemplate">
+        SELECT <include refid="profileUserColumns" />,
+                <include refid="userColumns" />
+
+        FROM profile_user pf
+        RIGHT JOIN users u
+        ON pf.user_id = u.id
+        WHERE u.id = #{userId}
+    </sql>
+
+    <select id="selectByUserIdWithJoinUser" resultMap="profileUserWithJoinUserMap">
+
+        <include refid="queryProfileUserJoinUserTemplate" />
+
+    </select>
+
+</mapper>

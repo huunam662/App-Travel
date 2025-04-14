@@ -1,6 +1,6 @@
 package app.travel.model.tours;
 
-import app.travel.model.founder_tours.FounderTourEntity;
+import app.travel.model.founder_tours.entity.FounderTourEntity;
 import app.travel.model.places.entity.PlaceEntity;
 import app.travel.model.tag_tours.TagTourEntity;
 import app.travel.shared.entity.BaseEntity;

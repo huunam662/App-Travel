@@ -1,4 +1,4 @@
-package app.travel.model.founder_tours;
+package app.travel.model.founder_tours.entity;
 
 import app.travel.model.location.wards.entity.LocationWardEntity;
 import app.travel.model.users.entity.UserEntity;

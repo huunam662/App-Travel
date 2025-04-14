@@ -40,7 +40,9 @@
         pv.name_en as pv_name_en,
         pv.full_name as pv_full_name,
         pv.full_name_en as pv_full_name_en,
-        pv.code_name as pv_code_name
+        pv.code_name as pv_code_name,
+        pv.created_at as pv_created_at,
+        pv.updated_at as pv_updated_at
     </sql>
 
     <sql id="districtColumns">
@@ -50,7 +52,9 @@
         dt.full_name as dt_full_name,
         dt.full_name_en as dt_full_name_en,
         dt.code_name as dt_code_name,
-        dt.location_province_id as dt_location_province_id
+        dt.location_province_id as dt_location_province_id,
+        pv.created_at as pv_created_at,
+        pv.updated_at as pv_updated_at
     </sql>
 
     <sql id="wardColumns">
@@ -60,7 +64,9 @@
         w.full_name as w_full_name,
         w.full_name_en as w_full_name_en,
         w.code_name as w_code_name,
-        w.location_district_id as w_location_district_id
+        w.location_district_id as w_location_district_id,
+        pv.created_at as pv_created_at,
+        pv.updated_at as pv_updated_at
     </sql>
 
     <sql id="queryColumnsFromTableTemplate">

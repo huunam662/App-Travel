@@ -1,4 +1,4 @@
-package app.travel.domain.users.service;
+package app.travel.domain.users.user.service;
 
 import app.travel.model.users.entity.UserEntity;
 

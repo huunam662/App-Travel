@@ -1,6 +1,6 @@
 package app.travel.model.location.wards.entity;
 
-import app.travel.model.founder_tours.FounderTourEntity;
+import app.travel.model.founder_tours.entity.FounderTourEntity;
 import app.travel.model.location.districts.entity.LocationDistrictEntity;
 import app.travel.shared.entity.LocationBaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;

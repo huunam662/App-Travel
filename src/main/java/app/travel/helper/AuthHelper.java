@@ -1,8 +1,8 @@
 package app.travel.helper;
 
 import app.travel.domain.auth.payload.request.SignUpRequest;
-import app.travel.domain.users.service.IUserService;
-import app.travel.shared.service.profile_user.IProfileUserService;
+import app.travel.domain.users.profile.service.IProfileUserService;
+import app.travel.domain.users.user.service.IUserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

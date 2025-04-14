@@ -8,6 +8,9 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Repository
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -28,5 +31,11 @@ public class ProfileUserRepository implements IProfileUserRepository{
         profileUserMapper.insert(profileUser);
 
         return profileUser;
+    }
+
+    @Override
+    public Optional<ProfileUserEntity> findByUserId(UUID userId) {
+
+        return profileUserMapper.selectByUserIdWithJoinUser(userId);
     }
 }

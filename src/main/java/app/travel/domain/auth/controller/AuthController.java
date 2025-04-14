@@ -5,8 +5,6 @@ import app.travel.domain.auth.payload.request.SignInRequest;
 import app.travel.domain.auth.payload.request.SignUpRequest;
 import app.travel.domain.auth.payload.response.SignInResponse;
 import app.travel.domain.auth.service.IAuthService;
-import app.travel.shared.service.mailer.IMailerService;
-import app.travel.shared.service.profile_user.IProfileUserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
