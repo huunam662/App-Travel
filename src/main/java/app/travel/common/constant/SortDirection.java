@@ -16,11 +16,6 @@ public enum SortDirection {
 
     SortDirection(String value) {
 
-        if(value == null || value.isEmpty()) {
-            this.value = "desc";
-            return;
-        }
-
         this.value = value;
     }
 

@@ -1,10 +1,17 @@
 package app.travel.domain.resource.service;
 
+import app.travel.domain.resource.payload.request.UploadFileRequest;
+import app.travel.domain.resource.payload.response.ResourceFileResponse;
 import app.travel.domain.resource.payload.response.UploadFileResponse;
-import org.springframework.web.multipart.MultipartFile;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.core.io.Resource;
+
+import java.io.IOException;
 
 public interface IResourceService {
 
-    UploadFileResponse uploadByCloudinary(MultipartFile file, String folderName) throws Exception;
+    UploadFileResponse uploadByCloudinary(UploadFileRequest request, HttpServletRequest servletRequest) throws Exception;
+
+    ResourceFileResponse getResourceByKey(String key) throws Exception;
 
 }

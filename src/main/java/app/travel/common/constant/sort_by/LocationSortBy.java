@@ -27,8 +27,10 @@ public enum LocationSortBy {
         if(name == null || name.isEmpty())
             return NAME;
 
+        String nameTrim = name.trim();
+
         return Arrays.stream(LocationSortBy.values()).filter(
-                p -> p.getName().equalsIgnoreCase(name)
+                p -> p.getName().equalsIgnoreCase(nameTrim)
         ).findFirst().orElse(NAME);
     }
 

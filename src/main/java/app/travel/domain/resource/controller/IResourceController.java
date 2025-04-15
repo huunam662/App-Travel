@@ -1,19 +1,21 @@
 package app.travel.domain.resource.controller;
 
 import app.travel.common.annotation.DefaultMessage;
+import app.travel.domain.resource.payload.request.UploadFileRequest;
+import app.travel.domain.resource.payload.response.ResourceFileResponse;
 import app.travel.domain.resource.payload.response.UploadFileResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.Map;
+import org.springframework.web.bind.annotation.*;
 
 public interface IResourceController {
 
-    @PostMapping(value = "/profile-user/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @DefaultMessage(message = "Upload successful.")
-    UploadFileResponse uploadResource(@RequestPart("file") MultipartFile file) throws Exception;
+    UploadFileResponse uploadResource(@ModelAttribute UploadFileRequest request, HttpServletRequest servletRequest) throws Exception;
+
+    @GetMapping("/{key:.+}")
+    ResourceFileResponse getResource(@PathVariable("key") String key) throws Exception;
 
 }

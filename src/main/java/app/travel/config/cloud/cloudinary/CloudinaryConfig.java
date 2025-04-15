@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 @RequiredArgsConstructor
@@ -26,5 +27,14 @@ public class CloudinaryConfig {
                 "secure", true
         ));
     }
+
+    @Bean(name = "webClientForCloudinary")
+    public WebClient webClient(){
+
+        return WebClient.builder()
+                .baseUrl("https://res.cloudinary.com")
+                .build();
+    }
+
 
 }

@@ -1,4 +1,4 @@
-package app.travel.util;
+package app.travel.utils;
 
 import app.travel.common.constant.SortDirection;
 import app.travel.domain.places.payload.request.PlaceFilterRequest;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @UtilityClass
-public class PlaceUtil {
+public class PlaceUtils {
 
     public static <T> QueryWrapper<T> queryFilter(QueryWrapper<T> queryWrapper, PlaceFilterRequest placeFilterRequest){
 

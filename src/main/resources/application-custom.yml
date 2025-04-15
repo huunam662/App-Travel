@@ -2,6 +2,7 @@ app:
   path:
     backend:
       refresh-token: /auth/refresh-token
+      load-image: /load/resource
     frontend:
       signup-confirm: /signup/confirm
 

@@ -1,10 +1,11 @@
 package app.travel.shared.service.mailer;
 
 import app.travel.domain.auth.payload.request.SignUpRequest;
-import app.travel.shared.service.crypto.aes_gcm.CryptoAesGcmService;
 import app.travel.shared.service.crypto.aes_gcm.ICryptoAesGcmService;
 import app.travel.value.AppCoreValue;
+import app.travel.value.MailValue;
 import app.travel.value.MailTemplateValue;
+import app.travel.value.PathValue;
 import io.swagger.v3.core.util.Json;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -22,6 +23,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.Base64;
 
 @Slf4j(topic = "MAILER-SERVICE")
 @Service
@@ -39,6 +41,10 @@ public class MailerService implements IMailerService{
 
     AppCoreValue appCoreValue;
 
+    PathValue pathValue;
+
+    MailValue emailValue;
+
     ICryptoAesGcmService cryptoAesGcmService;
 
     @Override
@@ -51,11 +57,11 @@ public class MailerService implements IMailerService{
 
         String signupIn4ToJson = Json.pretty(request);
 
-        String signupIn4ToJsonEncode = URLEncoder.encode(cryptoAesGcmService.encode(signupIn4ToJson), StandardCharsets.UTF_8);
+        String signupIn4ToJsonEncode = cryptoAesGcmService.encode(signupIn4ToJson);
 
         Context context = new Context();
 
-        String urlLinkFeConfirm = String.format("%s%s?drag=%s", appCoreValue.getFrontendDomain(), appCoreValue.getFeSignupConfirmPath(), signupIn4ToJsonEncode);
+        String urlLinkFeConfirm = String.format("%s%s?drag=%s", appCoreValue.getFrontendDomain(), pathValue.getFeSignupConfirmPath(), signupIn4ToJsonEncode);
 
         context.setVariable("linkFeSignUpConfirm", urlLinkFeConfirm);
         context.setVariable("year", LocalDateTime.now().getYear());
@@ -65,7 +71,7 @@ public class MailerService implements IMailerService{
         String sendTo = request.getEmail();
         String subject = mailTemplateValue.getSignupConfirmSubject();
 
-        sendToEmail(appCoreValue.getSendEmailFrom(), sendTo, subject, htmlContent);
+        sendToEmail(emailValue.getSendEmailFrom(), sendTo, subject, htmlContent);
     }
 
     @Override

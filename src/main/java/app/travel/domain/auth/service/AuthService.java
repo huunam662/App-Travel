@@ -27,6 +27,7 @@ import app.travel.shared.service.roles.IRoleService;
 import app.travel.shared.service.tokens.ITokenService;
 import app.travel.value.AppCoreValue;
 import app.travel.value.JwtValue;
+import app.travel.value.PathValue;
 import io.swagger.v3.core.util.Json;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,8 +42,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 @Slf4j(topic = "AUTH-SERVICE")
@@ -54,6 +53,8 @@ public class AuthService implements IAuthService{
     AuthenticationManager authenticationManager;
 
     AppCoreValue appCoreValue;
+
+    PathValue pathValue;
 
     JwtValue jwtValue;
 
@@ -108,7 +109,7 @@ public class AuthService implements IAuthService{
         CookieInternal cookieInternal = CookieInternal.builder()
                 .key(JwtTokenType.REFRESH.getNameSpecial())
                 .value(refreshTokenEntity.getId().toString())
-                .path(String.format("%s/", appCoreValue.getRefreshTokenPath()))
+                .path(String.format("%s/", pathValue.getRefreshTokenPath()))
                 .maxAge(jwtValue.getRefreshDurationTime().intValue())
                 .build();
 
@@ -181,9 +182,7 @@ public class AuthService implements IAuthService{
     @Transactional
     public void signUpConfirm(String drag) throws Exception {
 
-        String dragUrlDecode = URLDecoder.decode(drag, StandardCharsets.UTF_8);
-
-        String signUpRequestJson = cryptoAesGcmService.decode(dragUrlDecode);
+        String signUpRequestJson = cryptoAesGcmService.decode(drag);
 
         SignUpRequest signUpRequest = Json.mapper().readValue(signUpRequestJson, SignUpRequest.class);
 

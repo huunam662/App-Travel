@@ -1,9 +1,9 @@
-package app.travel.util;
+package app.travel.utils;
 
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class MediaUtil {
+public class MediaUtils {
 
     public static String typeFile(String fileName){
 

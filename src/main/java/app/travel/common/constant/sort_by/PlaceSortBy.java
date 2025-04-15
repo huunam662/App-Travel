@@ -18,13 +18,8 @@ public enum PlaceSortBy {
 
     PlaceSortBy(String value, String column) {
 
-        if(value == null || value.isEmpty())
-            this.value = "latest";
-        else this.value = value;
-
-        if(column == null || column.isEmpty())
-            this.column = "updated_at";
-        else this.column = column;
+        this.value = value;
+        this.column = column;
     }
 
     public static final PlaceSortBy DEFAULT = UPDATE_AT;
@@ -34,9 +29,11 @@ public enum PlaceSortBy {
         if(value == null || value.isEmpty())
             return UPDATE_AT;
 
+        String valueTrim = value.trim();
+
         return Arrays.stream(PlaceSortBy.values())
                 .filter(
-                        v -> v.getValue().equalsIgnoreCase(value)
+                        v -> v.getValue().equalsIgnoreCase(valueTrim)
                 )
                 .findFirst()
                 .orElse(UPDATE_AT);
@@ -47,9 +44,11 @@ public enum PlaceSortBy {
         if(column == null || column.isEmpty())
             return UPDATE_AT;
 
+        String columnTrim = column.trim();
+
         return Arrays.stream(PlaceSortBy.values())
                 .filter(
-                        v -> v.getColumn().equalsIgnoreCase(column)
+                        v -> v.getColumn().equalsIgnoreCase(columnTrim)
                 )
                 .findFirst()
                 .orElse(UPDATE_AT);

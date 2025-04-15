@@ -14,12 +14,6 @@ public class AppCoreValue {
     @Value("${server.servlet.context-path}")
     String prefixPath;
 
-    @Value("${app.path.backend.refresh-token}")
-    String refreshTokenPath;
-
-    @Value("${app.path.frontend.signup-confirm}")
-    String feSignupConfirmPath;
-
     @Value("${app.domain.backend}")
     String backendDomain;
 
@@ -28,8 +22,5 @@ public class AppCoreValue {
 
     @Value("${app.server.secret-key.crypto.aes-gcm}")
     String serverSecretKey;
-
-    @Value("${spring.mail.username}")
-    String sendEmailFrom;
 
 }

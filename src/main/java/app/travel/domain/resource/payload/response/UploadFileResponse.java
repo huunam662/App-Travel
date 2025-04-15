@@ -17,8 +17,9 @@ public class UploadFileResponse {
 
     String formatFile;
 
-    String urlFile;
-
     String fileName;
+
+    String fileUrl;
+
 
 }

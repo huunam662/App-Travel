@@ -1,12 +1,16 @@
 package app.travel.shared.service.cloud.cloudinary;
 
-import org.springframework.web.multipart.MultipartFile;
+import app.travel.domain.resource.payload.request.UploadFileRequest;
+import app.travel.shared.payload.internal.LoadResourceInternal;
+import com.cloudinary.api.ApiResponse;
+import org.springframework.core.io.Resource;
 
-import java.io.IOException;
 import java.util.Map;
 
 public interface ICloudinaryService {
 
-    Map upload(MultipartFile file, String folderName) throws Exception;
+    Map upload(UploadFileRequest request) throws Exception;
+
+    LoadResourceInternal loadResource(String fileName) throws Exception;
 
 }

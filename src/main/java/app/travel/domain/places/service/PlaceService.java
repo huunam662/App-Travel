@@ -9,12 +9,10 @@ import app.travel.domain.places.payload.request.NewPlaceRequest;
 import app.travel.domain.places.payload.request.PlaceFilterRequest;
 import app.travel.domain.places.payload.response.PlaceResponse;
 import app.travel.model.places.entity.PlaceEntity;
-import app.travel.model.places.mapper.PlaceMapper;
 import app.travel.model.places.repository.IPlaceRepository;
-import app.travel.model.places.repository.PlaceRepository;
 import app.travel.shared.payload.response.FilterResponse;
 import app.travel.shared.payload.response.KeyResourceResponse;
-import app.travel.util.PlaceUtil;
+import app.travel.utils.PlaceUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -22,13 +20,11 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.BadRequestException;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 
@@ -65,7 +61,7 @@ public class PlaceService implements IPlaceService{
 
         Page<PlaceEntity> page = new Page<>(request.getPage(), request.getPageSize());
 
-        QueryWrapper<PlaceEntity> query = PlaceUtil.queryFilter(new QueryWrapper<>(), request);
+        QueryWrapper<PlaceEntity> query = PlaceUtils.queryFilter(new QueryWrapper<>(), request);
 
         IPage<PlaceEntity> pageResult = placeRepository.selectPage(page, query);
 

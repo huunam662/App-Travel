@@ -6,16 +6,9 @@ import lombok.experimental.FieldDefaults;
 
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public enum FolderUpload {
+public enum ContentDispositionType {
 
-    PROFILE_USER("profile-user");
-
-    String folder;
-
-    FolderUpload(String folder) {
-        this.folder = folder;
-    }
-
-
+    INLINE,
+    ATTACHMENT
 
 }

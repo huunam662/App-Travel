@@ -1,10 +1,10 @@
 package app.travel.config.web;
 
 import app.travel.common.constant.SortDirection;
+import app.travel.common.constant.UploadType;
 import app.travel.common.constant.sort_by.LocationSortBy;
 import app.travel.common.constant.sort_by.PlaceSortBy;
 import app.travel.config.middleware.interceptor.MiddlewareInterceptorConfig;
-import app.travel.config.middleware.interceptor.MiddlewareVoidResponseInterceptorConfig;
 import app.travel.value.AppCoreValue;
 import lombok.AccessLevel;
 import lombok.NonNull;
@@ -13,7 +13,6 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.lang.Nullable;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
@@ -75,6 +74,15 @@ public class WebConfig implements WebMvcConfigurer {
             @NonNull
             public LocationSortBy convert(@NonNull String source) {
                 return LocationSortBy.fromName(source);
+            }
+        });
+
+        registry.addConverter(new Converter<String, UploadType>() {
+
+            @Override
+            @NonNull
+            public UploadType convert(@NonNull String source) {
+                return UploadType.fromType(source);
             }
         });
     }
