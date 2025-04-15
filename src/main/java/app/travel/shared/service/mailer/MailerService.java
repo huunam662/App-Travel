@@ -1,7 +1,8 @@
 package app.travel.shared.service.mailer;
 
 import app.travel.domain.auth.payload.request.SignUpRequest;
-import app.travel.util.CryptoAESGCMUtil;
+import app.travel.shared.service.crypto.aes_gcm.CryptoAesGcmService;
+import app.travel.shared.service.crypto.aes_gcm.ICryptoAesGcmService;
 import app.travel.value.AppCoreValue;
 import app.travel.value.MailTemplateValue;
 import io.swagger.v3.core.util.Json;
@@ -11,7 +12,6 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.bouncycastle.util.encoders.UrlBase64Encoder;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,6 +39,8 @@ public class MailerService implements IMailerService{
 
     AppCoreValue appCoreValue;
 
+    ICryptoAesGcmService cryptoAesGcmService;
+
     @Override
     public void sendEmailConfirmSignUp(SignUpRequest request) throws Exception {
 
@@ -49,7 +51,7 @@ public class MailerService implements IMailerService{
 
         String signupIn4ToJson = Json.pretty(request);
 
-        String signupIn4ToJsonEncode = URLEncoder.encode(CryptoAESGCMUtil.encode(signupIn4ToJson), StandardCharsets.UTF_8);
+        String signupIn4ToJsonEncode = URLEncoder.encode(cryptoAesGcmService.encode(signupIn4ToJson), StandardCharsets.UTF_8);
 
         Context context = new Context();
 

@@ -1,8 +1,10 @@
 package app.travel.util;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 
+@UtilityClass
 public class AppUtil {
 
     public static HttpStatus statusOfMethod(HttpMethod method){

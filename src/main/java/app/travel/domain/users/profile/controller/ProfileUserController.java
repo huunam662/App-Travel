@@ -3,6 +3,7 @@ package app.travel.domain.users.profile.controller;
 
 import app.travel.converter.ProfileUserConverter;
 import app.travel.domain.users.profile.payload.response.ProfileUserHomeResponse;
+import app.travel.domain.users.profile.payload.response.ProfileUserResponse;
 import app.travel.domain.users.profile.service.IProfileUserService;
 import app.travel.model.profile_user.entity.ProfileUserEntity;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,10 +24,20 @@ public class ProfileUserController implements IProfileUserController{
     IProfileUserService profileUserService;
 
     @Override
-    public ProfileUserHomeResponse loadProfile(HttpServletRequest request) {
+    public ProfileUserHomeResponse loadProfileHome() {
 
-        ProfileUserEntity profileUser = profileUserService.getProfile(request);
+        ProfileUserEntity profileUserHome = profileUserService.getProfile();
 
-        return ProfileUserConverter.INSTANCE.toProfileUserHomeResponse(profileUser);
+        return ProfileUserConverter.INSTANCE.toProfileUserHomeResponse(profileUserHome);
     }
+
+    @Override
+    public ProfileUserResponse loadProfile() {
+
+        ProfileUserEntity profileUser = profileUserService.getProfile();
+
+        return ProfileUserConverter.INSTANCE.toProfileUserResponse(profileUser);
+    }
+
+
 }

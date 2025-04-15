@@ -28,6 +28,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// https://mvnrepository.com/artifact/com.cloudinary/cloudinary-core
+	implementation("com.cloudinary:cloudinary-core:2.2.0")
+	// https://mvnrepository.com/artifact/com.cloudinary/cloudinary-http5
+	implementation("com.cloudinary:cloudinary-http5:2.2.0")
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf:3.4.4")
 	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui

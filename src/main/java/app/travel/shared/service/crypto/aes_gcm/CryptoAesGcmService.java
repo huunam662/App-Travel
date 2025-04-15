@@ -1,4 +1,4 @@
-package app.travel.util;
+package app.travel.shared.service.crypto.aes_gcm;
 
 import app.travel.value.AppCoreValue;
 import io.jsonwebtoken.security.Keys;
@@ -6,18 +6,19 @@ import jakarta.annotation.PostConstruct;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import javax.crypto.*;
 import javax.crypto.spec.GCMParameterSpec;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.util.Base64;
 
-@Component
+@Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class CryptoAESGCMUtil {
+public class CryptoAesGcmService implements ICryptoAesGcmService{
 
     static{
         Security.addProvider(new BouncyCastleProvider());
@@ -25,13 +26,12 @@ public class CryptoAESGCMUtil {
 
     AppCoreValue appCoreValue;
 
-    static CryptoAESGCMUtil cryptoAESGCMUtil;
-    static SecretKey secretKey;
+    @NonFinal
+    SecretKey secretKey;
 
     @PostConstruct
     void init(){
-        cryptoAESGCMUtil = this;
-        secretKey = Keys.hmacShaKeyFor(cryptoAESGCMUtil.appCoreValue.getServerSecretKey().getBytes(StandardCharsets.UTF_8));
+        secretKey = Keys.hmacShaKeyFor(appCoreValue.getServerSecretKey().getBytes(StandardCharsets.UTF_8));
     }
 
     static String ALGORITHM = "AES/GCM/NoPadding";
@@ -40,7 +40,7 @@ public class CryptoAESGCMUtil {
     static Integer IV_LENGTH = 12;
     static byte[] IV = new byte[IV_LENGTH];
 
-    public static String encode(String originalText) throws Exception {
+    public String encode(String originalText) throws Exception {
 
         Cipher cipher = Cipher.getInstance(ALGORITHM, PROVIDER);
 
@@ -53,7 +53,7 @@ public class CryptoAESGCMUtil {
         return Base64.getEncoder().encodeToString(encryptedByte);
     }
 
-    public static String decode(String encryptedText) throws Exception {
+    public String decode(String encryptedText) throws Exception {
 
         Cipher cipher = Cipher.getInstance(ALGORITHM, PROVIDER);
 

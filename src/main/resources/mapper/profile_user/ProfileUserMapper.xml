@@ -54,19 +54,22 @@
     </sql>
 
     <sql id="queryProfileUserJoinUserTemplate">
+
         SELECT <include refid="profileUserColumns" />,
                 <include refid="userColumns" />
 
         FROM profile_user pf
         RIGHT JOIN users u
         ON pf.user_id = u.id
-        WHERE u.id = #{userId}
     </sql>
 
     <select id="selectByUserIdWithJoinUser" resultMap="profileUserWithJoinUserMap">
 
         <include refid="queryProfileUserJoinUserTemplate" />
 
+        WHERE u.id = #{userId}
     </select>
+
+
 
 </mapper>

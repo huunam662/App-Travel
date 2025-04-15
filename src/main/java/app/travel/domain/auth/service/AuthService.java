@@ -20,11 +20,11 @@ import app.travel.shared.identity.UserDetailsImpl;
 import app.travel.shared.payload.response.JwtTokenResponse;
 import app.travel.shared.payload.internal.CookieInternal;
 import app.travel.shared.service.cookie.ICookieService;
+import app.travel.shared.service.crypto.aes_gcm.ICryptoAesGcmService;
 import app.travel.shared.service.jwt.IJwtService;
 import app.travel.shared.service.mailer.IMailerService;
 import app.travel.shared.service.roles.IRoleService;
 import app.travel.shared.service.tokens.ITokenService;
-import app.travel.util.CryptoAESGCMUtil;
 import app.travel.value.AppCoreValue;
 import app.travel.value.JwtValue;
 import io.swagger.v3.core.util.Json;
@@ -70,6 +70,8 @@ public class AuthService implements IAuthService{
     IProfileUserService profileUserService;
 
     IMailerService mailerService;
+
+    ICryptoAesGcmService cryptoAesGcmService;
 
     AuthHelper authHelper;
 
@@ -181,7 +183,7 @@ public class AuthService implements IAuthService{
 
         String dragUrlDecode = URLDecoder.decode(drag, StandardCharsets.UTF_8);
 
-        String signUpRequestJson = CryptoAESGCMUtil.decode(dragUrlDecode);
+        String signUpRequestJson = cryptoAesGcmService.decode(dragUrlDecode);
 
         SignUpRequest signUpRequest = Json.mapper().readValue(signUpRequestJson, SignUpRequest.class);
 
@@ -198,7 +200,7 @@ public class AuthService implements IAuthService{
         ProfileUserEntity profileUserEntity = ProfileUserConverter.INSTANCE.toProfileUserEntityFromSignUpRequest(signUpRequest);
         profileUserEntity.setUserId(userEntity.getId());
 
-        profileUserService.saveProfileUser(profileUserEntity);
+        profileUserService.createProfileUser(profileUserEntity);
 
     }
 }

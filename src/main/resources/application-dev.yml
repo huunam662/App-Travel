@@ -23,3 +23,8 @@ app:
       title: Travel app Api
       version: 1.0
       description: This page show api to apply in the system
+
+cloudinary:
+  cloud-name: dx7ttwkc1
+  api-key: 551814231965972
+  api-secret: LmaVWQQx5UTkv7k4DnyQfP_W8kQ

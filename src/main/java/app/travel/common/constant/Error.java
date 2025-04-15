@@ -26,7 +26,8 @@ public enum Error {
     COOKIE_NOT_EXISTED("Cookie not existed.", HttpStatus.BAD_REQUEST),
     ILLEGAL_ARGUMENT("Illegal argument.", HttpStatus.BAD_REQUEST),
     RESOURCE_EXISTED("Resource already exists.", HttpStatus.BAD_REQUEST),
-    PARSE_DATATYPE_FAIL("Parse data failed.", HttpStatus.BAD_REQUEST),;
+    PARSE_DATATYPE_FAIL("Parse data failed.", HttpStatus.BAD_REQUEST),
+    REQUEST_RESOURCE_INVALID("Request resource is invalid.", HttpStatus.BAD_REQUEST),;
 
     // >> ---------------------------------------------------------------------- <<
 
