@@ -14,7 +14,7 @@ app:
   server:
     secret-key:
       crypto:
-        aes-gcm: 0bcc3ac262ae691c6456a7348b6e8319
+        aes-gcm: mCHpWbuvLwsDa3ZxW8j9H9S17grMFEZA
 
   mail:
     templates:
