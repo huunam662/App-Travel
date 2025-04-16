@@ -1,30 +1,19 @@
 package app.travel.advice.response;
 
 import app.travel.common.annotation.DefaultMessage;
-import app.travel.common.constant.ContentDispositionType;
-import app.travel.domain.resource.payload.response.ResourceFileResponse;
 import app.travel.shared.payload.response.FilterResponse;
 import app.travel.shared.payload.response.ResourceResponse;
 import app.travel.shared.payload.response.ResultApiResponse;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
-import org.springframework.core.io.Resource;
-import org.springframework.http.ContentDisposition;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
-
-import java.net.URI;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 
 
 @Slf4j(topic = "GLOBAL-OBJECT-RESPONSE-WRAPPER")
@@ -51,7 +40,8 @@ public class GlobalObjectResponseWrapper implements ResponseBodyAdvice<Object> {
                 (
                     declaringClass.getAnnotation(RestController.class) != null ||
                     objectReturnType.equals(ResultApiResponse.ErrorResponse.class)
-                );
+                ) && !objectReturnType.equals(byte[].class) &&
+                !objectReturnType.equals(byte.class);
     }
 
     @Override
@@ -75,24 +65,6 @@ public class GlobalObjectResponseWrapper implements ResponseBodyAdvice<Object> {
             errorResponse.setPath(request.getURI().getPath());
 
             return errorResponse;
-        }
-
-        if(body instanceof ResourceFileResponse resourceFileResponse){
-
-            Resource resource = resourceFileResponse.getResource();
-            ContentDispositionType contentDispositionType = resourceFileResponse.getContentDisposition();
-
-            HttpHeaders httpHeaders = response.getHeaders();
-
-            httpHeaders.setContentLength(resourceFileResponse.getContentLength());
-            httpHeaders.setContentType(resourceFileResponse.getMediaType());
-            httpHeaders.setContentDisposition(
-                    ContentDisposition.builder(contentDispositionType.name())
-                            .filename(resource.getFilename(), StandardCharsets.UTF_8)
-                            .build()
-            );
-
-            return resource.getInputStream();
         }
 
 //        Method method = returnType.getMethod();

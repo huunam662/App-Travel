@@ -14,7 +14,6 @@ import org.apache.ibatis.type.JdbcType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-
 import javax.sql.DataSource;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;

@@ -24,7 +24,7 @@ public enum LocationSortBy {
 
     public static LocationSortBy fromName(String name) {
 
-        if(name == null || name.isEmpty())
+            if(name == null || name.isEmpty())
             return NAME;
 
         String nameTrim = name.trim();

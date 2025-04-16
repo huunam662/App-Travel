@@ -6,6 +6,8 @@ app:
     frontend:
       signup-confirm: /signup/confirm
 
+  context-path: /travel-app/api/v${app.openapi.info.version}
+
   jwt:
     secret-key: d]"erpMJ-hf-+!K|8jaw~tXXtOM{1fxRSoggAm-1I0YzY4jdeB>]r6x{5YN'M=s|Pp>JVO*zU~fU'`S
     access-duration-time: 900000

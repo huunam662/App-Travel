@@ -2,20 +2,24 @@ package app.travel.shared.payload.internal;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.core.io.Resource;
+import lombok.experimental.SuperBuilder;
+import org.springframework.http.MediaType;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LoadResourceInternal {
 
-    Resource resource;
+    byte[] resource;
 
-    String resourceFormat;
+    String resourceName;
 
-    String resourceType;
+    MediaType mediaType;
+
+    Long contentLength;
+
 
 }

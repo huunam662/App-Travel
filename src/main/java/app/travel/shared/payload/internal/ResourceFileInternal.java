@@ -4,6 +4,8 @@ import app.travel.common.constant.CloudType;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,6 +22,6 @@ public class ResourceFileInternal {
 
     @Builder.ObtainVia
     @Setter(AccessLevel.NONE)
-    final Long uploadTime = System.currentTimeMillis();
+    final UUID unique = UUID.randomUUID();
 
 }

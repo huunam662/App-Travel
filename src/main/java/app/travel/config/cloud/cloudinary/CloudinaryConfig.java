@@ -28,13 +28,4 @@ public class CloudinaryConfig {
         ));
     }
 
-    @Bean(name = "webClientForCloudinary")
-    public WebClient webClient(){
-
-        return WebClient.builder()
-                .baseUrl("https://res.cloudinary.com")
-                .build();
-    }
-
-
 }

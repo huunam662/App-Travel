@@ -1,23 +1,22 @@
 package app.travel.domain.resource.controller;
 
+import app.travel.common.annotation.ExcludedContextPath;
+import app.travel.common.constant.ContentDispositionType;
 import app.travel.domain.resource.payload.request.UploadFileRequest;
-import app.travel.domain.resource.payload.response.ResourceFileResponse;
 import app.travel.domain.resource.payload.response.UploadFileResponse;
 import app.travel.domain.resource.service.IResourceService;
-import com.cloudinary.api.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-
 @RestController
 @Tag(name = "Resource-Api-Endpoints")
+@ExcludedContextPath
 @RequestMapping("/resource")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -32,8 +31,8 @@ public class ResourceController implements IResourceController {
     }
 
     @Override
-    public ResourceFileResponse getResource(String key) throws Exception {
+    public byte[] getResource(String key, ContentDispositionType type, HttpServletResponse servletResponse) throws Exception {
 
-        return resourceService.getResourceByKey(key);
+        return resourceService.getResourceByKey(key, type, servletResponse);
     }
 }

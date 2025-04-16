@@ -24,8 +24,8 @@ public interface IAuthController {
     @DefaultMessage(message = "Refreshing successful.")
     SignInResponse refreshToken(HttpServletRequest request);
 
-    @GetMapping("/sign-up/confirm")
+    @GetMapping("/sign-up/confirm/{drag}")
     @DefaultMessage(message = "Confirm successful.")
-    void signUpConfirm(@RequestParam("drag") String drag) throws Exception;
+    void signUpConfirm(@PathVariable("drag") String drag) throws Exception;
 
 }

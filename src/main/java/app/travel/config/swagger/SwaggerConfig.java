@@ -1,8 +1,10 @@
 package app.travel.config.swagger;
 
+import app.travel.value.AppCoreValue;
 import app.travel.value.OpenApiValue;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.Paths;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
@@ -12,6 +14,7 @@ import io.swagger.v3.oas.models.servers.Server;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import java.util.List;
@@ -23,6 +26,8 @@ public class SwaggerConfig {
 
     OpenApiValue openApiValue;
 
+    AppCoreValue appCoreValue;
+
     @Bean
     public OpenAPI openAPI(){
 
@@ -30,10 +35,14 @@ public class SwaggerConfig {
         server.setUrl(openApiValue.getServerUrl());
         server.setDescription(openApiValue.getServerDescription());
 
+        Server resource = new Server();
+        resource.setUrl(appCoreValue.getBackendDomain());
+        resource.setDescription("Prefix Domain URL for request resourcing system.");
+
         final String securitySchemaName = "Bearer Authorization";
 
         return new OpenAPI()
-                .servers(List.of(server))
+                .servers(List.of(server, resource))
                 .addSecurityItem(new SecurityRequirement().addList(securitySchemaName))
                 .info(info())
                 .components(components(securitySchemaName));
@@ -72,6 +81,31 @@ public class SwaggerConfig {
         components.addSecuritySchemes(securitySchemaName, securityScheme);
 
         return components;
+    }
+
+    @Bean
+    public OpenApiCustomizer removeApiPrefixCustomizer(){
+
+        return openApi -> {
+
+            Paths paths = new Paths();
+
+            openApi.getPaths().keySet().forEach(
+                    path -> {
+
+                        if(path.startsWith(appCoreValue.getContextPath())){
+
+                            String pathWithoutPrefix = path.substring(appCoreValue.getContextPath().length());
+
+                            paths.put(pathWithoutPrefix, openApi.getPaths().get(path));
+
+                        }
+                        else paths.put(path, openApi.getPaths().get(path));
+                    }
+            );
+
+            openApi.setPaths(paths);
+        };
     }
 
 }

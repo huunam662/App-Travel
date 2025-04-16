@@ -1,7 +1,13 @@
 package app.travel.config.middleware.interceptor;
 
+import app.travel.advice.exception.templates.ErrorHolderException;
+import app.travel.common.constant.Error;
+import app.travel.value.AppCoreValue;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -9,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j(topic = "MIDDLEWARE-INTERCEPTOR")
 @Configuration
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class MiddlewareInterceptorConfig implements HandlerInterceptor {
 
     @Override

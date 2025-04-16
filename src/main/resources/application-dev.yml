@@ -10,8 +10,8 @@ app:
     frontend: http://localhost:3000
   openapi:
     server:
-      url: ${app.domain.backend}${server.servlet.context-path}
-      description: Server URL in development environment
+      url: ${app.domain.backend}${app.context-path}
+      description: Prefix Domain URL in development environment
     contact:
       email: nguyen.hnam2024@gmail.com
       name: Huu Nam Nguyen

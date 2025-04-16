@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AppCoreValue {
 
-    @Value("${server.servlet.context-path}")
-    String prefixPath;
+    @Value("${app.context-path}")
+    String contextPath;
 
     @Value("${app.domain.backend}")
     String backendDomain;

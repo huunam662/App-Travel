@@ -74,7 +74,7 @@ public class WebSecurityConfig {
 
         UrlBasedCorsConfigurationSource urlBasedCors = new UrlBasedCorsConfigurationSource();
 
-        String patternUrl = String.format("%s/**", appCoreValue.getPrefixPath());
+        String patternUrl = String.format("%s/**", appCoreValue.getContextPath());
         urlBasedCors.registerCorsConfiguration(patternUrl, corsConfiguration);
 
         corsConfigurer.configurationSource(urlBasedCors);
