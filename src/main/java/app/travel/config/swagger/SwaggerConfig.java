@@ -18,6 +18,7 @@ import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import java.util.List;
+import java.util.Set;
 
 @Configuration
 @RequiredArgsConstructor
@@ -88,23 +89,27 @@ public class SwaggerConfig {
 
         return openApi -> {
 
-            Paths paths = new Paths();
+            Paths pathsNewDisplay = new Paths();
 
-            openApi.getPaths().keySet().forEach(
+            Paths pathsOpenApi = openApi.getPaths();
+
+            Set<String> keySets = pathsOpenApi.keySet();
+
+            keySets.forEach(
                     path -> {
 
                         if(path.startsWith(appCoreValue.getContextPath())){
 
                             String pathWithoutPrefix = path.substring(appCoreValue.getContextPath().length());
 
-                            paths.put(pathWithoutPrefix, openApi.getPaths().get(path));
+                            pathsNewDisplay.put(pathWithoutPrefix, pathsOpenApi.get(path));
 
                         }
-                        else paths.put(path, openApi.getPaths().get(path));
+                        else pathsNewDisplay.put(path, pathsOpenApi.get(path));
                     }
             );
 
-            openApi.setPaths(paths);
+            openApi.setPaths(pathsNewDisplay);
         };
     }
 

@@ -1,8 +1,5 @@
 package app.travel.config.middleware.interceptor;
 
-import app.travel.advice.exception.templates.ErrorHolderException;
-import app.travel.common.constant.Error;
-import app.travel.value.AppCoreValue;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AccessLevel;
