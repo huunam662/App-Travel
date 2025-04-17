@@ -34,7 +34,16 @@ public class ProfileUserRepository implements IProfileUserRepository{
     }
 
     @Override
-    public Optional<ProfileUserEntity> findByUserId(UUID userId) {
+    @Transactional
+    public ProfileUserEntity update(ProfileUserEntity profileUser) {
+
+        profileUserMapper.updateById(profileUser);
+
+        return profileUser;
+    }
+
+    @Override
+    public ProfileUserEntity findByUserId(UUID userId) {
 
         return profileUserMapper.selectByUserIdWithJoinUser(userId);
     }

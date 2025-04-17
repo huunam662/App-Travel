@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class KeyResourceResponse<T> {
+public class ResourceKeyResponse<T> {
 
     T key;
 

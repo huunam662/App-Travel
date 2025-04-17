@@ -13,7 +13,6 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EditPlaceRequest extends NewPlaceRequest{
 

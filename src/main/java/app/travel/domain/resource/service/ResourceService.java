@@ -3,23 +3,23 @@ package app.travel.domain.resource.service;
 import app.travel.advice.exception.templates.ErrorHolderException;
 import app.travel.common.constant.ContentDispositionType;
 import app.travel.common.constant.Error;
-import app.travel.domain.resource.payload.request.UploadFileRequest;
-import app.travel.domain.resource.payload.response.UploadFileResponse;
+import app.travel.common.constant.UploadType;
+import app.travel.domain.resource.payload.request.ResourceUploadRequest;
+import app.travel.domain.resource.payload.response.ResourceUploadResponse;
 import app.travel.shared.payload.internal.LoadResourceInternal;
 import app.travel.shared.service.cloud.cloudinary.ICloudinaryService;
-import app.travel.shared.service.crypto.aes_gcm.ICryptoAesGcmService;
+import app.travel.value.AppCoreValue;
+import app.travel.value.PathValue;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Optional;
 
@@ -30,26 +30,30 @@ public class ResourceService implements IResourceService{
 
     ICloudinaryService cloudinaryService;
 
-    ICryptoAesGcmService cryptoAesGcmService;
+    AppCoreValue appCoreValue;
+
+    PathValue pathValue;
 
     @Override
-    public UploadFileResponse uploadByCloudinary(UploadFileRequest request, HttpServletRequest servletRequest) throws Exception {
+    public ResourceUploadResponse uploadByCloudinary(ResourceUploadRequest request, UploadType uploadType, HttpServletRequest servletRequest) throws Exception {
 
         MultipartFile file = request.getFile();
 
         if(file == null || file.isEmpty())
             throw new ErrorHolderException(Error.REQUEST_RESOURCE_INVALID);
 
-        request.setServletRequest(servletRequest);
+        if(uploadType == null) uploadType = UploadType.DEFAULT;
 
-        Map uploadResponse = cloudinaryService.upload(request);
+        Map uploadResponse = cloudinaryService.upload(request, uploadType, servletRequest);
 
-        return UploadFileResponse.builder()
+        String fileName = (String) uploadResponse.get("public_id");
+
+        return ResourceUploadResponse.builder()
                 .type((String) uploadResponse.get("type"))
                 .typeFile((String) uploadResponse.get("resource_type"))
                 .formatFile((String) uploadResponse.get("format"))
-                .fileUrl((String) uploadResponse.get("secure_url"))
-                .fileName((String) uploadResponse.get("public_id"))
+                .fileUrl(String.format("%s%s/%s", appCoreValue.getBackendDomain(), pathValue.getResourceLoadPath(), fileName))
+                .fileName(fileName)
                 .build();
     }
 
@@ -65,6 +69,10 @@ public class ResourceService implements IResourceService{
 
         String resourceName = loadResourceInternal.getResourceName();
 
+        int resourceNameLength = resourceName.length();
+
+        int subResourceName = resourceNameLength > 32 ? resourceNameLength - 32 : resourceNameLength;
+
         MediaType mediaType = Optional.ofNullable(loadResourceInternal.getMediaType()).orElse(MediaType.APPLICATION_OCTET_STREAM);
 
         servletResponse.setContentType(mediaType.toString());
@@ -74,7 +82,7 @@ public class ResourceService implements IResourceService{
 
         servletResponse.setHeader(
                 HttpHeaders.CONTENT_DISPOSITION,
-                type.getContentDisposition() + "; filename=" + resourceName.substring(resourceName.length() / 2)
+                type.getContentDisposition() + "; filename=" + resourceName.substring(subResourceName)
         );
 
         return loadResourceInternal.getResource();

@@ -10,7 +10,6 @@ import org.springdoc.core.annotations.ParameterObject;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ParameterObject
 public class LocationWardParams1Request {

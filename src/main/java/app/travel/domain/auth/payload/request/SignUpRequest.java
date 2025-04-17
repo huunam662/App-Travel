@@ -2,6 +2,7 @@ package app.travel.domain.auth.payload.request;
 
 import app.travel.common.annotation.PasswordFormat;
 import app.travel.common.annotation.PasswordMatch;
+import app.travel.common.annotation.PhoneNumberFormat;
 import app.travel.common.annotation.UsernameFormat;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -9,7 +10,6 @@ import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -30,7 +30,7 @@ public class SignUpRequest {
 
     @NotBlank(message = "Phone number is required!")
     @NotNull(message = "Phone number is required!")
-    @Pattern(regexp = "^[0-9]{9,11}$", message = "Phone numbers must contain only digits and be between 9 and 11 characters long.")
+    @PhoneNumberFormat
     String phoneNumber;
 
     @NotNull(message = "Username is required!")

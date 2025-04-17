@@ -9,7 +9,7 @@ import app.travel.domain.places.payload.response.PlaceResponse;
 import app.travel.domain.places.service.IPlaceService;
 import app.travel.model.places.entity.PlaceEntity;
 import app.travel.shared.payload.response.FilterResponse;
-import app.travel.shared.payload.response.KeyResourceResponse;
+import app.travel.shared.payload.response.ResourceKeyResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -35,19 +35,19 @@ public class PlaceController implements IPlaceController {
     }
 
     @Override
-    public KeyResourceResponse<?> createPlace(NewPlaceRequest request) {
+    public ResourceKeyResponse<?> createPlace(NewPlaceRequest request) {
 
         return placeService.createPlace(request);
     }
 
     @Override
-    public KeyResourceResponse<?> updatePlace(EditPlaceRequest request) {
+    public ResourceKeyResponse<?> updatePlace(EditPlaceRequest request) {
 
         return placeService.updatePlace(request);
     }
 
     @Override
-    public KeyResourceResponse<?> changePlaceIsForeign(ChangeIsForeignRequest request) {
+    public ResourceKeyResponse<?> changePlaceIsForeign(ChangeIsForeignRequest request) {
 
         return placeService.changePlaceIsForeign(request);
     }

@@ -7,7 +7,7 @@ import app.travel.domain.places.payload.request.PlaceFilterRequest;
 import app.travel.domain.places.payload.response.PlaceResponse;
 import app.travel.model.places.entity.PlaceEntity;
 import app.travel.shared.payload.response.FilterResponse;
-import app.travel.shared.payload.response.KeyResourceResponse;
+import app.travel.shared.payload.response.ResourceKeyResponse;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,11 +24,11 @@ public interface IPlaceService {
 
     FilterResponse<PlaceResponse> filterPlaces(PlaceFilterRequest request);
 
-    KeyResourceResponse<?> createPlace(NewPlaceRequest request);
+    ResourceKeyResponse<?> createPlace(NewPlaceRequest request);
 
-    KeyResourceResponse<?> updatePlace(EditPlaceRequest request);
+    ResourceKeyResponse<?> updatePlace(EditPlaceRequest request);
 
-    KeyResourceResponse<?> changePlaceIsForeign(ChangeIsForeignRequest request);
+    ResourceKeyResponse<?> changePlaceIsForeign(ChangeIsForeignRequest request);
 
     void deletePlaceById(UUID id);
 

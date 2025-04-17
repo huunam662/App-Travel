@@ -3,45 +3,32 @@ package app.travel.shared.service.cloud.cloudinary;
 import app.travel.advice.exception.templates.ErrorHolderException;
 import app.travel.common.constant.CloudType;
 import app.travel.common.constant.Error;
-import app.travel.domain.resource.payload.request.UploadFileRequest;
+import app.travel.common.constant.UploadType;
+import app.travel.domain.resource.payload.request.ResourceUploadRequest;
 import app.travel.shared.payload.internal.LoadResourceInternal;
 import app.travel.shared.payload.internal.ResourceFileInternal;
 import app.travel.shared.service.crypto.aes_gcm.ICryptoAesGcmService;
 import app.travel.utils.HttpUtils;
-import app.travel.value.CloudinaryValue;
 import com.cloudinary.Cloudinary;
-import com.cloudinary.Transformation;
-import com.cloudinary.Url;
 import com.cloudinary.api.ApiResponse;
 import com.cloudinary.utils.ObjectUtils;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.core.util.Json;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
-import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.ClientHttpRequest;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
 
 @Slf4j(topic = "CLOUDINARY-SERVICE")
 @Service
@@ -56,14 +43,12 @@ public class CloudinaryService implements ICloudinaryService{
     RestTemplate restTemplate;
 
     @Override
-    public Map upload(UploadFileRequest request) throws Exception {
+    public Map upload(ResourceUploadRequest request, UploadType uploadType, HttpServletRequest servletRequest) throws Exception {
 
         MultipartFile file = request.getFile();
 
-        HttpServletRequest servletRequest = request.getServletRequest();
-
         ResourceFileInternal uploadFileInternal = ResourceFileInternal.builder()
-                .folderName(request.getUploadType().getFolder())
+                .folderName(uploadType.getFolder())
                 .cloudType(CloudType.CLOUDINARY)
                 .ipAddressClient(HttpUtils.getRequestIP(servletRequest))
                 .build();
@@ -76,7 +61,7 @@ public class CloudinaryService implements ICloudinaryService{
 //                "overwrite", true,
                         "resource_type", "auto",
                 "public_id", public_id,
-                "asset_folder", request.getUploadType().getFolder()
+                "asset_folder", uploadType.getFolder()
         ));
     }
 

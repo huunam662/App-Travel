@@ -11,6 +11,8 @@ public interface IProfileUserRepository {
 
     ProfileUserEntity insert(ProfileUserEntity profileUser);
 
-    Optional<ProfileUserEntity> findByUserId(UUID userId);
+    ProfileUserEntity update(ProfileUserEntity profileUser);
+
+    ProfileUserEntity findByUserId(UUID userId);
 
 }

@@ -52,8 +52,6 @@ public class AuthService implements IAuthService{
 
     AuthenticationManager authenticationManager;
 
-    AppCoreValue appCoreValue;
-
     PathValue pathValue;
 
     JwtValue jwtValue;
@@ -196,7 +194,7 @@ public class AuthService implements IAuthService{
 
         userEntity = userService.saveUser(userEntity);
 
-        ProfileUserEntity profileUserEntity = ProfileUserConverter.INSTANCE.toProfileUserEntityFromSignUpRequest(signUpRequest);
+        ProfileUserEntity profileUserEntity = ProfileUserConverter.INSTANCE.toProfileUserEntity(signUpRequest);
         profileUserEntity.setUserId(userEntity.getId());
 
         profileUserService.createProfileUser(profileUserEntity);

@@ -18,6 +18,6 @@ public class PathValue {
     @Value("${app.path.frontend.signup-confirm}")
     String feSignupConfirmPath;
 
-    @Value("${app.path.backend.load-image}")
-    String loadResourcePath;
+    @Value("${app.path.backend.resource-load}")
+    String resourceLoadPath;
 }

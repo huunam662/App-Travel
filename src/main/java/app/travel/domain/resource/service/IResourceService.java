@@ -1,14 +1,15 @@
 package app.travel.domain.resource.service;
 
 import app.travel.common.constant.ContentDispositionType;
-import app.travel.domain.resource.payload.request.UploadFileRequest;
-import app.travel.domain.resource.payload.response.UploadFileResponse;
+import app.travel.common.constant.UploadType;
+import app.travel.domain.resource.payload.request.ResourceUploadRequest;
+import app.travel.domain.resource.payload.response.ResourceUploadResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public interface IResourceService {
 
-    UploadFileResponse uploadByCloudinary(UploadFileRequest request, HttpServletRequest servletRequest) throws Exception;
+    ResourceUploadResponse uploadByCloudinary(ResourceUploadRequest request, UploadType uploadType, HttpServletRequest servletRequest) throws Exception;
 
     byte[] getResourceByKey(String key, ContentDispositionType type, HttpServletResponse servletResponse) throws Exception;
 

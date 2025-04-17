@@ -18,6 +18,6 @@ public interface ProfileUserMapper extends BaseMapper<ProfileUserEntity> {
     )
     Boolean isExistsByPhoneNumber(@Param("phoneNumber") String phoneNumber);
 
-    Optional<ProfileUserEntity> selectByUserIdWithJoinUser(@Param("userId") UUID userId);
+    ProfileUserEntity selectByUserIdWithJoinUser(@Param("userId") UUID userId);
 
 }

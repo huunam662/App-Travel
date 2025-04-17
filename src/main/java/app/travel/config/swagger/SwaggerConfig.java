@@ -38,7 +38,7 @@ public class SwaggerConfig {
 
         Server resource = new Server();
         resource.setUrl(appCoreValue.getBackendDomain());
-        resource.setDescription("Prefix Domain URL for request resourcing system.");
+        resource.setDescription("Prefix Domain URL for load resource system.");
 
         final String securitySchemaName = "Bearer Authorization";
 
@@ -96,17 +96,18 @@ public class SwaggerConfig {
             Set<String> keySets = pathsOpenApi.keySet();
 
             keySets.forEach(
-                    path -> {
 
-                        if(path.startsWith(appCoreValue.getContextPath())){
+                path -> {
 
-                            String pathWithoutPrefix = path.substring(appCoreValue.getContextPath().length());
+                    if(path.startsWith(appCoreValue.getContextPath())){
 
-                            pathsNewDisplay.put(pathWithoutPrefix, pathsOpenApi.get(path));
+                        String pathWithoutPrefix = path.substring(appCoreValue.getContextPath().length());
 
-                        }
-                        else pathsNewDisplay.put(path, pathsOpenApi.get(path));
+                        pathsNewDisplay.put(pathWithoutPrefix, pathsOpenApi.get(path));
+
                     }
+                    else pathsNewDisplay.put(path, pathsOpenApi.get(path));
+                }
             );
 
             openApi.setPaths(pathsNewDisplay);

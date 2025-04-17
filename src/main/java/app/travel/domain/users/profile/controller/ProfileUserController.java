@@ -1,11 +1,17 @@
 package app.travel.domain.users.profile.controller;
 
 
+import app.travel.common.constant.UploadType;
 import app.travel.converter.ProfileUserConverter;
+import app.travel.domain.resource.payload.request.ResourceUploadRequest;
+import app.travel.domain.resource.payload.response.ResourceUploadResponse;
+import app.travel.domain.resource.service.IResourceService;
+import app.travel.domain.users.profile.payload.request.EditProfileUserRequest;
 import app.travel.domain.users.profile.payload.response.ProfileUserHomeResponse;
 import app.travel.domain.users.profile.payload.response.ProfileUserResponse;
 import app.travel.domain.users.profile.service.IProfileUserService;
 import app.travel.model.profile_user.entity.ProfileUserEntity;
+import app.travel.shared.payload.response.ResourceKeyResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AccessLevel;
@@ -39,5 +45,15 @@ public class ProfileUserController implements IProfileUserController{
         return ProfileUserConverter.INSTANCE.toProfileUserResponse(profileUser);
     }
 
+    @Override
+    public ResourceKeyResponse<?> updateProfileUser(EditProfileUserRequest request) {
 
+        return profileUserService.updateProfileUser(request);
+    }
+
+    @Override
+    public ResourceUploadResponse uploadProfileImage(ResourceUploadRequest request, HttpServletRequest servletRequest) throws Exception {
+
+        return profileUserService.uploadProfileImage(request, servletRequest);
+    }
 }

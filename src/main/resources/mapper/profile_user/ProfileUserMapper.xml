@@ -34,7 +34,7 @@
         pf.id as pf_id,
         pf.first_name as pf_first_name,
         pf.last_name as pf_last_name,
-        pf.identify_code as pf_identity_code,
+        pf.identify_code as pf_identify_code,
         pf.phone_number as pf_phone_number,
         pf.profile_image as pf_profile_image,
         pf.user_id as pf_user_id,

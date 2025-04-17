@@ -11,7 +11,6 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class NewPlaceRequest {
 

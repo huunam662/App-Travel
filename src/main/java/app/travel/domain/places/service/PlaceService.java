@@ -11,7 +11,7 @@ import app.travel.domain.places.payload.response.PlaceResponse;
 import app.travel.model.places.entity.PlaceEntity;
 import app.travel.model.places.repository.IPlaceRepository;
 import app.travel.shared.payload.response.FilterResponse;
-import app.travel.shared.payload.response.KeyResourceResponse;
+import app.travel.shared.payload.response.ResourceKeyResponse;
 import app.travel.utils.PlaceUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -89,7 +89,7 @@ public class PlaceService implements IPlaceService{
 
     @Override
     @Transactional
-    public KeyResourceResponse<?> createPlace(NewPlaceRequest request) {
+    public ResourceKeyResponse<?> createPlace(NewPlaceRequest request) {
 
         checkExistsByPlaceName(request.getPlaceName(), true);
 
@@ -97,14 +97,14 @@ public class PlaceService implements IPlaceService{
 
         place = placeRepository.insert(place);
 
-        return KeyResourceResponse.builder()
+        return ResourceKeyResponse.builder()
                 .key(place.getId())
                 .build();
     }
 
     @Override
     @Transactional
-    public KeyResourceResponse<?> updatePlace(EditPlaceRequest request) {
+    public ResourceKeyResponse<?> updatePlace(EditPlaceRequest request) {
 
         PlaceEntity place = getPlaceById(request.getId());
 
@@ -114,14 +114,14 @@ public class PlaceService implements IPlaceService{
 
         place = placeRepository.update(place);
 
-        return KeyResourceResponse.builder()
+        return ResourceKeyResponse.builder()
                 .key(place.getId())
                 .build();
     }
 
     @Override
     @Transactional
-    public KeyResourceResponse<?> changePlaceIsForeign(ChangeIsForeignRequest request) {
+    public ResourceKeyResponse<?> changePlaceIsForeign(ChangeIsForeignRequest request) {
 
         PlaceEntity place = getPlaceById(request.getId());
 
@@ -129,7 +129,7 @@ public class PlaceService implements IPlaceService{
 
         place = placeRepository.update(place);
 
-        return KeyResourceResponse.builder()
+        return ResourceKeyResponse.builder()
                 .key(place.getId())
                 .build();
     }

@@ -7,7 +7,7 @@ import app.travel.domain.places.payload.request.NewPlaceRequest;
 import app.travel.domain.places.payload.request.PlaceFilterRequest;
 import app.travel.domain.places.payload.response.PlaceResponse;
 import app.travel.shared.payload.response.FilterResponse;
-import app.travel.shared.payload.response.KeyResourceResponse;
+import app.travel.shared.payload.response.ResourceKeyResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,15 +25,15 @@ public interface IPlaceController {
 
     @PostMapping
     @DefaultMessage(message = "Save resource successful.")
-    KeyResourceResponse<?> createPlace(@Valid @RequestBody NewPlaceRequest request);
+    ResourceKeyResponse<?> createPlace(@Valid @RequestBody NewPlaceRequest request);
 
     @PutMapping
     @DefaultMessage(message = "Save resource successful.")
-    KeyResourceResponse<?> updatePlace(@Valid @RequestBody EditPlaceRequest request);
+    ResourceKeyResponse<?> updatePlace(@Valid @RequestBody EditPlaceRequest request);
 
     @PatchMapping("/foreign")
     @DefaultMessage(message = "Save resource successful.")
-    KeyResourceResponse<?> changePlaceIsForeign(@Valid @RequestBody ChangeIsForeignRequest request);
+    ResourceKeyResponse<?> changePlaceIsForeign(@Valid @RequestBody ChangeIsForeignRequest request);
 
     @DeleteMapping("/{id}")
     @DefaultMessage(message = "Drop resource successful.")

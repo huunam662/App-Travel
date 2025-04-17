@@ -12,7 +12,6 @@ import org.springdoc.core.annotations.ParameterObject;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ParameterObject
 public class LocationProvinceParams2Request extends LocationProvinceParams1Request{

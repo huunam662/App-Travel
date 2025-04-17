@@ -13,19 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UploadFileRequest {
+public class ResourceUploadRequest {
 
     @Schema(description = "File for upload.")
     @NotNull(message = "File for upload is required!")
     MultipartFile file;
-
-    @Schema(description = "Upload type for file.")
-    @NotNull(message = "Upload type for file is required!")
-    UploadType uploadType = UploadType.DEFAULT;
-
-    @Hidden
-    HttpServletRequest servletRequest;
 
 }
