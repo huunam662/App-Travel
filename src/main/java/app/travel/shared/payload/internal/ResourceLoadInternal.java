@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 @AllArgsConstructor
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class LoadResourceInternal {
+public class ResourceLoadInternal {
 
     byte[] resource;
 

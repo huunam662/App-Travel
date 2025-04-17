@@ -6,7 +6,7 @@ import app.travel.common.constant.Error;
 import app.travel.common.constant.UploadType;
 import app.travel.domain.resource.payload.request.ResourceUploadRequest;
 import app.travel.domain.resource.payload.response.ResourceUploadResponse;
-import app.travel.shared.payload.internal.LoadResourceInternal;
+import app.travel.shared.payload.internal.ResourceLoadInternal;
 import app.travel.shared.service.cloud.cloudinary.ICloudinaryService;
 import app.travel.value.AppCoreValue;
 import app.travel.value.PathValue;
@@ -63,9 +63,10 @@ public class ResourceService implements IResourceService{
         if(key == null || key.isEmpty())
             throw new ErrorHolderException(Error.ILLEGAL_ARGUMENT);
 
-        LoadResourceInternal loadResourceInternal = cloudinaryService.loadResource(key);
+        ResourceLoadInternal loadResourceInternal = cloudinaryService.loadResource(key);
 
-        if(loadResourceInternal.getResource() == null) throw new ErrorHolderException(Error.RESOURCE_NOT_FOUND);
+        if(loadResourceInternal.getResource() == null)
+            throw new ErrorHolderException(Error.RESOURCE_NOT_FOUND);
 
         String resourceName = loadResourceInternal.getResourceName();
 

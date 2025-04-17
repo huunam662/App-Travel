@@ -29,7 +29,7 @@
                 <result property="fullName" column="w_full_name" />
                 <result property="fullNameEn" column="w_full_name_en" />
                 <result property="codeName" column="w_code_name" />
-                <result property="locationDistrictId" column="dt_location_district_id" />
+                <result property="locationDistrictId" column="w_location_district_id" />
             </collection>
         </collection>
     </resultMap>

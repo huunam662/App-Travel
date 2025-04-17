@@ -5,7 +5,7 @@ import app.travel.common.constant.CloudType;
 import app.travel.common.constant.Error;
 import app.travel.common.constant.UploadType;
 import app.travel.domain.resource.payload.request.ResourceUploadRequest;
-import app.travel.shared.payload.internal.LoadResourceInternal;
+import app.travel.shared.payload.internal.ResourceLoadInternal;
 import app.travel.shared.payload.internal.ResourceFileInternal;
 import app.travel.shared.service.crypto.aes_gcm.ICryptoAesGcmService;
 import app.travel.utils.HttpUtils;
@@ -67,7 +67,7 @@ public class CloudinaryService implements ICloudinaryService{
 
     @Override
     @SneakyThrows
-    public LoadResourceInternal loadResource(String fileName) throws Exception {
+    public ResourceLoadInternal loadResource(String fileName) throws Exception {
 
         ApiResponse apiResponse = cloudinary.api().resource(fileName, ObjectUtils.asMap("quality_analysis", true));
 
@@ -101,7 +101,7 @@ public class CloudinaryService implements ICloudinaryService{
 //        MediaType contentType = clientHttpResponse.getHeaders().getContentType();
 //        long contentLength = clientHttpResponse.getHeaders().getContentLength();
 
-        return LoadResourceInternal.builder()
+        return ResourceLoadInternal.builder()
                 .resource(resource)
                 .resourceName(fileName)
                 .contentLength(contentLength)
