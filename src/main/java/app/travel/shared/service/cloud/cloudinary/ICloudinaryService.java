@@ -1,6 +1,6 @@
 package app.travel.shared.service.cloud.cloudinary;
 
-import app.travel.common.constant.UploadType;
+import app.travel.common.constant.other.UploadType;
 import app.travel.domain.resource.payload.request.ResourceUploadRequest;
 import app.travel.shared.payload.internal.ResourceLoadInternal;
 import jakarta.servlet.http.HttpServletRequest;

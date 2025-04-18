@@ -1,7 +1,7 @@
 package app.travel.domain.location.province.service;
 
 import app.travel.advice.exception.templates.ErrorHolderException;
-import app.travel.common.constant.Error;
+import app.travel.common.constant.other.Error;
 import app.travel.domain.location.province.payload.request.LocationProvinceParams1Request;
 import app.travel.domain.location.province.payload.request.LocationProvinceParams2Request;
 import app.travel.model.location.provinces.entity.LocationProvinceEntity;

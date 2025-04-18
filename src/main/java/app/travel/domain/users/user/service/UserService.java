@@ -1,7 +1,7 @@
 package app.travel.domain.users.user.service;
 
 import app.travel.advice.exception.templates.ErrorHolderException;
-import app.travel.common.constant.Error;
+import app.travel.common.constant.other.Error;
 import app.travel.model.roles.entity.RoleEntity;
 import app.travel.model.users.entity.UserEntity;
 import app.travel.model.users.repository.IUserRepository;

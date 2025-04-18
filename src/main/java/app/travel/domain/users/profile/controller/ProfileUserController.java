@@ -1,11 +1,9 @@
 package app.travel.domain.users.profile.controller;
 
 
-import app.travel.common.constant.UploadType;
 import app.travel.converter.ProfileUserConverter;
 import app.travel.domain.resource.payload.request.ResourceUploadRequest;
 import app.travel.domain.resource.payload.response.ResourceUploadResponse;
-import app.travel.domain.resource.service.IResourceService;
 import app.travel.domain.users.profile.payload.request.EditProfileUserRequest;
 import app.travel.domain.users.profile.payload.response.ProfileUserHomeResponse;
 import app.travel.domain.users.profile.payload.response.ProfileUserResponse;

@@ -1,7 +1,7 @@
 package app.travel.domain.location.ward.service;
 
 import app.travel.advice.exception.templates.ErrorHolderException;
-import app.travel.common.constant.Error;
+import app.travel.common.constant.other.Error;
 import app.travel.domain.location.ward.payload.request.LocationWardParams1Request;
 import app.travel.domain.location.ward.payload.request.LocationWardParams2Request;
 import app.travel.model.location.wards.entity.LocationWardEntity;

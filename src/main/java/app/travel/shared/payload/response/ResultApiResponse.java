@@ -1,6 +1,6 @@
 package app.travel.shared.payload.response;
 
-import app.travel.common.constant.Error;
+import app.travel.common.constant.other.Error;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

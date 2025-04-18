@@ -1,6 +1,6 @@
 package app.travel.shared.payload.request;
 
-import app.travel.common.constant.SortDirection;
+import app.travel.common.constant.other.SortDirection;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

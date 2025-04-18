@@ -1,6 +1,6 @@
 package app.travel.shared.service.jwt;
 
-import app.travel.common.constant.JwtTokenType;
+import app.travel.common.constant.other.JwtTokenType;
 import io.jsonwebtoken.Claims;
 import org.springframework.security.core.userdetails.UserDetails;
 

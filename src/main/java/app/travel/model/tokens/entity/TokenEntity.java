@@ -1,6 +1,6 @@
 package app.travel.model.tokens.entity;
 
-import app.travel.common.constant.JwtTokenType;
+import app.travel.common.constant.other.JwtTokenType;
 import app.travel.shared.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;

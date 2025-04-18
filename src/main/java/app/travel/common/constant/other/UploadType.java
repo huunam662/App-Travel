@@ -1,4 +1,4 @@
-package app.travel.common.constant;
+package app.travel.common.constant.other;
 
 import lombok.AccessLevel;
 import lombok.Getter;

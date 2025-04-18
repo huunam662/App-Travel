@@ -17,9 +17,11 @@ import lombok.experimental.FieldDefaults;
 import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import java.util.List;
 import java.util.Set;
 
+@Profile({"dev", "stage"})
 @Configuration
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)

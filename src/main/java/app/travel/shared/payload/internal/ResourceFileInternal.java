@@ -1,6 +1,6 @@
 package app.travel.shared.payload.internal;
 
-import app.travel.common.constant.CloudType;
+import app.travel.common.constant.other.CloudType;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

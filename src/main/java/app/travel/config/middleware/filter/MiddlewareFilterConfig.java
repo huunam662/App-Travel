@@ -2,7 +2,7 @@ package app.travel.config.middleware.filter;
 
 import app.travel.advice.exception.handler.GlobalExceptionHandler;
 import app.travel.advice.exception.templates.ErrorHolderException;
-import app.travel.common.constant.Error;
+import app.travel.common.constant.other.Error;
 import app.travel.shared.service.jwt.IJwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

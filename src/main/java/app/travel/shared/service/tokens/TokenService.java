@@ -1,8 +1,8 @@
 package app.travel.shared.service.tokens;
 
 import app.travel.advice.exception.templates.ErrorHolderException;
-import app.travel.common.constant.Error;
-import app.travel.common.constant.JwtTokenType;
+import app.travel.common.constant.other.Error;
+import app.travel.common.constant.other.JwtTokenType;
 import app.travel.model.tokens.entity.TokenEntity;
 import app.travel.model.tokens.repository.ITokenRepository;
 import app.travel.model.users.entity.UserEntity;

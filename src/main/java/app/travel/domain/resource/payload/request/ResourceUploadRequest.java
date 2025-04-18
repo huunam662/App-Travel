@@ -1,9 +1,6 @@
 package app.travel.domain.resource.payload.request;
 
-import app.travel.common.constant.UploadType;
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

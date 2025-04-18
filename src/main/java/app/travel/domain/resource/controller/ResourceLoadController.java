@@ -1,7 +1,7 @@
 package app.travel.domain.resource.controller;
 
 import app.travel.common.annotation.ExcludedContextPath;
-import app.travel.common.constant.ContentDispositionType;
+import app.travel.common.constant.other.ContentDispositionType;
 import app.travel.domain.resource.service.IResourceService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;

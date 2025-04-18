@@ -1,6 +1,6 @@
 package app.travel.model.roles.entity;
 
-import app.travel.common.constant.Role;
+import app.travel.common.constant.other.Role;
 import app.travel.model.founder_tours.entity.FounderTourEntity;
 import app.travel.model.profile_user.entity.ProfileUserEntity;
 import app.travel.model.users.entity.UserEntity;

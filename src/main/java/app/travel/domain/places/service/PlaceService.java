@@ -1,7 +1,7 @@
 package app.travel.domain.places.service;
 
 import app.travel.advice.exception.templates.ErrorHolderException;
-import app.travel.common.constant.Error;
+import app.travel.common.constant.other.Error;
 import app.travel.converter.PlaceConverter;
 import app.travel.domain.places.payload.request.ChangeIsForeignRequest;
 import app.travel.domain.places.payload.request.EditPlaceRequest;

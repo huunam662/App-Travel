@@ -1,6 +1,6 @@
 package app.travel.model.roles.mapper;
 
-import app.travel.common.constant.Role;
+import app.travel.common.constant.other.Role;
 import app.travel.model.roles.entity.RoleEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.*;

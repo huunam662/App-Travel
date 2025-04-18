@@ -1,7 +1,7 @@
 package app.travel.domain.resource.service;
 
-import app.travel.common.constant.ContentDispositionType;
-import app.travel.common.constant.UploadType;
+import app.travel.common.constant.other.ContentDispositionType;
+import app.travel.common.constant.other.UploadType;
 import app.travel.domain.resource.payload.request.ResourceUploadRequest;
 import app.travel.domain.resource.payload.response.ResourceUploadResponse;
 import jakarta.servlet.http.HttpServletRequest;

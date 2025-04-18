@@ -2,8 +2,8 @@ package app.travel.shared.service.cookie;
 
 
 import app.travel.advice.exception.templates.ErrorHolderException;
-import app.travel.common.constant.CookieSameSite;
-import app.travel.common.constant.Error;
+import app.travel.common.constant.other.CookieSameSite;
+import app.travel.common.constant.other.Error;
 import app.travel.shared.payload.internal.CookieInternal;
 import app.travel.value.AppCoreValue;
 import jakarta.servlet.http.Cookie;

@@ -1,12 +1,11 @@
 package app.travel.model.roles.repository;
 
-import app.travel.common.constant.Role;
+import app.travel.common.constant.other.Role;
 import app.travel.model.roles.entity.RoleEntity;
 import app.travel.model.roles.mapper.RoleMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.UUID;

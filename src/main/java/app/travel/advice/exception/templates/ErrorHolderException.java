@@ -1,6 +1,6 @@
 package app.travel.advice.exception.templates;
 
-import app.travel.common.constant.Error;
+import app.travel.common.constant.other.Error;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

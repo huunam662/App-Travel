@@ -1,9 +1,9 @@
 package app.travel.domain.auth.service;
 
 import app.travel.advice.exception.templates.ErrorHolderException;
-import app.travel.common.constant.Error;
-import app.travel.common.constant.JwtTokenType;
-import app.travel.common.constant.Role;
+import app.travel.common.constant.other.Error;
+import app.travel.common.constant.other.JwtTokenType;
+import app.travel.common.constant.other.Role;
 import app.travel.converter.AuthConverter;
 import app.travel.converter.ProfileUserConverter;
 import app.travel.domain.auth.payload.request.SignInRequest;
@@ -25,7 +25,6 @@ import app.travel.shared.service.jwt.IJwtService;
 import app.travel.shared.service.mailer.IMailerService;
 import app.travel.shared.service.roles.IRoleService;
 import app.travel.shared.service.tokens.ITokenService;
-import app.travel.value.AppCoreValue;
 import app.travel.value.JwtValue;
 import app.travel.value.PathValue;
 import io.swagger.v3.core.util.Json;

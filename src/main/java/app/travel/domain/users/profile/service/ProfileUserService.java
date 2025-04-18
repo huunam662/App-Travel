@@ -1,8 +1,8 @@
 package app.travel.domain.users.profile.service;
 
 import app.travel.advice.exception.templates.ErrorHolderException;
-import app.travel.common.constant.Error;
-import app.travel.common.constant.UploadType;
+import app.travel.common.constant.other.Error;
+import app.travel.common.constant.other.UploadType;
 import app.travel.converter.ProfileUserConverter;
 import app.travel.domain.resource.payload.request.ResourceUploadRequest;
 import app.travel.domain.resource.payload.response.ResourceUploadResponse;

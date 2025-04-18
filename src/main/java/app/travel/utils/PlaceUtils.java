@@ -1,6 +1,6 @@
 package app.travel.utils;
 
-import app.travel.common.constant.SortDirection;
+import app.travel.common.constant.other.SortDirection;
 import app.travel.domain.places.payload.request.PlaceFilterRequest;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.experimental.UtilityClass;

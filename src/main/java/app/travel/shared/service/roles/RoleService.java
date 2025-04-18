@@ -1,10 +1,9 @@
 package app.travel.shared.service.roles;
 
 import app.travel.advice.exception.templates.ErrorHolderException;
-import app.travel.common.constant.Error;
-import app.travel.common.constant.Role;
+import app.travel.common.constant.other.Error;
+import app.travel.common.constant.other.Role;
 import app.travel.model.roles.entity.RoleEntity;
-import app.travel.model.roles.mapper.RoleMapper;
 import app.travel.model.roles.repository.IRoleRepository;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -12,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service

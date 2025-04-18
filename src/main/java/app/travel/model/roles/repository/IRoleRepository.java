@@ -1,6 +1,6 @@
 package app.travel.model.roles.repository;
 
-import app.travel.common.constant.Role;
+import app.travel.common.constant.other.Role;
 import app.travel.model.roles.entity.RoleEntity;
 import java.util.Optional;
 import java.util.UUID;

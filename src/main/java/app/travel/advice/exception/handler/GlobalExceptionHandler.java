@@ -1,7 +1,7 @@
 package app.travel.advice.exception.handler;
 
 import app.travel.advice.exception.templates.ErrorHolderException;
-import app.travel.common.constant.Error;
+import app.travel.common.constant.other.Error;
 import app.travel.shared.payload.response.FieldErrorResponse;
 import app.travel.shared.payload.response.ResultApiResponse;
 import io.swagger.v3.core.util.Json;
@@ -26,7 +26,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;

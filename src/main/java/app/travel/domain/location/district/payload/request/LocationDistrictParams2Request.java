@@ -1,6 +1,6 @@
 package app.travel.domain.location.district.payload.request;
 
-import app.travel.common.constant.SortDirection;
+import app.travel.common.constant.other.SortDirection;
 import app.travel.common.constant.sort_by.LocationSortBy;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.*;
