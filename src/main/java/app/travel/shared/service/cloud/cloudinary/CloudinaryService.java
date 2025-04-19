@@ -29,6 +29,7 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j(topic = "CLOUDINARY-SERVICE")
 @Service
@@ -88,7 +89,7 @@ public class CloudinaryService implements ICloudinaryService{
             throw new ErrorHolderException(Error.RESOURCE_NOT_FOUND);
 
         byte[] resource = responseFromMono.getBody();
-        MediaType contentType = responseFromMono.getHeaders().getContentType();
+        MediaType contentType = Optional.of(responseFromMono.getHeaders().getContentType()).orElse(MediaType.APPLICATION_OCTET_STREAM);
         long contentLength = responseFromMono.getHeaders().getContentLength();
 
 //        URI uri = new URI(secureUrl);

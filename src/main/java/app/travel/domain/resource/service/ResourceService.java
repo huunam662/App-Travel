@@ -74,9 +74,7 @@ public class ResourceService implements IResourceService{
 
         int subResourceName = resourceNameLength > 32 ? resourceNameLength - 32 : resourceNameLength;
 
-        MediaType mediaType = Optional.ofNullable(loadResourceInternal.getMediaType()).orElse(MediaType.APPLICATION_OCTET_STREAM);
-
-        servletResponse.setContentType(mediaType.toString());
+        servletResponse.setContentType(loadResourceInternal.getMediaType().toString());
         servletResponse.setContentLength(loadResourceInternal.getContentLength().intValue());
 
         if(type == null) type = ContentDispositionType.DEFAULT;
