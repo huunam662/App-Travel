@@ -8,6 +8,9 @@ app:
 
   context-path: /travel-app/api/v${app.openapi.info.version}
 
+  template:
+    not-found-404: 404/not-found-route
+
   jwt:
     secret-key: d]"erpMJ-hf-+!K|8jaw~tXXtOM{1fxRSoggAm-1I0YzY4jdeB>]r6x{5YN'M=s|Pp>JVO*zU~fU'`S
     access-duration-time: 900000
@@ -21,6 +24,6 @@ app:
 
   mail:
     templates:
-      signup-confirm: mail-signup-confirm-template.html
+      signup-confirm: mail/mail-signup-confirm-template.html
     subjects:
       signup-confirm: Confirm your register with Travel App.

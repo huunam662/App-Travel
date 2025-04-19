@@ -4,7 +4,6 @@ import app.travel.domain.auth.payload.request.SignUpRequest;
 import app.travel.shared.service.crypto.aes_gcm.ICryptoAesGcmService;
 import app.travel.value.AppCoreValue;
 import app.travel.value.MailValue;
-import app.travel.value.MailTemplateValue;
 import app.travel.value.PathValue;
 import io.swagger.v3.core.util.Json;
 import jakarta.mail.MessagingException;
@@ -20,10 +19,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.util.Base64;
 
 @Slf4j(topic = "MAILER-SERVICE")
 @Service
@@ -35,15 +31,13 @@ public class MailerService implements IMailerService{
 
     PasswordEncoder passwordEncoder;
 
-    MailTemplateValue mailTemplateValue;
-
     SpringTemplateEngine templateEngine;
 
     AppCoreValue appCoreValue;
 
     PathValue pathValue;
 
-    MailValue emailValue;
+    MailValue mailValue;
 
     ICryptoAesGcmService cryptoAesGcmService;
 
@@ -66,12 +60,12 @@ public class MailerService implements IMailerService{
         context.setVariable("linkFeSignUpConfirm", urlLinkFeConfirm);
         context.setVariable("year", LocalDateTime.now().getYear());
 
-        String htmlContent = templateEngine.process(mailTemplateValue.getSignupConfirmTemplate(), context);
+        String htmlContent = templateEngine.process(mailValue.getSignupConfirmTemplate(), context);
 
         String sendTo = request.getEmail();
-        String subject = mailTemplateValue.getSignupConfirmSubject();
+        String subject = mailValue.getSignupConfirmSubject();
 
-        sendToEmail(emailValue.getSendEmailFrom(), sendTo, subject, htmlContent);
+        sendToEmail(mailValue.getSendEmailFrom(), sendTo, subject, htmlContent);
     }
 
     @Override

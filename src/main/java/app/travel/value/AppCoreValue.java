@@ -23,4 +23,6 @@ public class AppCoreValue {
     @Value("${app.server.secret-key.crypto.aes-gcm}")
     String serverSecretKey;
 
+    @Value("${app.template.not-found-404}")
+    String notFoundTemplate;
 }

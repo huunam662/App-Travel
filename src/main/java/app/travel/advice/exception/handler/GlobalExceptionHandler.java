@@ -4,10 +4,14 @@ import app.travel.advice.exception.templates.ErrorHolderException;
 import app.travel.common.constant.other.Error;
 import app.travel.shared.payload.response.FieldErrorResponse;
 import app.travel.shared.payload.response.ResultApiResponse;
+import app.travel.value.AppCoreValue;
 import io.swagger.v3.core.util.Json;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.connector.ClientAbortException;
 import org.apache.coyote.BadRequestException;
@@ -26,13 +30,20 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Slf4j(topic = "GLOBAL-EXCEPTION-HANDLER")
 @RestControllerAdvice
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class GlobalExceptionHandler implements AuthenticationEntryPoint, AccessDeniedHandler {
+
+    AppCoreValue appCoreValue;
 
     private void logError(Error error, Exception ex){
         log.error("{} - error code {}", ex.getMessage(), error.getStatus().value());
@@ -76,10 +87,24 @@ public class GlobalExceptionHandler implements AuthenticationEntryPoint, AccessD
         writeBodyExceptionResponse(request, response, error);
     }
 
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ModelAndView noResourceFoundHandler(NoResourceFoundException ex) {
+
+        Error error = Error.RESOURCE_NOT_FOUND;
+
+        logError(error, ex);
+
+        ModelAndView mav = new ModelAndView(appCoreValue.getNotFoundTemplate());
+
+        mav.setStatus(error.getStatus());
+
+        return mav;
+    }
+
+
+
     @ExceptionHandler({Exception.class})
     public ResultApiResponse.ErrorResponse handlerServerException(Exception ex){
-
-        System.out.println("-->>  handlerServerException");
 
         Error error = Error.SERVER_ERROR;
 

@@ -14,4 +14,10 @@ public class MailValue {
     @Value("${spring.mail.username}")
     String sendEmailFrom;
 
+    @Value("${app.mail.templates.signup-confirm}")
+    String signupConfirmTemplate;
+
+    @Value("${app.mail.subjects.signup-confirm}")
+    String signupConfirmSubject;
+
 }
