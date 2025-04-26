@@ -3,7 +3,7 @@ package app.travel.config.web;
 import app.travel.common.annotation.ExcludedContextPath;
 import app.travel.common.constant.other.ContentDispositionType;
 import app.travel.common.constant.other.SortDirection;
-import app.travel.common.constant.other.UploadType;
+import app.travel.common.constant.other.CloudinaryUploadType;
 import app.travel.common.constant.sort_by.LocationSortBy;
 import app.travel.common.constant.sort_by.PlaceSortBy;
 import app.travel.config.middleware.interceptor.MiddlewareInterceptorConfig;
@@ -18,7 +18,6 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
@@ -95,13 +94,13 @@ public class WebConfig implements WebMvcConfigurer {
             }
         });
 
-        registry.addConverter(new Converter<String, UploadType>() {
+        registry.addConverter(new Converter<String, CloudinaryUploadType>() {
 
             @Override
             @NonNull
-            public UploadType convert(@NonNull String source) {
+            public CloudinaryUploadType convert(@NonNull String source) {
 
-                return UploadType.fromType(source);
+                return CloudinaryUploadType.fromType(source);
             }
         });
 

@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public enum UploadType {
+public enum CloudinaryUploadType {
 
     DEFAULT_UPLOAD("store", "store"),
     PROFILE_USER("profile", "pfu-gallery"),
@@ -20,20 +20,20 @@ public enum UploadType {
     String type;
     String folder;
 
-    UploadType(String type, String folder) {
+    CloudinaryUploadType(String type, String folder) {
 
         this.type = type;
         this.folder = folder;
     }
 
-    public static final UploadType DEFAULT = DEFAULT_UPLOAD;
+    public static final CloudinaryUploadType DEFAULT = DEFAULT_UPLOAD;
 
-    public static UploadType fromType(String type) {
+    public static CloudinaryUploadType fromType(String type) {
 
         if(type == null || type.isEmpty())
             return DEFAULT;
 
-        return Arrays.stream(UploadType.values())
+        return Arrays.stream(CloudinaryUploadType.values())
                 .filter(t -> t.type.equalsIgnoreCase(type.trim()))
                 .findFirst()
                 .orElse(DEFAULT);

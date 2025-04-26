@@ -55,7 +55,7 @@ public class MailerService implements IMailerService{
 
         Context context = new Context();
 
-        String urlLinkFeConfirm = String.format("%s%s?drag=%s", appCoreValue.getFrontendDomain(), pathValue.getFeSignupConfirmPath(), signupIn4ToJsonEncode);
+        String urlLinkFeConfirm = String.format("%s%s/%s", appCoreValue.getFrontendDomain(), pathValue.getFeSignupConfirmPath(), signupIn4ToJsonEncode);
 
         context.setVariable("linkFeSignUpConfirm", urlLinkFeConfirm);
         context.setVariable("year", LocalDateTime.now().getYear());

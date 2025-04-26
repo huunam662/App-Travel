@@ -2,7 +2,7 @@ package app.travel.domain.users.profile.service;
 
 import app.travel.advice.exception.templates.ErrorHolderException;
 import app.travel.common.constant.other.Error;
-import app.travel.common.constant.other.UploadType;
+import app.travel.common.constant.other.CloudinaryUploadType;
 import app.travel.converter.ProfileUserConverter;
 import app.travel.domain.resource.payload.request.ResourceUploadRequest;
 import app.travel.domain.resource.payload.response.ResourceUploadResponse;
@@ -91,7 +91,7 @@ public class ProfileUserService implements IProfileUserService{
 
         ProfileUserEntity profileUser = getProfile();
 
-        ResourceUploadResponse resourceUploadResponse = resourceService.uploadByCloudinary(request, UploadType.PROFILE_USER, servletRequest);
+        ResourceUploadResponse resourceUploadResponse = resourceService.uploadByCloudinary(request, CloudinaryUploadType.PROFILE_USER, servletRequest);
 
         profileUser.setProfileImage(resourceUploadResponse.getFileUrl());
 

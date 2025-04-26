@@ -3,7 +3,7 @@ package app.travel.shared.service.cloud.cloudinary;
 import app.travel.advice.exception.templates.ErrorHolderException;
 import app.travel.common.constant.other.CloudType;
 import app.travel.common.constant.other.Error;
-import app.travel.common.constant.other.UploadType;
+import app.travel.common.constant.other.CloudinaryUploadType;
 import app.travel.domain.resource.payload.request.ResourceUploadRequest;
 import app.travel.shared.payload.internal.ResourceLoadInternal;
 import app.travel.shared.payload.internal.ResourceFileInternal;
@@ -44,7 +44,7 @@ public class CloudinaryService implements ICloudinaryService{
     RestTemplate restTemplate;
 
     @Override
-    public Map upload(ResourceUploadRequest request, UploadType uploadType, HttpServletRequest servletRequest) throws Exception {
+    public Map upload(ResourceUploadRequest request, CloudinaryUploadType uploadType, HttpServletRequest servletRequest) throws Exception {
 
         MultipartFile file = request.getFile();
 

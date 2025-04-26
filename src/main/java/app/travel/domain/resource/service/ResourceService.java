@@ -3,7 +3,7 @@ package app.travel.domain.resource.service;
 import app.travel.advice.exception.templates.ErrorHolderException;
 import app.travel.common.constant.other.ContentDispositionType;
 import app.travel.common.constant.other.Error;
-import app.travel.common.constant.other.UploadType;
+import app.travel.common.constant.other.CloudinaryUploadType;
 import app.travel.domain.resource.payload.request.ResourceUploadRequest;
 import app.travel.domain.resource.payload.response.ResourceUploadResponse;
 import app.travel.shared.payload.internal.ResourceLoadInternal;
@@ -16,12 +16,10 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,14 +33,14 @@ public class ResourceService implements IResourceService{
     PathValue pathValue;
 
     @Override
-    public ResourceUploadResponse uploadByCloudinary(ResourceUploadRequest request, UploadType uploadType, HttpServletRequest servletRequest) throws Exception {
+    public ResourceUploadResponse uploadByCloudinary(ResourceUploadRequest request, CloudinaryUploadType uploadType, HttpServletRequest servletRequest) throws Exception {
 
         MultipartFile file = request.getFile();
 
         if(file == null || file.isEmpty())
             throw new ErrorHolderException(Error.REQUEST_RESOURCE_INVALID);
 
-        if(uploadType == null) uploadType = UploadType.DEFAULT;
+        if(uploadType == null) uploadType = CloudinaryUploadType.DEFAULT;
 
         Map uploadResponse = cloudinaryService.upload(request, uploadType, servletRequest);
 
