@@ -16,12 +16,14 @@ public class ResourceFileInternal {
 
     String folderName;
 
-    String ipAddressClient;
-
     CloudType cloudType;
 
     @Builder.ObtainVia
     @Setter(AccessLevel.NONE)
     final UUID unique = UUID.randomUUID();
+
+    @Builder.ObtainVia
+    @Setter(AccessLevel.NONE)
+    final long timestamp = System.currentTimeMillis();
 
 }

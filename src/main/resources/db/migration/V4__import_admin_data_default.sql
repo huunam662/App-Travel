@@ -14,11 +14,7 @@ DECLARE
     _timestamp_now timestamp := now();
 BEGIN
 
-    select split_part(version(), ' ', 2)::FLOAT::INTEGER INTO _version;
-
-    if _version < 13 then
-        execute 'create extension if not exists pgcrypto';
-    end if;
+    execute 'create extension if not exists pgcrypto';
 
     select * into _record
     from users u

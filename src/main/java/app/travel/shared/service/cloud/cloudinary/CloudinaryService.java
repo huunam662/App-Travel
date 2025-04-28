@@ -51,7 +51,6 @@ public class CloudinaryService implements ICloudinaryService{
         ResourceFileInternal uploadFileInternal = ResourceFileInternal.builder()
                 .folderName(uploadType.getFolder())
                 .cloudType(CloudType.CLOUDINARY)
-                .ipAddressClient(HttpUtils.getRequestIP(servletRequest))
                 .build();
 
         String public_id = cryptoAesGcmService.encode(Json.pretty(uploadFileInternal));
